@@ -1,0 +1,20 @@
+.editor {
+    background: #1E1E1E;
+    border: 25px solid #2D415B;
+    outline: none;
+    height: 450px;
+    width: 100%;
+}
+
+
+.editor-normal {
+    width: 100%;
+}
+
+.editor-mini {
+    width: 100%;
+}
+
+.editor-big {
+    width: 800px;
+}

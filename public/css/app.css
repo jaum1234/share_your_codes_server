@@ -1,0 +1,145 @@
+.corpo {
+    background-color: #051D3B;
+    color: white;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.height {
+    height: 400px;
+}
+
+.input-text {
+    background-color: #2D415B;
+    border: none;
+    color: whitesmoke;
+    outline: none;
+    resize: none;
+}
+
+.info {
+    background-color: #041832;
+}
+
+.user-background {
+    background-color: #2D415B;
+    padding: 1rem;
+}
+
+
+
+@media screen and (min-width: 768px) {
+
+    #buscador {
+        background-color: #2D415B ;
+        display: inline !important;
+        width: 50%;
+    }
+
+    #lupa {
+        display: none !important;
+    }
+
+    .editor {
+        height: 350px !important;
+    }
+
+    .input-formulario {
+        width: 30% !important;
+    }
+
+    
+}
+
+@media screen and (min-width: 992px) {
+    #ham {
+        display: none !important;
+    }
+
+    #primeira-coluna {
+        display: flex !important;
+        margin-top: 10px ;
+    }
+
+    #segunda-coluna {
+        flex-grow: 4;
+    }
+
+    #terceira-coluna {
+        margin-top: 10px !important;
+    }
+
+    #conteudo-principal {
+        flex-direction: row !important;
+    }
+
+    #coluna-projetos {
+        display: flex;
+        flex-wrap: wrap;
+        flex-grow: 5;  
+        justify-content: start;
+    }
+
+    .editor {
+        height: 400px !important;
+    }
+
+    .bloco-editor {
+        padding-right: 20px;
+        width: 50% !important;
+    }
+
+    .user-background {
+        align-items: center !important;
+        
+    }
+
+    #buscador {
+        width: 60%;
+    }
+
+    .editor-mini {
+        height: 300px !important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
