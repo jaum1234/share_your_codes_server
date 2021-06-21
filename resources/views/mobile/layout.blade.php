@@ -26,15 +26,19 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-transparent ">
             <div class="container-fluid">
-                <a class="navbar-brand text-uppercase fs-3" href="#">
+                <a class="navbar-brand text-uppercase fs-3" href="/">
                   <span class="text-light">Alura</span>
                   <span id="dev" class="ms-1 rounded ps-1 pe-1">dev</span>
                 </a>
-                <input 
-                  placeholder="busque aqui..." 
-                  type="text" 
-                  class="d-none rounded form-control ms-5 text-light fw-light" 
-                  id="buscador">
+                <form action="/pesquisar" method="POST" class="largura">
+                  @csrf
+                  <input
+                    placeholder="busque aqui..."
+                    name="criterio"
+                    class="d-none rounded form-control ms-5 text-light fw-light"
+                    id="buscador">
+                </form>
+
 
               <div class="d-flex align-items-center">
                             <!-- Button trigger modal -->
@@ -94,7 +98,7 @@
               <div class="collapse navbar-collapse fw-light justify-content-end" id="navbarNavAltMarkup" >
                 <div class="navbar-nav" >
                   
-                  <div class="dropdown">
+                  <div class="dropdown d-none" id="desktop-nav">
                     <button 
                       class="btn btn-secondary d-flex align-items-center" 
                       type="button" 
