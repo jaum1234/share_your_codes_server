@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('conteudo')
-
+    
     <div class="col" id="coluna-projetos">
         @foreach ($projetos as $projeto)
      

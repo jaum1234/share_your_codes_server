@@ -4,14 +4,12 @@
 
             
             <div class="col mb-2" id="segunda-coluna">
-                <a
-                   href="/projeto/{{ $projeto->id }}"
-                   class="text-decoration-none text-light">
+                
                    <div class="d-flex flex-column">
                        <pre style="border-color: {{ $projeto->cor }}" class="pointer fw-light rounded p-3 editor height"><code contenteditable="false" id="#editor">{{ $projeto->codigo }}</code>
                        </pre>
                    </div>
-                </a>
+                
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#compartilhar">
                     Compartilhar
                 </button>

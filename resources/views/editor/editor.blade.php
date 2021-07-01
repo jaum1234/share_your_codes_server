@@ -74,7 +74,7 @@
                         
                     <button 
                         name="botao-salvar" 
-                        class="botao-salvar p-3 rounded fw-light" 
+                        class="p-3 rounded fw-light btn btn-primary" 
                         id="botao-salvar">
                         Salvar projeto
                     </button>
