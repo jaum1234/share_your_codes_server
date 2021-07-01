@@ -9,7 +9,7 @@
     <!--Comunidade-->
   <img src="https://i.gyazo.com/f3cdcf569f9466f84fe3f704e38e6cdf.png"  width="480" height="250"> 
     <!--Perfil-->
-  <img src="https://i.gyazo.com/6d672dd3d883f9bc577b68b541007d6f.png"  width="480" height="250">
+  <img src="https://i.gyazo.com/a533963ed3c77e5e4f96d08005ab19f2.png"  width="480" height="250">
 </div>
 
 ## Contatos
@@ -37,19 +37,23 @@
   </li>
   <li>
     <p>Alterar a cor de borda para a exibição do projeto</p>
-    <img src="https://i.gyazo.com/f9bd308a5b1bce9e7c32cdee0d49a3f0.gif" width="700" height="350">
+    <img src="https://i.gyazo.com/d58f4ec025da8f45ea8be2f6e6b8072c.gif" width="700" height="350">
   </li>
    <li>
     <p>Marcação de sintaxe</p>
-    <img src="https://i.gyazo.com/ba6e7f73d9024fb670591de419c89866.gif" width="700" height="350">
+    <img src="https://i.gyazo.com/87e600bd1b358f5afec397985538914d.gif" width="700" height="350">
   </li>
   <li>
     <p>Busca por nome de projeto</p>
-    <img src="https://i.gyazo.com/0d1136b82b1b483fc01fba6d324312a4.gif" width="700" height="350">
+    <img src="https://i.gyazo.com/6f06316422f1010123af12a55b46ff97.gif" width="700" height="350">
+  </li>
+  <li>
+      <p>Deletar seus projetos</p>
+      <img src="https://i.gyazo.com/6f06316422f1010123af12a55b46ff97.gif" width="700" height="350">
   </li>
   <li>
     <p>Compartilhamento de projetos em outras mídias sociais</p>
-    <img src="https://i.gyazo.com/2ed8452c1f1a54e25a5c95cb8c0abf74.gif" width="700" height="350">
+    <img src="https://i.gyazo.com/3c59df258e181b4329a6b62b3ee6ec57.gif" width="700" height="350">
   </li>
   <li>
     <p>Alterar informações de usuário</p>
