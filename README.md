@@ -49,7 +49,7 @@
   </li>
   <li>
       <p>Deletar seus projetos</p>
-      <img src="https://i.gyazo.com/6f06316422f1010123af12a55b46ff97.gif" width="700" height="350">
+      <img src="https://i.gyazo.com/21a342027026cf25ac31f405fd6c623b.gif" width="700" height="350">
   </li>
   <li>
     <p>Compartilhamento de projetos em outras mídias sociais</p>
