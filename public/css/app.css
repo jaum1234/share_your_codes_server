@@ -55,7 +55,7 @@
 }
 
 @media screen and (min-width: 992px) {
-    #ham {
+    .ham {
         display: none !important;
     }
 
@@ -66,6 +66,7 @@
     #primeira-coluna {
         display: flex !important;
         margin-top: 10px ;
+        
     }
 
     #desktop-nav {
@@ -77,10 +78,12 @@
     }
 
     #terceira-coluna {
+        margin-left: 10px ;
         margin-top: 10px !important;
     }
 
     #conteudo-principal {
+        flex-grow: 4;
         flex-direction: row !important;
     }
 
@@ -100,9 +103,8 @@
         width: 50% !important;
     }
 
-    .user-background {
-        align-items: center !important;
-        
+    .bloco-perfil-usuario {
+        flex-grow: 4 !important;
     }
 
     #buscador {

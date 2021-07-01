@@ -15,7 +15,6 @@
     <!--Meus estilos-->
     <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" href="/css/botao.css">
-    <link rel="stylesheet" href="/css/cabecalho.css">
     <link rel="stylesheet" href="/css/editor.css">
     <link rel="stylesheet" href="/css/form.css">
     <link rel="stylesheet" href="/css/menu.css">
@@ -30,7 +29,7 @@
                   <span class="text-light">Alura</span>
                   <span id="dev" class="ms-1 rounded ps-1 pe-1">dev</span>
                 </a>
-                <form action="/pesquisar" method="POST" class="largura">
+                <form action="/projetos/pesquisar" method="GET" class="largura">
                   @csrf
                   <input
                     placeholder="busque aqui..."
@@ -93,14 +92,14 @@
               </button>
             </div>
             
-                              <!--Lado direito navbar no mobile e tablet-->
+                              <!--Lado direito navbar no destop-->
 
               <div class="collapse navbar-collapse fw-light justify-content-end" id="navbarNavAltMarkup" >
                 <div class="navbar-nav" >
                   
                   <div class="dropdown d-none" id="desktop-nav">
                     <button 
-                      class="btn btn-secondary d-flex align-items-center" 
+                      class="btn text-light fw-light d-flex align-items-center" 
                       type="button" 
                       id="dropdownMenuButton1" 
                       data-bs-toggle="dropdown" 
@@ -109,36 +108,36 @@
                       <span class="ms-3">{{ Auth::user()->nickname }}</span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                      <li><a class="dropdown-item" href="/meusProjetos">Meus projetos</a></li>
-                      <li><a class="dropdown-item" href="/user/{{ Auth::user()->nickname }}">Meu Perfil</a></li>
+                      <li><a class="dropdown-item" href="/usuarios/{{ Auth::user()->id }}/{{ Auth::user()->nickname }}/projetos">Meus projetos</a></li>
+                      <li><a class="dropdown-item" href="/usuarios/{{ Auth::user()->id }}/{{ Auth::user()->nickname }}">Meu Perfil</a></li>
                       <div class="dropdown-divider bg-light"></div>
                       <li>
                         @auth
-                        <a class="nav-link text-danger" href="/logout">Logout</a>  
-                      @endauth
+                          <a class="nav-link text-danger" href="/logout">Logout</a>  
+                        @endauth
     
-                      @guest
-                        <a class="nav-link" href="/login">Login</a>
-                      @endguest
+                        @guest
+                          <a class="nav-link" href="/login">Login</a>
+                        @endguest
                     </li>
                     </ul>
 
-                                    <!--Lado direito navbar no desktop-->
                   </div>
-
-                  <a class="nav-link active text-light" aria-current="page" href="/" id="ham">Home</a>
-                  <a class="nav-link text-light" href="/editorDeCodigo" id="ham">Editor de codigo</a>
-                  <a class="nav-link text-light" href="/comunidade" id="ham">Comunidade</a>
-                  <a class="nav-link text-light" href="/meusProjetos" id="ham">Meus projetos</a>
-                  <a class="nav-link text-light" href="/user/{{ Auth::user()->nickname }}" id="ham">Meu Perfil</a>
+                  
+                                <!--Lado direito navbar no mobile e tablet-->
+                  <a class="nav-link active text-light ham" aria-current="page" href="/" >Home</a>
+                  <a class="nav-link text-light ham" href="/projetos/criar" >Editor de codigo</a>
+                  <a class="nav-link text-light ham" href="/projetos" >Comunidade</a>
+                  <a class="nav-link text-light ham" href="/usuarios/{{ Auth::user()->id }}/{{ Auth::user()->nickname }}/projetos" >Meus projetos</a>
+                  <a class="nav-link text-light ham" href="/usuarios/{{ Auth::user()->id }}/{{ Auth::user()->nickname }}" >Meu Perfil</a>
                   <div class="dropdown-divider bg-light"></div>
 
                   @auth
-                    <a class="nav-link text-light" href="/logout" id="ham">Logout</a>  
+                    <a class="nav-link text-light ham" href="/logout" >Logout</a>  
                   @endauth
 
                   @guest
-                    <a class="nav-link text-light" href="/login" id="ham">Login</a>
+                    <a class="nav-link text-light ham" href="/login" >Login</a>
                   @endguest
 
                 </div>
@@ -146,7 +145,32 @@
               </div>
             </div>
           </nav>
-          @yield('conteudo')
+          <div class="container mt-5">
+            <div class="row">
+              <div class="col d-none" id="primeira-coluna">
+                <div>
+                    <h5 class="fw-light">Menu</h5>
+                    <div>
+                        <ul class="list-unstyled fw-light">
+                            <li class="mb-2">
+                                <a href="/projetos/criar" class="text-decoration-none text-light">
+                                  <i class="fas fa-code fs-6 icone"></i>
+                                  Editor de código
+                                </a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="/projetos" class="text-decoration-none text-light">
+                                  <i class="fas fa-users fs-6 icone"></i>
+                                  Comunidade
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+              </div>
+              @yield('conteudo')
+            </div>
+          </div>
     </div>
 
     <!--Bibliotecas JS-->
@@ -159,18 +183,17 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
 
     <!--Meus scripts-->
-    <script src="/js/compartilhar.js"></script>
-    <script src="/js/borda-editor.js"></script>
+    <script type="module" src="/js/compartilhar.js"></script>
     <script src="/js/contador-de-caracteres.js"></script>
     <script src="/js/editar-perfil.js"></script>
-    <script src="/js/highlight.js"></script>
-    <script src="/js/salvar-na-textarea.js"></script>
-    <script src="/js/color-picker.js"></script>
+    <script type="module" src="/js/sem-highlight.js" ></script>
+    <script type="module" src="/js/salvar-projeto.js"></script>
+    <script src="/js/selecionar-cor-borda.js"></script>
+    <script src="/js/com-highlight.js" ></script>
     <script>
-      $(function() {  
-        $('#dev').css({'color' : '#051D3B', 'background-color' : 'white'})
-        
-        exibeFormularioEdicao();
+      $(function() { 
+        $('#dev').css({'color' : '#051D3B', 'background-color' : 'white'})     
+        $("[data-cor]").val('#2D415B');
       })
     </script>
 </body>

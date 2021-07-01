@@ -1,22 +1,30 @@
-let linkCopiado = '';
+import {gerarLink} from "./gerador-de-links.js";
 
-$(function() {
-    linkCopiado = $('#copia').val();
+/**
+ *  Twitter
+ */
+gerarLink("#compartilharTwitter", "https://twitter.com/intent/tweet?url=");
 
-    $('#compartilharFb').on('click', function () {  
-        window.open('https://www.facebook.com/sharer/sharer.php?=u' + window.location.href, 'facebook-share-dialog',
-        "width=626, height=436");
-    })
+/**
+ *  Facebook
+ */
+gerarLink(
+    "#compartilharFb", 
+    "https://www.facebook.com/sharer/sharer.php?=u", 
+    "facebook-share-dialog", 
+    "width=626, height=436");
 
-    $('#compartilharTwitter').on('click', function () {  
-        window.open('https://twitter.com/intent/tweet?url=' + window.location.href);
-    })
+/**
+ *  Whatsapp
+ */
+gerarLink("#compartilharWpp", "https://api.whatsapp.com/send?text=")
 
-    $('#compartilharWpp').on('click', function () {  
-        window.open('https://api.whatsapp.com/send?text=' + window.location.href, '_blank');
-    })
- 
-})
+
+
+
+
+
+
 
 
 

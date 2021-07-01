@@ -2,13 +2,16 @@
 namespace App\Service;
 
 use App\Models\Projeto;
+use Illuminate\Http\Request;
 
 class BuscadorDeProjeto
 {
-    public function pesquisarProjeto(string $criterio)
+    public function pesquisarProjeto( string $criterio)
     {
-        $projetos = Projeto::where('nome', 'LIKE', '%' . $criterio . '%')->get();
-
+        $projetos = Projeto::query()
+            ->where('nome', 'LIKE', '%' . $criterio . '%')
+            ->paginate(4);
+        
         return $projetos;
     }
 }

@@ -7,6 +7,9 @@ class RemovedorDeProjeto
 {
     public function removerProjeto(int $id)
     {
-        Projeto::destroy($id);
+        $qtdRecursos = Projeto::destroy($id);
+        if ($qtdRecursos === 0) {
+            return redirect()->back(204);
+        }
     }
 }

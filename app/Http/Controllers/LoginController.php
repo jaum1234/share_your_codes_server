@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CadastroFormRequest;
+use App\Http\Requests\LoginFormRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -9,47 +11,59 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
+    /**
+     *  Exibe o formulario
+     * de login
+     */
     public function formLogin(Request $request)
     {
         $mensagem = $request->session()->get('mensagem');
         $titulo = 'Login';
 
-        return view('mobile.login', compact('mensagem', 'titulo'));
+        return view('autenticacao.login', compact('mensagem', 'titulo'));
     }
 
+    /**
+     *  Exibe formulario 
+     * de cadastro
+     */
     public function formCadastro()
     {
         $titulo = 'Cadastro';
 
-        return view('mobile.cadastro', compact('titulo'));
+        return view('autenticacao.cadastro', compact('titulo'));
     }
 
-
-    public function logar(Request $request)
+    /**
+     *  Efetua o login
+     */
+    public function logar (LoginFormRequest $request)
     {
-        if (!filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
-            return redirect()
-            ->back()
-            ->withInput()
-            ->withErrors(['Os dados informados nao sao validos!']);
-        }
-
-        $credencials =[
+        
+        $credencials = [
             'email' => $request->email,
-            'password' => $request->senha
+            'password' => $request->password
         ];
 
-        if (Auth::attempt($credencials, true)) {
+        $user = User::where('email', $request->email)->first();
+
+        if (!Hash::check($request->password, $user->password)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors(['erro' => 'Dados invalidos']);
+        }
+        
+        if (Auth::attempt($credencials)) {
             $request->session()->regenerate();
 
-            return redirect('/editorDeCodigo');
-        }
-        return redirect()
-            ->back()
-            ->withInput()
-            ->withErrors(['As senhas informadas nao correspondem!']);
+            return redirect('/projetos/criar');
+        }   
     }
 
+    /**
+     *  Efetua o logout
+     */
     public function logout(Request $request)
     {
         Auth::logout();
@@ -60,29 +74,18 @@ class LoginController extends Controller
         return redirect('/login');
     }
 
-    public function cadastrar(Request $request)
+    /**
+     *  Efetua o cadastro
+     */
+    public function cadastrar(CadastroFormRequest $request)
     {
-        if (!filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
-            return redirect()
-            ->back()
-            ->withInput()
-            ->withErrors(['O E-mail informado nao é valido!']);
-        }
+        if ($request->password === $request->password_confirmation) {
+               
+            $senhaHash = bcrypt($request->password);
 
-        if (User::where('nickname', $request->nomeUsuario)->exists()) {
-            return redirect()
-            ->back()
-            ->withInput()
-            ->withErrors(['Esse nome de usuário já existe.']);
-        }
-
-        if ($request->senha === $request->confirmar_senha) {
-            $senha = filter_var($request->senha, FILTER_SANITIZE_STRING);    
-            $senhaHash = bcrypt($senha);
-
-            $usuario = User::create([
-                'name' => $request->nome,
-                'nickname' =>$request->nomeUsuario,
+            User::create([
+                'name' => $request->name,
+                'nickname' =>$request->nickname,
                 'email' => $request->email,
                 'password' => $senhaHash
             ]);
@@ -95,10 +98,7 @@ class LoginController extends Controller
             return redirect('/login');
         }
 
-        return redirect()
-            ->back()
-            ->withInput()
-            ->withErrors(['As senhas informadas nao correspondem']);
+        
         
     }
 }

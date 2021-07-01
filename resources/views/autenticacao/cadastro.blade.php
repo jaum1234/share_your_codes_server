@@ -1,4 +1,4 @@
-@extends('mobile.layout-form')
+@extends('layouts.form')
 
 @section('formulario')
     <div class="container mt-5">
@@ -6,38 +6,40 @@
             <h2 class="fw-light mb-5">{{ $titulo }}</h2>
             <form action="/cadastro/do" method="post" class="mb-3 d-flex flex-column align-items-center">
                 @csrf
-                @if ($errors->all())
-                    @foreach ($errors->all() as $error)
-                        <div class="alert alert-danger" role="alert">
-                            {{ $error }}
-                        </div>
-                    @endforeach
-                @endif
-                
+                <small class="text-danger">{{ $errors->first('email') }}</small>
                     <label for="email" class="form-label fw-light">E-mail</label>
+                    
                     <input 
-                        type="text" 
+                        type="email" 
                         name="email" 
                         class="rounded form-control text-light input-formulario">
-                    <label for="nome" class="form-label fw-light">Nome completo</label>
+                        
+                        <small class="text-danger">{{ $errors->first('name') }}</small>
+                    <label for="name" class="form-label fw-light">Nome completo</label>
                     <input 
                         type="text" 
-                        name="nome" 
+                        name="name" 
                         class="rounded form-control text-light input-formulario">
-                    <label for="nomeUsuario" class="form-label fw-light">Nome de usuário</label>
+                        
+                        <small class="text-danger">{{ $errors->first('nickname') }}</small>
+                    <label for="nickname" class="form-label fw-light">Nome de usuário</label>
                     <input 
                         type="text" 
-                        name="nomeUsuario" 
+                        name="nickname" 
                         class="rounded form-control text-light input-formulario">
-                    <label for="senha" class="form-label fw-light">Senha</label>
+                        
+                        <small class="text-danger" role="alert">{{ $errors->first('password') }}</small>
+                    <label for="password" class="form-label fw-light">Senha</label>
                     <input 
                         type="password" 
-                        name="senha" 
+                        name="password" 
                         class="rounded form-control text-light input-formulario">
-                    <label for="confirmar_senha" class="form-label fw-light">Confirmar senha</label>
+                        
+                        
+                    <label for="password_confirmation" class="form-label fw-light">Confirmar senha</label>
                     <input 
                         type="password" 
-                        name="confirmar_senha" 
+                        name="password_confirmation" 
                         class="rounded form-control text-light input-formulario">
                 
                 <button class="btn btn-primary" type="submit">Cadastrar-se</button>

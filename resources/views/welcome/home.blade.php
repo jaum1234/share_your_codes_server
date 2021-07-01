@@ -31,8 +31,8 @@
                     class="fs-10 logo">
             </h1>
             <div class="d-flex flex-column align-items-center fw-light">
-                <a href="/comunidade" class="text-decoration-none text-light item">Comunidade</a>
-                <a href="/editorDeCodigo" class="text-decoration-none text-light item">Editor</a>
+                <a href="/projetos" class="text-decoration-none text-light item">Comunidade</a>
+                <a href="/projetos/criar" class="text-decoration-none text-light item">Editor</a>
             </div>
         </div>
     </div>
