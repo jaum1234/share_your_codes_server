@@ -60,7 +60,6 @@ class EditorDeCodigoController extends Controller
         $codigo = $request->codigo;
         $cor = $request->cor; 
 
-
             $criadorDeProjeto->criarProjeto(
                 $nome,
                 $descricao,
@@ -68,7 +67,7 @@ class EditorDeCodigoController extends Controller
                 $cor,
             );
 
-                return redirect()->back();
+            return redirect()->back();
     }
 
     /**
@@ -85,9 +84,8 @@ class EditorDeCodigoController extends Controller
      *  Realiza uma busca na
      * barra de pesquisa
      */
-    public function pesquisar(Request $request)
+    public function pesquisar(Request $request, BuscadorDeProjeto $buscadorDeProjeto)
     {
-        $buscadorDeProjeto = new BuscadorDeProjeto();
         $projetos = $buscadorDeProjeto->pesquisarProjeto($request->criterio);
         $projetos->appends($request->all());
 

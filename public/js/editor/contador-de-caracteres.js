@@ -5,7 +5,7 @@
 const editor = $("#editor");
 editor.on("input", function() {
     const contador = $("#contator-caracteres");
-    const conteudo = editor.text();
+    const conteudo = $(this).text();
     
     contador.text(conteudo.length);
     

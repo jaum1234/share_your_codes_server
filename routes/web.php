@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\EditorDeCodigoController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\CadastroController;
+use App\Http\Controllers\EditorDeCodigoController;
 
 
 
@@ -19,12 +20,14 @@ Route::middleware('auth')->group(function () {
         #get
         Route::get('', [EditorDeCodigoController::class, 'index']);
         Route::get('/criar', [EditorDeCodigoController::class, 'create']);
-        Route::get('/{id}/{nome}', [EditorDeCodigoController::class, 'show']);
+        Route::get('/{id}/{nome}', [EditorDeCodigoController::class, 'show'])
+            ->whereNumber('id');
         Route::get('/pesquisar', [EditorDeCodigoController::class, 'pesquisar']);
 
         #post
         Route::post('', [EditorDeCodigoController::class, 'store']);
-        Route::post('/excluir/{id}', [EditorDeCodigoController::class, 'destroy']);
+        Route::post('/excluir/{id}', [EditorDeCodigoController::class, 'destroy'])
+            ->whereNumber('id');
     });
 
     Route::prefix('/usuarios')->group(function () {
@@ -34,11 +37,14 @@ Route::middleware('auth')->group(function () {
          */
 
         #get
-        Route::get('/{id}/{nick}', [UserController::class, 'edit']);
-        Route::get('/{id}/{nick}/projetos', [UserController::class, 'meusProjetos']);
+        Route::get('/{id}/{nick}', [UserController::class, 'edit'])
+            ->whereNumber('id');
+        Route::get('/{id}/{nick}/projetos', [UserController::class, 'meusProjetos'])
+            ->whereNumber('id');
 
         #post
-        Route::post('/{id}/editar', [UserController::class, 'update']);
+        Route::post('/{id}/editar', [UserController::class, 'update'])
+            ->whereNumber('id');
     });
 });
 
@@ -48,13 +54,21 @@ Route::middleware('auth')->group(function () {
 
 #get
 Route::get('/login', [LoginController::class, 'formLogin']);
-Route::get('/cadastro', [LoginController::class, 'formCadastro']);
 Route::get('/logout', [LoginController::class, 'logout']);
 
 #post
 Route::post('/login/do', [LoginController::class, 'logar']);
-Route::post('/cadastro/do', [LoginController::class, 'cadastrar']);
-    
+
+/**
+ *  CadastroController
+ */
+
+ #get
+ Route::get('/cadastro', [CadastroController::class, 'formCadastro']);
+
+ #post
+ Route::post('/cadastro/do', [CadastroController::class, 'cadastrar']);
+
 
 
 

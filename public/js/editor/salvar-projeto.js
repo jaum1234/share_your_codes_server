@@ -1,4 +1,4 @@
-import {setLocalStorage} from './local-storage.js'
+import {setLocalStorage} from '../local-storage.js'
 
 /**
  *  Amarmazena os dados do editor de codigo

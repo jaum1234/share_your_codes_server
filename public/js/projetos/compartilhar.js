@@ -1,6 +1,10 @@
 import {gerarLink} from "./gerador-de-links.js";
 
 /**
+ *  Botoes de compartilhamento
+ */
+
+/**
  *  Twitter
  */
 gerarLink("#compartilharTwitter", "https://twitter.com/intent/tweet?url=");

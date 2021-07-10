@@ -1,5 +1,5 @@
-import {setLocalStorage} from './local-storage.js'
-import {getLocalStorage} from "./local-storage.js";
+import {setLocalStorage} from '../local-storage.js'
+import {getLocalStorage} from "../local-storage.js";
 
 /**
  *  Desativa o modo highlight na 

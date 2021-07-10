@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Projeto;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +15,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UserSeeder::class);
+        Projeto::factory()
+            ->count(50)
+            ->create();
     }
 }

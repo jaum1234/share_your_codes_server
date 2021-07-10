@@ -15,7 +15,7 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        Exception::class
+       
     ];
 
     /**
@@ -36,8 +36,6 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Exception $e) {
-            return 'Esse nome ja existe no banco de dados';
-        })->stop();
+        
     }
 }

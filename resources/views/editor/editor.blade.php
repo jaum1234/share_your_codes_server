@@ -55,7 +55,7 @@
                             name="descricao"
                             cols="23"
                             rows="2"
-                            class="rounded p-3 input-text fw-light"
+                            class="rounded p-3 input-text fw-light hidden-overflow"
                             id="descricao-projeto"
                             placeholder="Descriçao do projeto">
                             

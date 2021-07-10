@@ -27,7 +27,7 @@
             <div class="container-fluid">
                 <a class="navbar-brand text-uppercase fs-3" href="/">
                   <span class="text-light">Alura</span>
-                  <span id="dev" class="ms-1 rounded ps-1 pe-1">dev</span>
+                  <span id="dev" class="ms-1 rounded ps-1 pe-1 logo_dev">dev</span>
                 </a>
                 <form action="/projetos/pesquisar" method="GET" class="largura">
                   @csrf
@@ -168,7 +168,9 @@
                     </div>
                 </div>
               </div>
+
               @yield('conteudo')
+              
             </div>
           </div>
     </div>
@@ -183,18 +185,13 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
 
     <!--Meus scripts-->
-    <script type="module" src="/js/compartilhar.js"></script>
-    <script src="/js/contador-de-caracteres.js"></script>
-    <script src="/js/editar-perfil.js"></script>
-    <script type="module" src="/js/sem-highlight.js" ></script>
-    <script type="module" src="/js/salvar-projeto.js"></script>
-    <script src="/js/selecionar-cor-borda.js"></script>
-    <script src="/js/com-highlight.js" ></script>
-    <script>
-      $(function() { 
-        $('#dev').css({'color' : '#051D3B', 'background-color' : 'white'})     
-        $("[data-cor]").val('#2D415B');
-      })
-    </script>
+    <script type="module" src="/js/projetos/compartilhar.js"></script>
+    <script src="/js/editor/contador-de-caracteres.js"></script>
+    <script src="/js/user/editar-perfil.js"></script>
+    <script type="module" src="/js/editor/sem-highlight.js" ></script>
+    <script type="module" src="/js/editor/salvar-projeto.js"></script>
+    <script src="/js/editor/selecionar-cor-borda.js"></script>
+    <script src="/js/editor/com-highlight.js" ></script>
+    <script src="/js/cor-logo.js"></script>
 </body>
 </html>

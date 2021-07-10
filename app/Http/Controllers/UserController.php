@@ -55,7 +55,7 @@ class UserController extends Controller
         ->get();
 
         return view(
-        'editor.meus-projetos', 
+        'user.meus-projetos', 
         compact('projetos')
         );   
     }
