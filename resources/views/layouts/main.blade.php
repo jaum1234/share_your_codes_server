@@ -21,13 +21,13 @@
     <link rel="stylesheet" href="/css/seletor-cor.css">
   
 </head>
-<body class="corpo">
+<body>
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-transparent ">
             <div class="container-fluid">
                 <a class="navbar-brand text-uppercase fs-3" href="/">
                   <span class="text-light">Alura</span>
-                  <span id="dev" class="ms-1 rounded ps-1 pe-1">dev</span>
+                  <span class="ms-1 rounded ps-1 pe-1" data-dev>dev</span>
                 </a>
                 <form action="/projetos/pesquisar" method="GET" class="largura">
                   @csrf
@@ -192,7 +192,7 @@
     <script src="/js/com-highlight.js" ></script>
     <script>
       $(function() { 
-        $('#dev').css({'color' : '#051D3B', 'background-color' : 'white'})     
+        $('[data-dev]').css({'color' : '#051D3B', 'background-color' : 'white'})     
         $("[data-cor]").val('#2D415B');
       })
     </script>

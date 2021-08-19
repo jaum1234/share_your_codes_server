@@ -1,6 +1,6 @@
-.corpo {
-    background-color: #051D3B;
-    color: white;
+body {
+    background-color: #051D3B !important;
+    color: white !important;
 }
 
 .pointer {
