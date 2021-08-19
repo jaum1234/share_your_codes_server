@@ -26,14 +26,15 @@
                     <span
                         name="botao-highlight"
                         id="botao-highlight"
-                        class="botao-highlight p-3 fw-light rounded text-center"
-                        style="cursor: pointer">
+                        class="btn btn-primary botao-highlight p-3 fw-light rounded text-center"
+                        style="cursor: pointer"
+                        data-botao-highlight>
                         Visualizar projeto com highlight
                     </span>
                     <span
                         name="botao-sem-highlight"
                         id="botao-sem-highlight"
-                        class="botao-highlight p-3 fw-light rounded text-center"
+                        class="btn btn-primary botao-highlight p-3 fw-light rounded text-center"
                         hidden
                         style="cursor: pointer">
                         Visualizar projeto sem highlight
@@ -45,7 +46,7 @@
             <div class="text-start ">
                 <div class="d-flex flex-column mb-4">
                     <h5 class="fw-light">Seu projeto</h5>
-                        <input type="text" name="nome" id="nome-projeto" placeholder="nome do projeto" class="rounded p-3 input-text fw-light">
+                        <input type="text" name="nome" id="nome-projeto" placeholder="nome do projeto" class="rounded p-3 input-text fw-light form-control editor__titulo">
                         <small class="text-danger mb-3">{{ $errors->first('nome') }}</small>
             
                         <textarea
@@ -53,7 +54,7 @@
                             name="descricao"
                             cols="23"
                             rows="2"
-                            class="rounded p-3 input-text fw-light"
+                            class="rounded p-3 input-text fw-light form-control editor__descricao"
                             id="descricao-projeto"
                             placeholder="Descriçao do projeto">
                             
@@ -67,7 +68,7 @@
                         name="cor" 
                         placeholder="Selecione uma cor..." 
                         readonly 
-                        class="rounded mb-3 input-text fw-light seletor-cor border"
+                        class="rounded mb-3 fw-light seletor-cor"
                         data-cor>
                         
                     <button 

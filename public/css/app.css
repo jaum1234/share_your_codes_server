@@ -4,11 +4,11 @@ body {
 }
 
 .input-text {
-    background-color: #2D415B;
-    border: none;
-    color: whitesmoke;
-    outline: none;
-    resize: none;
+    background-color: #2D415B !important;
+    border: none !important;
+    color: whitesmoke !important;
+    outline: none !important;
+    resize: none !important;
 }
 
 .info {

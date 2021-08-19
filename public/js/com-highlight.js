@@ -3,7 +3,7 @@
  * pagina do editor
  */
 
-$('#botao-highlight').on('click', function () {
+$('[data-botao-highlight]').on('click', function () {
     $(this).attr("hidden", true);
     $('#botao-sem-highlight').attr("hidden", false);
     
