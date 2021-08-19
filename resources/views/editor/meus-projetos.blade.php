@@ -4,17 +4,17 @@
 
 
       
-      <div class="col mt-3" id="coluna-projetos">
+      <div class="projeto col mt-3" id="coluna-projetos">
         @foreach ($projetos as $projeto)
      
          
-             <div class=" mb-5 bloco-editor" id="bloco-editor">
+             <div class=" mb-5 projeto__bloco">
                  <a 
                     href="/projetos/{{ $projeto->id }}/{{ $projeto->nome }}" 
                     class="text-decoration-none text-light">
                     <div class="d-flex flex-column">
 
-                        <pre style="border-color: {{ $projeto->cor }}" class="pointer fw-light rounded p-3 editor editor-mini height"><code contenteditable="false" id="#editor">{{ $projeto->codigo }}</code>
+                        <pre style="border-color: {{ $projeto->cor }}" class="fw-light rounded p-3 editor editor--mini "><code contenteditable="false" id="#editor">{{ $projeto->codigo }}</code>
                         </pre>
 
                         <div class="info rounded p-3">

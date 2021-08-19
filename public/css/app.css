@@ -3,15 +3,6 @@ body {
     color: white !important;
 }
 
-.pointer {
-    cursor: pointer;
-}
-
-
-.height {
-    height: 400px;
-}
-
 .input-text {
     background-color: #2D415B;
     border: none;
@@ -41,10 +32,6 @@ body {
 
     #lupa {
         display: none !important;
-    }
-
-    .editor {
-        height: 350px !important;
     }
 
     .input-formulario {
@@ -94,14 +81,7 @@ body {
         justify-content: start;
     }
 
-    .editor {
-        height: 400px !important;
-    }
-
-    .bloco-editor {
-        padding-right: 20px;
-        width: 50% !important;
-    }
+    
 
     .bloco-perfil-usuario {
         flex-grow: 4 !important;
@@ -111,9 +91,7 @@ body {
         width: 60%;
     }
 
-    .editor-mini {
-        height: 300px !important;
-    }
+    
 }
 
 

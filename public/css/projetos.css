@@ -1,0 +1,12 @@
+.projeto__bloco {
+  padding-right: 20px;
+  width: 100% !important;
+}
+
+@media screen and (min-width: 992px) {
+  .projeto__bloco {
+    width: 50% !important;
+  }
+}
+
+/*# sourceMappingURL=projetos.css.map */

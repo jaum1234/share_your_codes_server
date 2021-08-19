@@ -1,0 +1,17 @@
+.projeto {
+
+    &__bloco {
+        padding-right: 20px;
+        width: 100% !important;
+    }
+}
+
+@media screen and (min-width: 992px){
+
+    .projeto {
+
+        &__bloco {
+            width: 50% !important;
+        }
+    }
+}

@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/css/form.css">
     <link rel="stylesheet" href="/css/menu.css">
     <link rel="stylesheet" href="/css/seletor-cor.css">
+    <link rel="stylesheet" href="{{ asset('css/projetos.css') }}">
   
 </head>
 <body>

@@ -10,7 +10,7 @@
 
             <form action="/projetos" method="POST">
                 @csrf
-            <pre class="editor editor-normal p-3 fw-light text-light mt-3 rounded" id="editor-pre"><code contenteditable="true" id="editor">Escreva seu codigo aqui...</code></pre>
+            <pre class="editor p-3 fw-light text-light mt-3 rounded" id="editor-pre"><code contenteditable="true" id="editor">Escreva seu codigo aqui...</code></pre>
                             
             <textarea 
                 name="codigo" 
