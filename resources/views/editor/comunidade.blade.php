@@ -2,7 +2,7 @@
 
 @section('conteudo')
     
-    <div class="col projeto" id="coluna-projetos">
+    <div class="col projeto coluna-projetos">
         @foreach ($projetos as $projeto)
      
             

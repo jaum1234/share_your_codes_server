@@ -3,9 +3,9 @@
 @section('conteudo')
     
     
-    <div class="col d-flex flex-column" id="conteudo-principal">
+    <div class="col d-flex conteudo-principal">
                 
-        <div class="col" id="segunda-coluna">
+        <div class="col conteudo-principal__editor">
             
 
             <form action="/projetos" method="POST">
@@ -23,26 +23,28 @@
             <div class="d-flex flex-column align-items-center">
                 <p class="fw-light"><span id="contator-caracteres">0</span> caracteres</p>
                 
-                    <span
+                    <button
                         name="botao-highlight"
+                        type="button"
                         id="botao-highlight"
-                        class="btn btn-primary botao-highlight p-3 fw-light rounded text-center"
+                        class="btn btn-primary botao--highlight p-3 fw-light rounded text-center"
                         style="cursor: pointer"
                         data-botao-highlight>
                         Visualizar projeto com highlight
-                    </span>
-                    <span
+                    </button>
+                    <button
                         name="botao-sem-highlight"
+                        type="button"
                         id="botao-sem-highlight"
-                        class="btn btn-primary botao-highlight p-3 fw-light rounded text-center"
+                        class="btn btn-primary botao--highlight p-3 fw-light rounded text-center"
                         hidden
                         style="cursor: pointer">
                         Visualizar projeto sem highlight
-                    </span>
+                    </button>
                 
             </div>
         </div>
-        <div class="col mt-5" id="terceira-coluna">
+        <div class="col mt-5 conteudo-principal__info">
             <div class="text-start ">
                 <div class="d-flex flex-column mb-4">
                     <h5 class="fw-light">Seu projeto</h5>
@@ -68,13 +70,14 @@
                         name="cor" 
                         placeholder="Selecione uma cor..." 
                         readonly 
-                        class="rounded mb-3 fw-light seletor-cor"
+                        class="rounded mb-3 fw-light conteudo-principal__seletor-cor"
                         data-cor>
                         
                     <button 
                         name="botao-salvar" 
                         class="p-3 rounded fw-light btn btn-primary" 
-                        id="botao-salvar">
+                        id="botao-salvar"
+                        data-botao-salvar>
                         Salvar projeto
                     </button>
                 </div>

@@ -21,18 +21,7 @@ body {
 }
 
 
-
 @media screen and (min-width: 768px) {
-
-    #buscador {
-        background-color: #2D415B ;
-        display: inline !important;
-        width: 50%;
-    }
-
-    #lupa {
-        display: none !important;
-    }
 
     .input-formulario {
         width: 30% !important;
@@ -42,7 +31,7 @@ body {
 }
 
 @media screen and (min-width: 992px) {
-    .ham {
+    .nav-link {
         display: none !important;
     }
 
@@ -56,32 +45,12 @@ body {
         
     }
 
-    #desktop-nav {
-        display: inline !important;
-    }
-
-    #segunda-coluna {
-        flex-grow: 4;
-    }
-
-    #terceira-coluna {
-        margin-left: 10px ;
-        margin-top: 10px !important;
-    }
-
-    #conteudo-principal {
-        flex-grow: 4;
-        flex-direction: row !important;
-    }
-
-    #coluna-projetos {
-        display: flex;
+    .coluna-projetos {
+        display: flex; 
         flex-wrap: wrap;
-        flex-grow: 5;  
+        flex-grow: 5 !important;  
         justify-content: start;
     }
-
-    
 
     .bloco-perfil-usuario {
         flex-grow: 4 !important;

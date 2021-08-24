@@ -4,7 +4,7 @@
 
 
       
-      <div class="projeto col mt-3" id="coluna-projetos">
+      <div class="projeto col mt-3 coluna-projetos">
         @foreach ($projetos as $projeto)
      
          

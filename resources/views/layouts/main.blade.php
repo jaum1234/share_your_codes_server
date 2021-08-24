@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="/css/menu.css">
     <link rel="stylesheet" href="/css/seletor-cor.css">
     <link rel="stylesheet" href="{{ asset('css/projetos.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   
 </head>
 <body>
@@ -35,8 +36,8 @@
                   <input
                     placeholder="busque aqui..."
                     name="criterio"
-                    class="d-none rounded form-control ms-5 text-light fw-light"
-                    id="buscador">
+                    class="rounded form-control ms-5 text-light fw-light nav__buscador"
+                  >
                 </form>
 
 
@@ -44,10 +45,10 @@
                             <!-- Button trigger modal -->
                 <button 
                   type="button" 
-                  class="btn text-light" 
+                  class="btn text-light nav__lupa" 
                   data-bs-toggle="modal" 
                   data-bs-target="#exampleModal" 
-                  id="lupa">
+                  >
                     <i class="fas fa-search fs-4"></i> 
                 </button>
                 
@@ -98,7 +99,7 @@
               <div class="collapse navbar-collapse fw-light justify-content-end" id="navbarNavAltMarkup" >
                 <div class="navbar-nav" >
                   
-                  <div class="dropdown d-none" id="desktop-nav">
+                  <div class="dropdown nav__dropdown">
                     <button 
                       class="btn text-light fw-light d-flex align-items-center" 
                       type="button" 
@@ -114,11 +115,11 @@
                       <div class="dropdown-divider bg-light"></div>
                       <li>
                         @auth
-                          <a class="nav-link text-danger" href="/logout">Logout</a>  
+                          <a class="dropdown-item text-danger" href="/logout">Logout</a>  
                         @endauth
     
                         @guest
-                          <a class="nav-link" href="/login">Login</a>
+                          <a class="dropdown-item" href="/login">Login</a>
                         @endguest
                     </li>
                     </ul>
@@ -126,19 +127,19 @@
                   </div>
                   
                                 <!--Lado direito navbar no mobile e tablet-->
-                  <a class="nav-link active text-light ham" aria-current="page" href="/" >Home</a>
-                  <a class="nav-link text-light ham" href="/projetos/criar" >Editor de codigo</a>
-                  <a class="nav-link text-light ham" href="/projetos" >Comunidade</a>
-                  <a class="nav-link text-light ham" href="/usuarios/{{ Auth::user()->id }}/{{ Auth::user()->nickname }}/projetos" >Meus projetos</a>
-                  <a class="nav-link text-light ham" href="/usuarios/{{ Auth::user()->id }}/{{ Auth::user()->nickname }}" >Meu Perfil</a>
+                  <a class="nav-link active text-light" aria-current="page" href="/" >Home</a>
+                  <a class="nav-link text-light" href="/projetos/criar" >Editor de codigo</a>
+                  <a class="nav-link text-light" href="/projetos" >Comunidade</a>
+                  <a class="nav-link text-light" href="/usuarios/{{ Auth::user()->id }}/{{ Auth::user()->nickname }}/projetos" >Meus projetos</a>
+                  <a class="nav-link text-light" href="/usuarios/{{ Auth::user()->id }}/{{ Auth::user()->nickname }}" >Meu Perfil</a>
                   <div class="dropdown-divider bg-light"></div>
 
                   @auth
-                    <a class="nav-link text-light ham" href="/logout" >Logout</a>  
+                    <a class="nav-link text-light" href="/logout" >Logout</a>  
                   @endauth
 
                   @guest
-                    <a class="nav-link text-light ham" href="/login" >Login</a>
+                    <a class="nav-link text-light" href="/login" >Login</a>
                   @endguest
 
                 </div>
@@ -194,7 +195,7 @@
     <script>
       $(function() { 
         $('[data-dev]').css({'color' : '#051D3B', 'background-color' : 'white'})     
-        $("[data-cor]").val('#2D415B');
+        
       })
     </script>
 </body>

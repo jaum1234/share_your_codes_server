@@ -5,10 +5,10 @@
             
             <div class="col mb-2" id="segunda-coluna">
                 
-                   <div class="d-flex flex-column">
-                       <pre style="border-color: {{ $projeto->cor }}" class="fw-light rounded p-3 editor"><code contenteditable="false" id="#editor">{{ $projeto->codigo }}</code>
-                       </pre>
-                   </div>
+                <div class="d-flex flex-column">
+                    <pre style="border-color: {{ $projeto->cor }}" class="fw-light rounded p-3 editor"><code contenteditable="false" id="#editor">{{ $projeto->codigo }}</code>
+                    </pre>
+                </div>
                 
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#compartilhar">
                     Compartilhar

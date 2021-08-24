@@ -1,0 +1,26 @@
+.conteudo-principal {
+    flex-direction: column;
+    
+    &__seletor-cor {
+        cursor: pointer;
+        height: 50px;
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+
+    .conteudo-principal {
+        flex-grow: 4 !important;
+        flex-direction: row !important;
+
+        &__editor {
+            flex-grow: 4 !important;
+        }
+
+        &__info {
+            margin-left: 10px !important;
+            margin-top: 10px !important;
+        }
+    }
+}

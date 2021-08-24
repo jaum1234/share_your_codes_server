@@ -1,0 +1,36 @@
+.nav {
+
+    &__buscador {
+        display: none !important;
+    }
+
+    &__dropdown {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 768px) {
+
+    .nav {
+        &__lupa {
+            display: none !important;
+        }
+
+        &__buscador {
+            background-color: #2D415B !important;
+            display: inline !important;
+            width: 50% !important;
+        }
+    }
+
+}
+
+@media screen and (min-width: 992px) {
+   
+    .nav {
+        
+        &__dropdown {
+            display: inline !important;
+        }
+    }
+}

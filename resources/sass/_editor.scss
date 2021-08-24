@@ -1,6 +1,8 @@
+@import 'cores';
+
 .editor {
     background: #1E1E1E;
-    border: 25px solid #2D415B;
+    border: 25px solid $inputBackground;
     height: 450px;
     max-width: 800px;
     outline: none;
