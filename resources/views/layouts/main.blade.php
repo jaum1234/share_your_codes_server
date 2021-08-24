@@ -149,20 +149,20 @@
           </nav>
           <div class="container mt-5">
             <div class="row">
-              <div class="col d-none" id="primeira-coluna">
+              <div class="col d-none sidebar" id="primeira-coluna">
                 <div>
                     <h5 class="fw-light">Menu</h5>
                     <div>
                         <ul class="list-unstyled fw-light">
                             <li class="mb-2">
                                 <a href="/projetos/criar" class="text-decoration-none text-light">
-                                  <i class="fas fa-code fs-6 icone"></i>
+                                  <i class="fas fa-code fs-6 sidebar__icone"></i>
                                   Editor de código
                                 </a>
                             </li>
                             <li class="mb-2">
                                 <a href="/projetos" class="text-decoration-none text-light">
-                                  <i class="fas fa-users fs-6 icone"></i>
+                                  <i class="fas fa-users fs-6 sidebar__icone"></i>
                                   Comunidade
                                 </a>
                             </li>

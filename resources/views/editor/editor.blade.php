@@ -27,7 +27,7 @@
                         name="botao-highlight"
                         type="button"
                         id="botao-highlight"
-                        class="btn btn-primary botao--highlight p-3 fw-light rounded text-center"
+                        class="btn btn-primary botao-highlight botao-highlight--com-highlight p-3 fw-light rounded text-center"
                         style="cursor: pointer"
                         data-botao-highlight>
                         Visualizar projeto com highlight
@@ -36,7 +36,7 @@
                         name="botao-sem-highlight"
                         type="button"
                         id="botao-sem-highlight"
-                        class="btn btn-primary botao--highlight p-3 fw-light rounded text-center"
+                        class="btn btn-primary botao-highlight botao-highlight--sem-highlight p-3 fw-light rounded text-center"
                         hidden
                         style="cursor: pointer">
                         Visualizar projeto sem highlight

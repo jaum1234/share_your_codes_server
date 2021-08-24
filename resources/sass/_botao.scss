@@ -1,4 +1,12 @@
-.botao--highlight {
+.botao-highlight {
     background: #072958 !important;
     width: 100%;
+
+    &--com-highlight {
+        border-color: green !important;
+    }
+
+    &--sem-highlight {
+        border-color: red !important;
+    }
 }
