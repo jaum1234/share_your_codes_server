@@ -12,35 +12,35 @@
                     <input 
                         type="email" 
                         name="email" 
-                        class="rounded form-control text-light input-formulario">
+                        class="rounded form-control text-light auth__input">
                         
                         <small class="text-danger">{{ $errors->first('name') }}</small>
                     <label for="name" class="form-label fw-light">Nome completo</label>
                     <input 
                         type="text" 
                         name="name" 
-                        class="rounded form-control text-light input-formulario">
+                        class="rounded form-control text-light auth__input">
                         
                         <small class="text-danger">{{ $errors->first('nickname') }}</small>
                     <label for="nickname" class="form-label fw-light">Nome de usuário</label>
                     <input 
                         type="text" 
                         name="nickname" 
-                        class="rounded form-control text-light input-formulario">
+                        class="rounded form-control text-light auth__input">
                         
                         <small class="text-danger" role="alert">{{ $errors->first('password') }}</small>
                     <label for="password" class="form-label fw-light">Senha</label>
                     <input 
                         type="password" 
                         name="password" 
-                        class="rounded form-control text-light input-formulario">
+                        class="rounded form-control text-light auth__input">
                         
                         
                     <label for="password_confirmation" class="form-label fw-light">Confirmar senha</label>
                     <input 
                         type="password" 
                         name="password_confirmation" 
-                        class="rounded form-control text-light input-formulario">
+                        class="rounded form-control text-light auth__input">
                 
                 <button class="btn btn-primary" type="submit">Cadastrar-se</button>
             </form>

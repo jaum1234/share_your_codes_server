@@ -5,9 +5,7 @@ body {
 
 .input-text {
     background-color: #2D415B !important;
-    border: none !important;
     color: whitesmoke !important;
-    outline: none !important;
     resize: none !important;
 }
 
@@ -21,14 +19,7 @@ body {
 }
 
 
-@media screen and (min-width: 768px) {
 
-    .input-formulario {
-        width: 30% !important;
-    }
-
-    
-}
 
 @media screen and (min-width: 992px) {
     .nav-link {

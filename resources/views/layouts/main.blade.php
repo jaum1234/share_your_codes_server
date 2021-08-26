@@ -31,11 +31,11 @@
                   <span class="text-light">Alura</span>
                   <span class="ms-1 rounded ps-1 pe-1" data-dev>dev</span>
                 </a>
-                <form action="/projetos/pesquisar" method="GET" class="largura">
+                <form action="/projetos?q=" method="GET" class="largura">
                   @csrf
                   <input
                     placeholder="busque aqui..."
-                    name="criterio"
+                    name="q"
                     class="rounded form-control ms-5 text-light fw-light nav__buscador"
                   >
                 </form>
@@ -69,7 +69,7 @@
                           aria-label="Close">
                         </button>
                         </div>
-                        <form action="/pesquisar" method="POST">
+                        <form action="/projetos?q=" method="POST">
                             @csrf
                         <div class="modal-body">
                             <input type="text" class="rounded form-control" name="criterio">

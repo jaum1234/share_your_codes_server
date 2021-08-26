@@ -11,7 +11,7 @@
 
     <!--Meus estilos-->
     <link rel="stylesheet" href="/css/app.css">
-    <link rel="stylesheet" href="/css/form.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     
 </head>
 <body class="corpo">

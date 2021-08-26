@@ -1,11 +1,13 @@
-@use 'editor';
+@use 'components/editor';
 
-@use 'projetos';
+@use 'layouts/projetos';
 
-@use 'conteudo-principal';
+@use 'layouts/conteudo-principal';
 
-@use 'nav';
+@use 'layouts/nav';
 
-@use 'botao';
+@use 'components/botao';
 
-@use 'sidebar';
+@use 'layouts/sidebar';
+
+@use 'layouts/auth';

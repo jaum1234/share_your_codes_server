@@ -38,8 +38,15 @@ class EditorDeCodigoController extends Controller
      *  Exibe a pagina da comunidade onde sao 
      * exibidos todos os projetos salvos
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->has('q')) {
+            $criterio = $request->only('q');
+            $projetos = Projeto::query()->where('nome', 'LIKE', '%' . $criterio['q'] . '%')->paginate(4);
+            return view('editor.comunidade',
+            compact('projetos')
+            );
+        }
         $projetos = Projeto::query()
             ->orderBy('nome')
             ->paginate(4);
@@ -85,13 +92,13 @@ class EditorDeCodigoController extends Controller
      *  Realiza uma busca na
      * barra de pesquisa
      */
-    public function pesquisar(Request $request)
-    {
-        $buscadorDeProjeto = new BuscadorDeProjeto();
-        $projetos = $buscadorDeProjeto->pesquisarProjeto($request->criterio);
-        $projetos->appends($request->all());
-
-        return view('editor.comunidade', compact('projetos'));
-    }
+    //public function pesquisar(Request $request)
+    //{
+    //    $buscadorDeProjeto = new BuscadorDeProjeto();
+    //    $projetos = $buscadorDeProjeto->pesquisarProjeto($request->criterio);
+    //    $projetos->appends($request->all());
+//
+    //    return view('editor.comunidade', compact('projetos'));
+    //}
 
 }
