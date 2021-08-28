@@ -13,13 +13,6 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/vs2015.min.css">
 
     <!--Meus estilos-->
-    <link rel="stylesheet" href="/css/app.css">
-    <link rel="stylesheet" href="/css/botao.css">
-    <link rel="stylesheet" href="/css/editor.css">
-    <link rel="stylesheet" href="/css/form.css">
-    <link rel="stylesheet" href="/css/menu.css">
-    <link rel="stylesheet" href="/css/seletor-cor.css">
-    <link rel="stylesheet" href="{{ asset('css/projetos.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   
 </head>
@@ -31,7 +24,7 @@
                   <span class="text-light">Alura</span>
                   <span class="ms-1 rounded ps-1 pe-1" data-dev>dev</span>
                 </a>
-                <form action="/projetos?q=" method="GET" class="largura">
+                <form action="/projetos?q=" method="GET" class="nav__form">
                   @csrf
                   <input
                     placeholder="busque aqui..."
@@ -69,7 +62,7 @@
                           aria-label="Close">
                         </button>
                         </div>
-                        <form action="/projetos?q=" method="POST">
+                        <form action="/projetos?q=" method="POST" class="nav__form--modal">
                             @csrf
                         <div class="modal-body">
                             <input type="text" class="rounded form-control" name="criterio">
@@ -149,18 +142,18 @@
           </nav>
           <div class="container mt-5">
             <div class="row">
-              <div class="col d-none sidebar" id="primeira-coluna">
+              <div class="col sidebar">
                 <div>
-                    <h5 class="fw-light">Menu</h5>
+                    <h5 class="mb-4 fw-light sidebar__titulo">Menu</h5>
                     <div>
                         <ul class="list-unstyled fw-light">
-                            <li class="mb-2">
+                            <li class="mb-3 sidebar__item">
                                 <a href="/projetos/criar" class="text-decoration-none text-light">
                                   <i class="fas fa-code fs-6 sidebar__icone"></i>
                                   Editor de código
                                 </a>
                             </li>
-                            <li class="mb-2">
+                            <li class="mb-2 sidebar__item">
                                 <a href="/projetos" class="text-decoration-none text-light">
                                   <i class="fas fa-users fs-6 sidebar__icone"></i>
                                   Comunidade

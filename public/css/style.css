@@ -15,16 +15,30 @@
     height: 300px !important;
   }
 }
-.projeto__bloco {
+.input-text {
+  background-color: #2D415B !important;
+  resize: none !important;
+}
+
+.projetos {
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 5 !important;
+  justify-content: start;
+}
+.projetos .projeto {
   padding-right: 20px;
   width: 100% !important;
 }
-
-@media screen and (min-width: 992px) {
-  .projeto__bloco {
+.projetos .projeto__info {
+  background-color: #041832;
+}
+@media (min-width: 1200px) {
+  .projetos .projeto {
     width: 50% !important;
   }
 }
+
 .conteudo-principal {
   flex-direction: column;
 }
@@ -47,28 +61,43 @@
     margin-top: 10px !important;
   }
 }
-.nav__buscador {
+.nav-link {
   display: none !important;
 }
-.nav__dropdown {
-  display: none;
+.nav__lupa {
+  display: none !important;
 }
-
-@media screen and (min-width: 768px) {
+.nav__buscador {
+  background-color: #2D415B !important;
+  display: inline !important;
+  width: 50% !important;
+}
+.nav__dropdown {
+  display: inline !important;
+}
+@media (min-width: 1200px) {
+  .nav__form {
+    width: 1000px;
+  }
+}
+@media (max-width: 989.98px) {
+  .nav-link {
+    display: flex !important;
+  }
   .nav__lupa {
+    display: inline !important;
+  }
+  .nav__dropdown {
     display: none !important;
   }
   .nav__buscador {
-    background-color: #2D415B !important;
-    display: inline !important;
-    width: 50% !important;
+    display: none !important;
   }
-}
-@media screen and (min-width: 992px) {
   .nav__dropdown {
-    display: inline !important;
+    display: none;
   }
 }
+
 .botao-highlight {
   background: #072958 !important;
   width: 100%;
@@ -80,6 +109,22 @@
   border-color: red !important;
 }
 
+.sidebar {
+  display: flex !important;
+  margin-top: 10px;
+}
+@media (max-width: 989.98px) {
+  .sidebar {
+    display: none !important;
+  }
+}
+.sidebar__item {
+  transition: 0.5s ease-in-out;
+}
+.sidebar__item:hover {
+  transform: scale(1.05);
+  filter: brightness(90%);
+}
 .sidebar__icone {
   background-color: #112D5A;
   text-align: center;
@@ -92,11 +137,25 @@
   width: 30% !important;
   margin-bottom: 2rem;
   background-color: #2D415B !important;
+  resize: none !important;
 }
-@media (max-width: 767.98px) {
+@media (max-width: 989.98px) {
   .auth__input {
     width: 100% !important;
   }
+}
+
+.perfil {
+  flex-grow: 4 !important;
+}
+.perfil__bloco {
+  background-color: #2D415B;
+  padding: 1rem;
+}
+
+body {
+  background-color: #051D3B !important;
+  color: white !important;
 }
 
 /*# sourceMappingURL=style.css.map */

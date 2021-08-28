@@ -2,8 +2,8 @@
 
 @section('conteudo')
 
-        <div class="col bloco-perfil-usuario">
-            <div class="user-background rounded d-flex flex-column text-center p-3 ">
+        <div class="col perfil">
+            <div class="perfil__bloco rounded d-flex flex-column text-center p-3 ">
                 <i class="fas fa-user-circle fs-1 profile mb-4"></i>
                 <div>
 

@@ -3,7 +3,7 @@
 .auth__input {
     width: 30% !important;
     margin-bottom: 2rem;
-    background-color: #2D415B !important;
+    @include defaut-text-input;
 
     @include for-phone {
         width: 100% !important;

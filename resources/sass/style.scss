@@ -1,5 +1,7 @@
 @use 'components/editor';
 
+@use 'components/input';
+
 @use 'layouts/projetos';
 
 @use 'layouts/conteudo-principal';
@@ -11,3 +13,7 @@
 @use 'layouts/sidebar';
 
 @use 'layouts/auth';
+
+@use 'layouts/perfil';
+
+@use 'base/base.scss';

@@ -3,7 +3,7 @@
 @section('conteudo')
     
     
-    <div class="col d-flex conteudo-principal">
+    <div class="col d-flex conteudo-principal mb-4">
                 
         <div class="col conteudo-principal__editor">
             
@@ -48,7 +48,7 @@
             <div class="text-start ">
                 <div class="d-flex flex-column mb-4">
                     <h5 class="fw-light">Seu projeto</h5>
-                        <input type="text" name="nome" id="nome-projeto" placeholder="nome do projeto" class="rounded p-3 input-text fw-light form-control editor__titulo">
+                        <input type="text" name="nome" id="nome-projeto" placeholder="nome do projeto" class="rounded p-3 input-text fw-light form-control editor__titulo text-light">
                         <small class="text-danger mb-3">{{ $errors->first('nome') }}</small>
             
                         <textarea
@@ -56,7 +56,7 @@
                             name="descricao"
                             cols="23"
                             rows="2"
-                            class="rounded p-3 input-text fw-light form-control editor__descricao"
+                            class="rounded p-3 input-text fw-light form-control editor__descricao text-light"
                             id="descricao-projeto"
                             placeholder="Descriçao do projeto">
                             

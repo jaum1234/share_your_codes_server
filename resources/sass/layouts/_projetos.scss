@@ -1,17 +1,23 @@
-.projeto {
+@import '../abstracts/mixins';
 
-    &__bloco {
-        padding-right: 20px;
-        width: 100% !important;
-    }
-}
-
-@media screen and (min-width: 992px){
+.projetos {
+    display: flex; 
+    flex-wrap: wrap;
+    flex-grow: 5 !important;  
+    justify-content: start;
 
     .projeto {
+        padding-right: 20px;
+        width: 100% !important;
 
-        &__bloco {
+        &__info {
+            background-color: #041832;
+        }
+    
+        @include for-desktop {
             width: 50% !important;
         }
     }
 }
+
+
