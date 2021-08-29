@@ -14,8 +14,9 @@
                     class="text-decoration-none text-light">
                     <div class="d-flex flex-column">
 
-                        <pre style="border-color: {{ $projeto->cor }}" class="fw-light rounded p-3 editor editor--mini "><code contenteditable="false" id="#editor">{{ $projeto->codigo }}</code>
-                        </pre>
+                        <div style="border-color: {{ $projeto->cor }}" class="code editor editor--mini fw-light text-light mt-3 rounded p-3 mb-1" data-codigo-highlight>
+{{ $projeto->codigo }}
+                        </div>
 
                         <div class="projeto__info rounded p-3">
                             <h5 class=" fw-light">{{ $projeto->nome }}</h5>

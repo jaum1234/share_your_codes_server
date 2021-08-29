@@ -10,26 +10,18 @@
 
             <form action="/projetos" method="POST">
                 @csrf
-                <!--
-            <div class="code">
-                protected $fillable = [
-                    'nome',
-                    'descricao',
-                    'cor',
-                    'linguagem',
-                    'codigo',
-                    'curtida',
-                    
-                ];
-            </div>
-        -->
-            <pre class="editor p-3 fw-light text-light mt-3 rounded" id="editor-pre" data-editor-pre-codigo><code contenteditable="true" id="editor" data-editor-codigo>Escreva seu codigo aqui...</code></pre>
-            
+                
+<div class="code editor fw-light text-light mt-3 rounded p-3 mb-1" hidden data-codigo-highlight>
+    
+</div>
+        
             <textarea 
-                name="codigo" 
-                id="editor-hidden" 
-                hidden>
-            </textarea>
+                class="editor p-3 fw-light text-light mt-3 rounded" 
+                id="editor" 
+                name="codigo"
+                data-editor-codigo>Escreva seu codigo aqui...</textarea>
+            
+            
             <small class="text-danger">{{ $errors->first('codigo') }}</small>
 
 
@@ -99,10 +91,5 @@
         </div>
     </div>
     </form>
-    <script>
-        $(function() {
-            $('[data-editor-codigo]').css({"background-color": "red"});
 
-        })
-    </script>
 @endsection
