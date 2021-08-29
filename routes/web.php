@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\EditorDeCodigoController;
+use App\Http\Controllers\ProjetosController;
 use App\Http\Controllers\UserController;
 
 
@@ -13,18 +13,18 @@ Route::middleware('auth')->group(function () {
     Route::prefix('/projetos')->group(function () {
 
         /**
-         *  EditorDeCodigoController
+         *  ProjetosController
          */
         
         #get
-        Route::get('', [EditorDeCodigoController::class, 'index']);
-        Route::get('/criar', [EditorDeCodigoController::class, 'create']);
-        Route::get('/{id}/{nome}', [EditorDeCodigoController::class, 'show']);
-        Route::get('/pesquisar', [EditorDeCodigoController::class, 'pesquisar']);
+        Route::get('', [ProjetosController::class, 'index']);
+        Route::get('/criar', [ProjetosController::class, 'create']);
+        Route::get('/{id}/{nome}', [ProjetosController::class, 'show']);
+        Route::any('/pesquisar', [ProjetosController::class, 'pesquisar'])->name('pesquisar');
 
         #post
-        Route::post('', [EditorDeCodigoController::class, 'store']);
-        Route::post('/excluir/{id}', [EditorDeCodigoController::class, 'destroy']);
+        Route::post('', [ProjetosController::class, 'store']);
+        Route::post('/excluir/{id}', [ProjetosController::class, 'destroy']);
     });
 
     Route::prefix('/usuarios')->group(function () {

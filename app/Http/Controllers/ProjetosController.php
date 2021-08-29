@@ -9,7 +9,7 @@ use App\Service\CriadorDeProjeto;
 use App\Service\BuscadorDeProjeto;
 use App\Service\RemovedorDeProjeto;
 
-class EditorDeCodigoController extends Controller
+class ProjetosController extends Controller
 {
     
     public function create()
@@ -31,13 +31,6 @@ class EditorDeCodigoController extends Controller
    
     public function index(Request $request)
     {
-        if ($request->has('q')) {
-            $criterio = $request->only('q');
-            $projetos = Projeto::query()->where('nome', 'LIKE', '%' . $criterio['q'] . '%')->paginate(4);
-            return view('editor.comunidade',
-            compact('projetos')
-            );
-        }
         $projetos = Projeto::query()
             ->orderBy('nome')
             ->paginate(4);
@@ -73,6 +66,17 @@ class EditorDeCodigoController extends Controller
         $removedorDeProjeto->removerProjeto($request->id);
 
         return redirect()->back();
+    }
+
+    public function pesquisar(Request $request)
+    {
+        $query = $request->q; 
+        $projetos = Projeto::where('nome', 'LIKE', '%' . $query . '%')
+            ->paginate(4);
+        $projetos->appends(['q' => $query]);
+
+        return view('editor.comunidade', compact('projetos'));
+
     }
 
 

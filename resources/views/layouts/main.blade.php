@@ -24,7 +24,7 @@
                   <span class="text-light">Alura</span>
                   <span class="ms-1 rounded ps-1 pe-1" data-dev>dev</span>
                 </a>
-                <form action="/projetos?q=" method="GET" class="nav__form">
+                <form action="{{ route('pesquisar') }}" method="POST" class="nav__form">
                   @csrf
                   <input
                     placeholder="busque aqui..."
