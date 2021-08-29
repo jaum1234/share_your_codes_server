@@ -1,7 +1,7 @@
 const botaoEditar = $("[data-botao-editar]");
 const botaoConfirmar = $("[data-botao-confirmar]");
 
-botaoEditar.on('click', function(event) {
+botaoEditar.on('click', function() {
     $("#nome-usuario").attr("hidden", true);
     $("#input-nome-usuario").attr("hidden", false);
 
@@ -14,7 +14,7 @@ botaoEditar.on('click', function(event) {
     
 });
 
-botaoConfirmar.on('click', function(event) {
+botaoConfirmar.on('click', function() {
     $("#nome-usuario").attr("hidden", false);
     $("#input-nome-usuario").attr("hidden", true);
 

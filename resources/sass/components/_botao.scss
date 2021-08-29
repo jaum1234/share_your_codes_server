@@ -2,8 +2,13 @@
     background: #072958 !important;
     width: 100%;
 
+    &:hover {
+        background-color: #0f294d !important;
+    }
+
     &--com-highlight {
         border-color: green !important;
+        
     }
 
     &--sem-highlight {

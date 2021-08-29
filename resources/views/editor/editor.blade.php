@@ -10,8 +10,21 @@
 
             <form action="/projetos" method="POST">
                 @csrf
-            <pre class="editor p-3 fw-light text-light mt-3 rounded" id="editor-pre"><code contenteditable="true" id="editor">Escreva seu codigo aqui...</code></pre>
-                            
+                <!--
+            <div class="code">
+                protected $fillable = [
+                    'nome',
+                    'descricao',
+                    'cor',
+                    'linguagem',
+                    'codigo',
+                    'curtida',
+                    
+                ];
+            </div>
+        -->
+            <pre class="editor p-3 fw-light text-light mt-3 rounded" id="editor-pre" data-editor-pre-codigo><code contenteditable="true" id="editor" data-editor-codigo>Escreva seu codigo aqui...</code></pre>
+            
             <textarea 
                 name="codigo" 
                 id="editor-hidden" 
@@ -80,9 +93,16 @@
                         data-botao-salvar>
                         Salvar projeto
                     </button>
+                    
                 </div>
             </div>
         </div>
     </div>
     </form>
+    <script>
+        $(function() {
+            $('[data-editor-codigo]').css({"background-color": "red"});
+
+        })
+    </script>
 @endsection

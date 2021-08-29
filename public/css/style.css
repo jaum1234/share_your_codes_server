@@ -102,6 +102,9 @@
   background: #072958 !important;
   width: 100%;
 }
+.botao-highlight:hover {
+  background-color: #0f294d !important;
+}
 .botao-highlight--com-highlight {
   border-color: green !important;
 }
@@ -156,6 +159,10 @@
 body {
   background-color: #051D3B !important;
   color: white !important;
+}
+
+div.code {
+  white-space: pre;
 }
 
 /*# sourceMappingURL=style.css.map */
