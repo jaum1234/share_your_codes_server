@@ -15,10 +15,7 @@ use App\Http\Requests\ValidacaoNomeUsuarioRequest;
 
 class UserController extends Controller
 {
-    /**
-     *  Exibe a pagina de perfil
-     * do usuario
-     */
+    
     public function edit(Request $request) 
     {
         $user = Auth::user();
@@ -27,27 +24,22 @@ class UserController extends Controller
         return view('user.user', compact('user', 'mensagem'));
     }
 
-    /**
-     *  Edita o perfil do usuario
-     */
+   
     public function update(UsuarioFormRequest $request, Int $id)
     { 
-            $usuario = User::find($id);
-            $usuario->fill([
-                'name' => $request->name, 
-                'nickname' => $request->nickname
-            ]);
-            $usuario->save();
+        $usuario = User::find($id);
+        $usuario->fill([
+            'name' => $request->name, 
+            'nickname' => $request->nickname
+        ]);
+        $usuario->save();
 
-            $request->session()->flash('mensagem', 'Dados atualizados com sucesso');
-
-            return redirect()->back();   
+        $response['success'] = true;
+        $response['message'] = 'Dados atualizados com sucesso!';
+        
+        return json_encode($response);   
     }
 
-    /**
-     *  Exibe a pagina de projetos 
-     * do usuario
-     */
     public function meusProjetos(Request $request)
     {
         $projetos = Projeto::where('user_id', Auth::id())

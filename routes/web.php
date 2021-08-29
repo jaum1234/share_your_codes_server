@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EditorDeCodigoController;
 use App\Http\Controllers\UserController;
 
@@ -43,17 +43,17 @@ Route::middleware('auth')->group(function () {
 });
 
 /**
- *  LoginController
+ *  AuthController
  */
 
 #get
-Route::get('/login', [LoginController::class, 'formLogin']);
-Route::get('/cadastro', [LoginController::class, 'formCadastro']);
-Route::get('/logout', [LoginController::class, 'logout']);
+Route::get('/login', [AuthController::class, 'formLogin']);
+Route::get('/cadastro', [AuthController::class, 'formCadastro']);
+Route::get('/logout', [AuthController::class, 'logout']);
 
 #post
-Route::post('/login/do', [LoginController::class, 'logar']);
-Route::post('/cadastro/do', [LoginController::class, 'cadastrar']);
+Route::post('/login/do', [AuthController::class, 'logar']);
+Route::post('/cadastro/do', [AuthController::class, 'cadastrar']);
     
 
 

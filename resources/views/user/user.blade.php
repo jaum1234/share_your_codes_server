@@ -8,7 +8,7 @@
                 <div>
 
                     <!--Form para alterar informacoes de perfil-->
-                    <form action="/usuarios/{{ $user->id }}/editar" method="POST">
+                    <form action="/usuarios/{{ $user->id }}/editar" method="POST" name="formUpdateUser">
                         @csrf
 
                     <ul class="list-unstyled fw-light d-flex flex-column lh-lg">
@@ -46,26 +46,23 @@
                                 class="text-center rounded border-0">
                                 <small class="text-danger">{{ $errors->first('nickname') }}</small>
 
-                                @if (!empty($mensagem))
-
-                                    <div class="alert alert-success mt-3">
-                                        {{ $mensagem }}
-                                    </div>
-
-                                @endif
-
+                                <div class="alert alert-success mt-3 d-none" data-message-box>
+                                    
+                                </div>
                         </li>
                         <div>
-                            <button type="button" class="btn btn-primary" id="botao-editar">
+                            <button type="button" class="btn btn-primary" id="botao-editar" data-botao-editar>
                                 <i class="fas fa-user-edit"></i>
                             </button>
 
                             <!--Hidden Button para confirmar alteracoes-->
                             <button 
+                                type="submit"
                                 hidden 
                                 class="btn btn-success" 
                                 id="botao-confirmar"
-                                name="botao-confirmar">
+                                name="botao-confirmar"
+                                data-botao-confirmar>
                                 
                                 <i class="fas fa-check-square"></i>
                             </button>
@@ -75,6 +72,31 @@
                 </div>
             </div>
         </div>
-    
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(function() {
+                const UsuarioId = '{{ $user->id }}';
+                $('form[name="formUpdateUser"]').on('submit', function (event) {  
+                    event.preventDefault();
+                    const UsuarioId = '{{ $user->id }}';
+                    $.ajax({
+                        type: "POST",
+                        url: "/usuarios/" + UsuarioId + "/editar",
+                        data: $(this).serialize(),
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.success === true) {
+                                const messageBox = $('[data-message-box]'); 
+                                messageBox.removeClass('d-none').html(response.message);
+                                setTimeout(() => {
+                                    messageBox.addClass('d-none');
+                                }, 5000);
+                                return;
+                            }
+                        }
+                    });
+                })
+            })
+        </script>
+        
 @endsection

@@ -9,12 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class LoginController extends Controller
+class AuthController extends Controller
 {
-    /**
-     *  Exibe o formulario
-     * de login
-     */
+    
     public function formLogin(Request $request)
     {
         $mensagem = $request->session()->get('mensagem');
@@ -23,10 +20,7 @@ class LoginController extends Controller
         return view('autenticacao.login', compact('mensagem', 'titulo'));
     }
 
-    /**
-     *  Exibe formulario 
-     * de cadastro
-     */
+  
     public function formCadastro()
     {
         $titulo = 'Cadastro';
@@ -34,9 +28,7 @@ class LoginController extends Controller
         return view('autenticacao.cadastro', compact('titulo'));
     }
 
-    /**
-     *  Efetua o login
-     */
+   
     public function logar (LoginFormRequest $request)
     {
         
@@ -61,9 +53,7 @@ class LoginController extends Controller
         }   
     }
 
-    /**
-     *  Efetua o logout
-     */
+   
     public function logout(Request $request)
     {
         Auth::logout();
@@ -74,9 +64,7 @@ class LoginController extends Controller
         return redirect('/login');
     }
 
-    /**
-     *  Efetua o cadastro
-     */
+   
     public function cadastrar(CadastroFormRequest $request)
     {
         if ($request->password === $request->password_confirmation) {

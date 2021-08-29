@@ -11,19 +11,13 @@ use App\Service\RemovedorDeProjeto;
 
 class EditorDeCodigoController extends Controller
 {
-    /**
-     *  Exibe o formulario de criaçao
-     * dos projetos
-     */
+    
     public function create()
     {
         return view('editor.editor');
     }
 
-    /**
-     *  Exibe a pagina de cada
-     * projeto
-     */
+    
     public function show(Request $request) 
     {
         $projeto = Projeto::find($request->id); 
@@ -34,10 +28,7 @@ class EditorDeCodigoController extends Controller
         );
     }
 
-    /**
-     *  Exibe a pagina da comunidade onde sao 
-     * exibidos todos os projetos salvos
-     */
+   
     public function index(Request $request)
     {
         if ($request->has('q')) {
@@ -57,9 +48,7 @@ class EditorDeCodigoController extends Controller
         );
     }
 
-    /**
-     *  Salva um projeto
-     */
+    
     public function store(CodigoFormRequest $request, CriadorDeProjeto $criadorDeProjeto)
     {   
         $nome = $request->nome;
@@ -78,9 +67,7 @@ class EditorDeCodigoController extends Controller
                 return redirect()->back();
     }
 
-    /**
-     *  Exclui um projeto
-     */
+    
     public function destroy(Request $request, RemovedorDeProjeto $removedorDeProjeto)
     {
         $removedorDeProjeto->removerProjeto($request->id);
@@ -88,17 +75,5 @@ class EditorDeCodigoController extends Controller
         return redirect()->back();
     }
 
-    /**
-     *  Realiza uma busca na
-     * barra de pesquisa
-     */
-    //public function pesquisar(Request $request)
-    //{
-    //    $buscadorDeProjeto = new BuscadorDeProjeto();
-    //    $projetos = $buscadorDeProjeto->pesquisarProjeto($request->criterio);
-    //    $projetos->appends($request->all());
-//
-    //    return view('editor.comunidade', compact('projetos'));
-    //}
 
 }

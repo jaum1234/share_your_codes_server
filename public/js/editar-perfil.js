@@ -1,9 +1,6 @@
-const botaoEditar = $("#botao-editar");
+const botaoEditar = $("[data-botao-editar]");
+const botaoConfirmar = $("[data-botao-confirmar]")
 
-/**
- *  Exibe formulario pra alterar
- * dados do perfil do usuario
- */
 botaoEditar.on('click', function() {
     $("#nome-usuario").attr("hidden", true);
     $("#input-nome-usuario").attr("hidden", false);
@@ -15,7 +12,22 @@ botaoEditar.on('click', function() {
     botaoEditar.attr("hidden", true);
     $("#botao-confirmar").attr("hidden", false);
     
-})
+});
+
+botaoConfirmar.on('click', function() {
+    $("#nome-usuario").attr("hidden", false);
+    $("#input-nome-usuario").attr("hidden", true);
+
+    $("#nome-completo").attr("hidden", false);
+    $("#input-nome-completo").attr("hidden", true);
+
+    botaoEditar.attr("hidden", false);
+    $("#botao-confirmar").attr("hidden", true);
+});
+
+ 
+   
+
 
 
 
