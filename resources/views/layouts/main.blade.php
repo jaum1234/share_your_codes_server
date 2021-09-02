@@ -24,9 +24,9 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-transparent ">
             <div class="container-fluid">
-                <a class="navbar-brand text-uppercase fs-3" href="/">
-                  <span class="text-light">Alura</span>
-                  <span class="ms-1 rounded ps-1 pe-1" data-dev>dev</span>
+                <a class="navbar-brand text-uppercase fs-3 brand" href="/">
+                  <span class="text-light brand__alura">Alura</span>
+                  <span class="ms-1 rounded ps-1 pe-1 brand__dev" data-dev>dev</span>
                 </a>
                 <form action="{{ route('pesquisar') }}" method="POST" class="nav__form">
                   @csrf
@@ -181,6 +181,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
 
     <!--Meus scripts-->
+    <script type="module" src="{{ asset('js/salvar-projeto.js') }}"></script>
     <script type="module" src="{{ asset('js/compartilhar.js') }}"></script>
     <script src="{{ asset('js/contador-de-caracteres.js') }}"></script>
     <script src="{{ asset('/js/editar-perfil.js') }}"></script>
@@ -188,9 +189,7 @@
     <script type="module" src="{{ asset('/js/salvar-projeto.js') }}"></script>
     <script src="{{ asset('/js/selecionar-cor-borda.js') }}"></script>
     <script>
-      $(function() { 
-        $('[data-dev]').css({'color' : '#051D3B', 'background-color' : 'white'})     
-      })
+     
     </script>
 </body>
 </html>

@@ -2,6 +2,9 @@ const cor = $('[data-cor]');
 
 cor.on('input', function () {
     let corValor = $(this).val();
-    $('#editor-pre').css("borderColor", corValor);
+    $('[data-editor-codigo]').css("borderColor", corValor);
+    $('[data-codigo-highlight]').css("borderColor", $('[data-cor]').val())
 })
+
+
 

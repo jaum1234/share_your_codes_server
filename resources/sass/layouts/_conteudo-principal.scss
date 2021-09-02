@@ -1,5 +1,7 @@
 .conteudo-principal {
     flex-direction: column;
+
+    
     
     &__seletor-cor {
         cursor: pointer;
@@ -11,14 +13,20 @@
 @media screen and (min-width: 992px) {
 
     .conteudo-principal {
-        flex-grow: 4 !important;
+        flex-grow: 5 !important;
         flex-direction: row !important;
 
+        &__form {
+            display: flex !important;
+            width: 90%;
+        }
+
         &__editor {
-            flex-grow: 4 !important;
+            width: 80%;
         }
 
         &__info {
+            width: 20%;
             margin-left: 10px !important;
             margin-top: 10px !important;
         }

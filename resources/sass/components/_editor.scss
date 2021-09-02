@@ -1,4 +1,4 @@
-@import '../abstracts/variaveis';
+@import '../abstracts/variaveis', '../abstracts/mixins';
 
 .editor {
     background: #1E1E1E;
@@ -8,6 +8,7 @@
     max-width: 800px;
     outline: none;
     width: 100%;
+
 }
 
 

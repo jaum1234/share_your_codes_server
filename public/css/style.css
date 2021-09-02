@@ -21,6 +21,10 @@
   resize: none !important;
 }
 
+.brand__dev {
+  background-color: white;
+}
+
 .projetos {
   display: flex;
   flex-wrap: wrap;
@@ -51,13 +55,18 @@
 
 @media screen and (min-width: 992px) {
   .conteudo-principal {
-    flex-grow: 4 !important;
+    flex-grow: 5 !important;
     flex-direction: row !important;
   }
+  .conteudo-principal__form {
+    display: flex !important;
+    width: 90%;
+  }
   .conteudo-principal__editor {
-    flex-grow: 4 !important;
+    width: 80%;
   }
   .conteudo-principal__info {
+    width: 20%;
     margin-left: 10px !important;
     margin-top: 10px !important;
   }
