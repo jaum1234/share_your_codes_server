@@ -84,3 +84,9 @@
     </div>
 
 @endsection
+@push('scripts')
+    <script type="module" src="{{ asset('/js/salvar-projeto.js') }}"></script>
+    <script src="{{ asset('js/contador-de-caracteres.js') }}"></script>
+    <script type="module" src="{{ asset('js/highlight.js') }}" ></script>
+    <script src="{{ asset('/js/selecionar-cor-borda.js') }}"></script>
+@endpush

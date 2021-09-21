@@ -181,15 +181,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
 
     <!--Meus scripts-->
-    <script type="module" src="{{ asset('js/salvar-projeto.js') }}"></script>
-    <script type="module" src="{{ asset('js/compartilhar.js') }}"></script>
-    <script src="{{ asset('js/contador-de-caracteres.js') }}"></script>
-    <script src="{{ asset('/js/editar-perfil.js') }}"></script>
-    <script type="module" src="{{ asset('js/highlight.js') }}" ></script>
-    <script type="module" src="{{ asset('/js/salvar-projeto.js') }}"></script>
-    <script src="{{ asset('/js/selecionar-cor-borda.js') }}"></script>
-    <script>
-     
-    </script>
+    @stack('scripts')
 </body>
 </html>

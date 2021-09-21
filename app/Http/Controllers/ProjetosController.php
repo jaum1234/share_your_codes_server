@@ -41,7 +41,6 @@ class ProjetosController extends Controller
         );
     }
 
-    
     public function store(CodigoFormRequest $request, CriadorDeProjeto $criadorDeProjeto)
     {   
         $nome = $request->nome;
@@ -60,7 +59,6 @@ class ProjetosController extends Controller
                 return redirect()->back();
     }
 
-    
     public function destroy(Request $request, RemovedorDeProjeto $removedorDeProjeto)
     {
         $removedorDeProjeto->removerProjeto($request->id);

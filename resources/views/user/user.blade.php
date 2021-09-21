@@ -1,7 +1,5 @@
 @extends('layouts.main')
-
 @section('conteudo')
-
         <div class="col perfil">
             <div class="perfil__bloco rounded d-flex flex-column text-center p-3 ">
                 <i class="fas fa-user-circle fs-1 profile mb-4"></i>
@@ -10,7 +8,6 @@
                     <!--Form para alterar informacoes de perfil-->
                     <form action="/usuarios/{{ $user->id }}/editar" method="POST" name="formUpdateUser">
                         @csrf
-
                     <ul class="list-unstyled fw-light d-flex flex-column lh-lg">
                         <li class="d-flex flex-column align-items-center mb-4">
                             E-mail:
@@ -71,32 +68,34 @@
                 </form>
                 </div>
             </div>
-        </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script>
-            $(function() {
-                const UsuarioId = '{{ $user->id }}';
-                $('form[name="formUpdateUser"]').on('submit', function (event) {  
-                    event.preventDefault();
-                    const UsuarioId = '{{ $user->id }}';
-                    $.ajax({
-                        type: "POST",
-                        url: "/usuarios/" + UsuarioId + "/editar",
-                        data: $(this).serialize(),
-                        dataType: 'json',
-                        success: function (response) {
-                            if (response.success === true) {
-                                const messageBox = $('[data-message-box]'); 
-                                messageBox.removeClass('d-none').html(response.message);
-                                setTimeout(() => {
-                                    messageBox.addClass('d-none');
-                                }, 5000);
-                                return;
-                            }
-                        }
-                    });
-                })
-            })
-        </script>
-        
+        </div>        
 @endsection
+@push('scripts')
+    <script src="{{ asset('/js/editar-perfil.js') }}"></script>
+    <script>
+        $(function() {
+            const UsuarioId = '{{ $user->id }}';
+            $('form[name="formUpdateUser"]').on('submit', function (event) {  
+                event.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "/usuarios/" + UsuarioId + "/editar",
+                    data: $(this).serialize(),
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.success === true) {
+                            $('#nome-usuario').text($('#input-nome-usuario').val())
+                            $('#nome-completo').text($('#input-nome-completo').val())
+                            const messageBox = $('[data-message-box]'); 
+                            messageBox.removeClass('d-none').html(response.message);
+                            setTimeout(() => {
+                                messageBox.addClass('d-none');
+                            }, 5000);
+                            return;
+                        }
+                    }
+                });
+            })
+        })
+    </script>
+@endpush

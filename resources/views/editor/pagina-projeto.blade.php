@@ -50,8 +50,11 @@
             <!-- Button trigger modal -->
            
         
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+    
+@endsection
+@push('scripts')
+    <script type="module" src="{{ asset('/js/compartilhar.js') }}"></script>
     <script>
         hljs.highlightAll();
     </script>
-@endsection
+@endpush

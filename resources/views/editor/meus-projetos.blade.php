@@ -1,9 +1,6 @@
 @extends('layouts.main')
 
-@section('conteudo')
-
-
-      
+@section('conteudo')  
       <div class="projeto col mt-3 projetos">
         @foreach ($projetos as $projeto)
      
@@ -35,14 +32,13 @@
                         </div>
                     </div>
                  </a>
-             </div>
-         
-     @endforeach
+             </div>      
+        @endforeach
       </div>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
-      <script>
-          hljs.highlightAll();
-      </script>
-    
-
 @endsection
+@push('scripts')
+    <script>
+        hljs.highlightAll();
+    </script>
+@endpush
+
