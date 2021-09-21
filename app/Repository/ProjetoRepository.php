@@ -30,12 +30,5 @@ class ProjetoRepository
         if ($qtdRecursos === 0) {
             return redirect()->back(410);
         }
-    }
-
-    public function find($id)
-    {
-        
-    }
-
-   
+    }   
 }

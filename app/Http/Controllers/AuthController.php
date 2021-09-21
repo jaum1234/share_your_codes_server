@@ -5,12 +5,19 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CadastroFormRequest;
 use App\Http\Requests\LoginFormRequest;
 use App\Models\User;
+use App\Repository\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    private $repository;
+
+    public function __construct(UserRepository $repository)
+    {
+        $this->repository = $repository;
+    }
     
     public function formLogin(Request $request)
     {
@@ -29,7 +36,7 @@ class AuthController extends Controller
     }
 
    
-    public function logar (LoginFormRequest $request)
+    public function logar(LoginFormRequest $request)
     {
         
         $credencials = [
@@ -69,14 +76,7 @@ class AuthController extends Controller
     {
         if ($request->password === $request->password_confirmation) {
                
-            $senhaHash = bcrypt($request->password);
-
-            User::create([
-                'name' => $request->name,
-                'nickname' =>$request->nickname,
-                'email' => $request->email,
-                'password' => $senhaHash
-            ]);
+            $this->repository->add($request);
 
             $request->session()->flash(
                 'mensagem',
@@ -85,8 +85,5 @@ class AuthController extends Controller
 
             return redirect('/login');
         }
-
-        
-        
     }
 }
