@@ -2,15 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CodigoFormRequest;
 use App\Models\Projeto;
 use Illuminate\Http\Request;
-use App\Service\CriadorDeProjeto;
 use App\Service\BuscadorDeProjeto;
 use App\Service\RemovedorDeProjeto;
+use App\Repository\ProjetoRepository;
+use App\Http\Requests\CodigoFormRequest;
 
 class ProjetosController extends Controller
 {
+    private $repository;
+    private $buscador;
+
+    public function __construct(ProjetoRepository $repository, BuscadorDeProjeto $buscador)
+    {
+        $this->repository = $repository;
+        $this->buscador = $buscador;
+    }
     
     public function create()
     {
@@ -32,8 +40,10 @@ class ProjetosController extends Controller
     public function index(Request $request)
     {
         $projetos = Projeto::query()
-            ->orderBy('nome')
+            ->orderBy('name')
             ->paginate(4);
+        
+        return $projetos;
 
         return view(
             'editor.comunidade', 
@@ -41,37 +51,23 @@ class ProjetosController extends Controller
         );
     }
 
-    public function store(CodigoFormRequest $request, CriadorDeProjeto $criadorDeProjeto)
+    public function store(CodigoFormRequest $request)
     {   
-        $nome = $request->nome;
-        $descricao = $request->descricao;
-        $codigo = $request->codigo;
-        $cor = $request->cor; 
-
-
-            $criadorDeProjeto->criarProjeto(
-                $nome,
-                $descricao,
-                $codigo,
-                $cor,
-            );
-
-                return redirect()->back();
-    }
-
-    public function destroy(Request $request, RemovedorDeProjeto $removedorDeProjeto)
-    {
-        $removedorDeProjeto->removerProjeto($request->id);
+        $this->repository->add($request);
 
         return redirect()->back();
     }
 
-    public function pesquisar(Request $request)
+    public function destroy(Request $request)
     {
-        $query = $request->q; 
-        $projetos = Projeto::where('nome', 'LIKE', '%' . $query . '%')
-            ->paginate(4);
-        $projetos->appends(['q' => $query]);
+        $this->repository->remove($request->id);
+
+        return redirect()->back();
+    }
+
+    public function search(Request $request)
+    {
+        $projetos = $this->buscador->pesquisar($request->q);
 
         return view('editor.comunidade', compact('projetos'));
 

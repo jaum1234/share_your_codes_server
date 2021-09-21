@@ -15,7 +15,7 @@ Route::middleware('auth')->group(function () {
         Route::get('', [ProjetosController::class, 'index'])->name('projetos');
         Route::get('/criar', [ProjetosController::class, 'create'])->name('projetos.criar');
         Route::get('/{id}/{nome}', [ProjetosController::class, 'show'])->name('projetos.projeto');
-        Route::any('/pesquisar', [ProjetosController::class, 'pesquisar'])->name('pesquisar');
+        Route::any('/pesquisar', [ProjetosController::class, 'search'])->name('pesquisar');
 
         Route::post('', [ProjetosController::class, 'store'])->name('projetos.salvar');
         Route::post('/excluir/{id}', [ProjetosController::class, 'destroy'])->name('projetos.excluir');

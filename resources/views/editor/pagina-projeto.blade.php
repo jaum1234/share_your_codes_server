@@ -3,10 +3,10 @@
 @section('conteudo')
 
             
-            <div class="col mb-2" id="segunda-coluna">
+            <div class="col-9 mb-2" id="segunda-coluna">
                 
                 <div class="d-flex flex-column">
-                    <pre style="border-color: {{ $projeto->cor }}" class="fw-light rounded p-3 editor"><code contenteditable="false" id="#editor">{{ $projeto->codigo }}</code>
+                    <pre style="border-color: {{ $projeto->cor }}" class="fw-light rounded p-3 editor editor--compartilhar"><code contenteditable="false" id="#editor">{{ $projeto->codigo }}</code>
                     </pre>
                 </div>
                 

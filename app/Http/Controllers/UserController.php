@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Projeto;
+use App\Service\Paginador;
 use Illuminate\Http\Request;
 use App\Service\EditorPerfil;
 use App\Service\BuscadorDeProjeto;
