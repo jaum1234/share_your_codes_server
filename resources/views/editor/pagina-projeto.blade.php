@@ -3,11 +3,10 @@
 @section('conteudo')
 
             
-            <div class="col-9 mb-2" id="segunda-coluna">
+            <div class="col-lg-10 mb-2" id="segunda-coluna" class="compartilhar">
                 
-                <div class="d-flex flex-column">
-                    <pre style="border-color: {{ $projeto->cor }}" class="fw-light rounded p-3 editor editor--compartilhar"><code contenteditable="false" id="#editor">{{ $projeto->codigo }}</code>
-                    </pre>
+                <div style="border-color: {{ $projeto->cor }}" class="code editor editor--compartilhar fw-light text-light mt-3 rounded p-3 mb-3" data-codigo-highlight>
+{{ $projeto->codigo }}
                 </div>
                 
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#compartilhar">
@@ -47,14 +46,13 @@
                     </div>
                 </div>
             </div>
-            <!-- Button trigger modal -->
-           
         
-    
 @endsection
 @push('scripts')
     <script type="module" src="{{ asset('/js/compartilhar.js') }}"></script>
     <script>
-        hljs.highlightAll();
+        document.querySelectorAll('div.code').forEach(el => {
+            hljs.highlightElement(el);
+        }); 
     </script>
 @endpush

@@ -43,7 +43,8 @@
                                 class="text-center rounded border-0">
                                 <small class="text-danger">{{ $errors->first('nickname') }}</small>
 
-                                <div class="alert alert-success mt-3 d-none" data-message-box>
+                                <div 
+                                    class="alert alert-success mt-3 d-none" data-message-box>
                                     
                                 </div>
                         </li>

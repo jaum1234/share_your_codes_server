@@ -1,7 +1,36 @@
-.conteudo-principal {
-    flex-direction: column;
+@import '../abstracts/mixins';
 
-    
+.conteudo-principal {
+
+    &__editor {
+        width: 100% !important;
+    }
+
+    &__info {
+        width: 100% !important;
+    }
+
+    &__form {
+        width: 100%;
+    }
+
+    @include for-desktop {
+        flex-direction: row !important;
+
+        &__form {
+            display: flex !important;      
+        }
+
+        &__editor {
+            width: 75% !important;
+        }
+
+        &__info {
+            width: 25% !important;
+            margin-left: 10px !important;
+            margin-top: 10px !important;
+        }
+    }
     
     &__seletor-cor {
         cursor: pointer;
@@ -10,25 +39,3 @@
     }
 }
 
-@media screen and (min-width: 992px) {
-
-    .conteudo-principal {
-        flex-grow: 5 !important;
-        flex-direction: row !important;
-
-        &__form {
-            display: flex !important;
-            width: 90%;
-        }
-
-        &__editor {
-            width: 80%;
-        }
-
-        &__info {
-            width: 20%;
-            margin-left: 10px !important;
-            margin-top: 10px !important;
-        }
-    }
-}

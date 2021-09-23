@@ -12,12 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    private $repository;
-
-    public function __construct(UserRepository $repository)
-    {
-        $this->repository = $repository;
-    }
+    
     
     public function formLogin(Request $request)
     {
@@ -27,15 +22,6 @@ class AuthController extends Controller
         return view('autenticacao.login', compact('mensagem', 'titulo'));
     }
 
-  
-    public function formCadastro()
-    {
-        $titulo = 'Cadastro';
-
-        return view('autenticacao.cadastro', compact('titulo'));
-    }
-
-   
     public function logar(LoginFormRequest $request)
     {
         
@@ -45,22 +31,26 @@ class AuthController extends Controller
         ];
 
         $user = User::where('email', $request->email)->first();
-
-        if (!Hash::check($request->password, $user->password)) {
-            return redirect()
-                ->back()
-                ->withInput()
-                ->withErrors(['erro' => 'Dados invalidos']);
+        
+        try {
+            $this->verificarSenha($request->password, $user->password);
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['erro' => $e->getMessage()]);
         }
         
         if (Auth::attempt($credencials)) {
             $request->session()->regenerate();
-
             return redirect('/projetos/criar');
         }   
     }
 
-   
+    public function verificarSenha($senha, $hashSenha)
+    {
+        if (!Hash::check($senha, $hashSenha)) {
+            throw new \Exception("Senha inválida");
+        }
+    }
+
     public function logout(Request $request)
     {
         Auth::logout();
@@ -72,18 +62,5 @@ class AuthController extends Controller
     }
 
    
-    public function cadastrar(CadastroFormRequest $request)
-    {
-        if ($request->password === $request->password_confirmation) {
-               
-            $this->repository->add($request);
-
-            $request->session()->flash(
-                'mensagem',
-                "Cadastro efetuado com sucesso. Agora realize o login."
-            );
-
-            return redirect('/login');
-        }
-    }
+   
 }

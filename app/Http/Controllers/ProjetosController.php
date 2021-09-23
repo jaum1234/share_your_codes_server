@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Projeto;
 use Illuminate\Http\Request;
 use App\Service\BuscadorDeProjeto;
-use App\Service\RemovedorDeProjeto;
+use Illuminate\Support\Facades\Auth;
 use App\Repository\ProjetoRepository;
-use App\Http\Requests\CodigoFormRequest;
+use Illuminate\Support\Facades\Validator;
 
 class ProjetosController extends Controller
 {
@@ -22,13 +22,20 @@ class ProjetosController extends Controller
     
     public function create()
     {
-        return view('editor.editor');
+        return response()->view('editor.editor');
     }
 
     
     public function show(Request $request) 
     {
-        $projeto = Projeto::find($request->id); 
+        try {
+            $projeto = Projeto::find($request->id); 
+            if (is_null($projeto)) {
+                throw new \DomainException("Parece que a página que você procura não existe.");
+            }
+        } catch (\DomainException $e){
+            return response()->view('errors.404', ['error' => $e->getMessage()]);
+        }
 
         return view(
             'editor.pagina-projeto', 
@@ -40,10 +47,8 @@ class ProjetosController extends Controller
     public function index(Request $request)
     {
         $projetos = Projeto::query()
-            ->orderBy('name')
+            ->orderBy('nome')
             ->paginate(4);
-        
-        return $projetos;
 
         return view(
             'editor.comunidade', 
@@ -51,11 +56,31 @@ class ProjetosController extends Controller
         );
     }
 
-    public function store(CodigoFormRequest $request)
+    public function store(Request $request)
     {   
-        $this->repository->add($request);
+        $validador = Validator::make($request->all(), [
+            'nome' => 'required',
+            'descricao' => 'required',
+            'cor' => 'required',
+            'codigo' => 'required'
+        ], [
+            'required' => 'Esse campo é obrigatório.'
+        ]);
 
-        return redirect()->back();
+        if ($validador->fails()) {
+            $response['success'] = false;
+            $response['message'] = $validador->errors();
+            return response()->json($response);
+        }
+        
+        $dadosValidados = $validador->validated();
+
+        $this->repository->add($dadosValidados);
+          
+        $response['success'] = true;
+        $response['message'] = 'Projeto criado com sucesso!';
+        
+        return response()->json($response, 201); 
     }
 
     public function destroy(Request $request)
@@ -70,7 +95,6 @@ class ProjetosController extends Controller
         $projetos = $this->buscador->pesquisar($request->q);
 
         return view('editor.comunidade', compact('projetos'));
-
     }
 
 

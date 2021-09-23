@@ -1,12 +1,29 @@
 @extends('layouts.main')
 
 @section('conteudo')  
-      <div class="projeto col mt-3 projetos">
-        @foreach ($projetos as $projeto)
-     
-         
-             <div class=" mb-5 projeto">
-                 <a 
+        <div class="projeto col-10 projetos">
+            @foreach ($projetos as $projeto)
+            <form
+            action="/projetos/excluir/{{ $projeto->id }}"
+            method="POST"
+            name="formDeleteProject">
+            @csrf
+                <div class="modal fade" id="warningModal" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header bg-light">
+                                <h5 class="modal-title" id="warningModalLabel">Tem certeza que deseja excluir esse projeto?</h5>
+                            </div>
+                            <div class="modal-footer bg-light">
+                                <button type="submit" class="btn btn-success">Sim</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Não</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class=" mb-5 projeto">
+                <a 
                     href="/projetos/{{ $projeto->id }}/{{ $projeto->nome }}" 
                     class="text-decoration-none text-light">
                     <div class="d-flex flex-column">
@@ -19,26 +36,33 @@
                             <h5 class=" fw-light">{{ $projeto->nome }}</h5>
                             <p class=" fw-light">{{ $projeto->descricao }}</p>
                             <div class="d-flex align-items-center">
-                                <form
-                                action="/projetos/excluir/{{ $projeto->id }}"
-                                method="POST"
-                                onsubmit="return confirm('Tem certeza de deseja excluir esse projeto?')">
-                                @csrf
-                                <button class="bg-transparent border-0">
+                                <button class="bg-transparent border-0" data-botao-deletar>
                                     <i class="fas fa-trash text-danger"></i>
                                 </button>
-                            </form>
                             </div>
                         </div>
                     </div>
-                 </a>
-             </div>      
+                </a>
+            </div>      
         @endforeach
-      </div>
+        </div>
+        <div class="pagination justify-content-center">
+        {{ $projetos->render() }}
+        </div>
 @endsection
 @push('scripts')
     <script>
-        hljs.highlightAll();
+        $(function() {  
+            $('[data-botao-deletar]').on("click", function (event) {
+                event.preventDefault();  
+                return $('#warningModal').modal('show'); 
+            });
+        })
+    </script>    
+    <script>
+        document.querySelectorAll('div.code').forEach(el => {
+            hljs.highlightElement(el);
+        }); 
     </script>
 @endpush
 

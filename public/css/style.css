@@ -3,19 +3,20 @@
   font-family: "Source Code Pro";
   border: 25px solid #2D415B;
   height: 450px;
-  max-width: 800px;
   outline: none;
   width: 100%;
+  resize: none;
 }
-
-@media screen and (min-width: 992px) {
+@media (min-width: 1200px) {
   .editor {
     height: 400px !important;
+    width: 100%;
   }
   .editor--mini {
     height: 300px !important;
   }
 }
+
 .input-text {
   background-color: #2D415B !important;
   resize: none !important;
@@ -25,10 +26,27 @@
   background-color: white;
 }
 
+.error {
+  text-shadow: 3px 3px 15px black;
+}
+
+.modal {
+  color: black;
+  box-shadow: none;
+  border: none;
+  outline: none;
+}
+.modal .modal-header, .modal .modal-footer {
+  border-bottom: 0;
+  border-top: 0;
+}
+.modal .modal-title {
+  font-weight: 400;
+}
+
 .projetos {
   display: flex;
   flex-wrap: wrap;
-  flex-grow: 5 !important;
   justify-content: start;
 }
 .projetos .projeto {
@@ -44,8 +62,30 @@
   }
 }
 
-.conteudo-principal {
-  flex-direction: column;
+.conteudo-principal__editor {
+  width: 100% !important;
+}
+.conteudo-principal__info {
+  width: 100% !important;
+}
+.conteudo-principal__form {
+  width: 100%;
+}
+@media (min-width: 1200px) {
+  .conteudo-principal {
+    flex-direction: row !important;
+  }
+  .conteudo-principal__form {
+    display: flex !important;
+  }
+  .conteudo-principal__editor {
+    width: 75% !important;
+  }
+  .conteudo-principal__info {
+    width: 25% !important;
+    margin-left: 10px !important;
+    margin-top: 10px !important;
+  }
 }
 .conteudo-principal__seletor-cor {
   cursor: pointer;
@@ -53,24 +93,6 @@
   width: 100%;
 }
 
-@media screen and (min-width: 992px) {
-  .conteudo-principal {
-    flex-grow: 5 !important;
-    flex-direction: row !important;
-  }
-  .conteudo-principal__form {
-    display: flex !important;
-    width: 90%;
-  }
-  .conteudo-principal__editor {
-    width: 80%;
-  }
-  .conteudo-principal__info {
-    width: 20%;
-    margin-left: 10px !important;
-    margin-top: 10px !important;
-  }
-}
 .nav-link {
   display: none !important;
 }
@@ -110,7 +132,7 @@
 
 .botao-highlight {
   background: #072958 !important;
-  width: 100%;
+  width: auto;
 }
 .botao-highlight:hover {
   background-color: #0f294d !important;
@@ -158,9 +180,6 @@
   }
 }
 
-.perfil {
-  flex-grow: 4 !important;
-}
 .perfil__bloco {
   background-color: #2D415B;
   padding: 1rem;

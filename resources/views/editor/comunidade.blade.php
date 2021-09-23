@@ -2,7 +2,7 @@
 
 @section('conteudo')
     
-    <div class="col projetos">
+    <div class="col-10 projetos">
         @foreach ($projetos as $projeto)
      
             
@@ -38,12 +38,14 @@
     <div class="pagination justify-content-center">
         {{ $projetos->render() }}
     </div>
-    
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+@endsection
+@push('scripts')
+    <script>
+
+    </script>
     <script>
         document.querySelectorAll('div.code').forEach(el => {
             hljs.highlightElement(el);
         }); 
     </script>
-
-@endsection
+@endpush

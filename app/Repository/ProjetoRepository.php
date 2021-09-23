@@ -19,7 +19,7 @@ class ProjetoRepository
     {
         $user = User::find(Auth::id());
 
-        $projeto = $user->projetos()->create($request->all());
+        $projeto = $user->projetos()->create($request);
 
         return $projeto;
     }
@@ -27,8 +27,6 @@ class ProjetoRepository
     public function remove($id)
     {
         $qtdRecursos = $this->class::destroy($id);
-        if ($qtdRecursos === 0) {
-            return redirect()->back(410);
-        }
+        return $qtdRecursos;
     }   
 }

@@ -11,7 +11,8 @@ gerarLink(
     "#compartilharFb", 
     "https://www.facebook.com/sharer/sharer.php?=u", 
     "facebook-share-dialog", 
-    "width=626, height=436");
+    "width=626, height=436"
+    );
 
 gerarLink("#compartilharWpp", "https://api.whatsapp.com/send?text=");
 

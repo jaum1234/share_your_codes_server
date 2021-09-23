@@ -1,6 +1,10 @@
+@import '../abstracts/mixins';
+
+
 .botao-highlight {
     background: #072958 !important;
-    width: 100%;
+    width: auto;
+
 
     &:hover {
         background-color: #0f294d !important;

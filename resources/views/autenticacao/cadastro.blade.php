@@ -44,7 +44,7 @@
                 
                 <button class="btn btn-primary" type="submit">Cadastrar-se</button>
             </form>
-            <a href="/login" class="text-decoration-none text-center pb-3">Ja possuo cadastro</a>
+            <a href="{{ route('form.login') }}" class="text-decoration-none text-center pb-3">Ja possuo cadastro</a>
         </div>
     </div>
 @endsection

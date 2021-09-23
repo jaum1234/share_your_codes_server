@@ -10,11 +10,6 @@
 
                 
 
-              @if ($errors->first('erro'))
-        
-                <div class="alert alert-danger">{{ $errors->first('erro') }}</div>
-
-              @endif
 
                 @if (!empty($mensagem))
 
@@ -32,12 +27,15 @@
                         class="rounded auth__input form-control text-light">
 
                     <small class="text-danger">{{ $errors->first('password') }}</small>
+                    @error('erro')
+                    <small class="text-danger">{{ $message }}</small>
+                    @enderror
                     <label for="password" class="form-label fw-light">Senha</label>
                     <input type="password" name="password" class="rounded form-control auth__input text-light">
                 
                 <button class="btn btn-primary">Logar</button>
             </form>
-            <a href="/cadastro" class="text-decoration-none ">Ainda nao tenho cadastro</a>
+            <a href="{{ route('form.cadastro') }}" class="text-decoration-none ">Ainda nao tenho cadastro</a>
         </div>
     </div>
 

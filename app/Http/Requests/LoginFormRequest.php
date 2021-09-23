@@ -25,7 +25,7 @@ class LoginFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'email|exists:users',
+            'email' => 'required|exists:users|email',
             'password' => 'required'
         ];
     }
@@ -34,9 +34,10 @@ class LoginFormRequest extends FormRequest
     {
         return [
             
-            'email.email' => 'O E-mail esta invalido',
-            'password.required' => 'Senha incorreta',
-            'email.exists' => 'O email nao esta cadastrado'
+            'email.required' => 'Esse campo é obrigatorio',
+            'email.email' => 'O E-mail não é válido',
+            'password.required' => 'Esse campo é obrigatório',
+            'email.exists' => 'O email não esta cadastrado'
 
         ]; 
     }

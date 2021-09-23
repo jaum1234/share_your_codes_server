@@ -66,10 +66,10 @@
                           aria-label="Close">
                         </button>
                         </div>
-                        <form action="/projetos?q=" method="POST" class="nav__form--modal">
+                        <form action="{{ route('pesquisar') }}" method="POST" class="nav__form--modal">
                             @csrf
                         <div class="modal-body">
-                            <input type="text" class="rounded form-control" name="criterio">
+                            <input type="text" class="rounded form-control" name="q">
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
@@ -104,17 +104,23 @@
                       data-bs-toggle="dropdown" 
                       aria-expanded="false">
                       <i class="fas fa-user-circle fs-3 profile text-center"></i>
+                      @auth
                       <span class="ms-3">{{ Auth::user()->nickname }}</span>
+                      @endauth
+                      @guest
+                      <span class="ms-3">Guest</span>
+                      @endguest
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                      @auth
                       <li><a class="dropdown-item" href="/usuarios/{{ Auth::user()->id }}/{{ Auth::user()->nickname }}/projetos">Meus projetos</a></li>
                       <li><a class="dropdown-item" href="/usuarios/{{ Auth::user()->id }}/{{ Auth::user()->nickname }}">Meu Perfil</a></li>
                       <div class="dropdown-divider bg-light"></div>
                       <li>
+                      @endauth
                         @auth
                           <a class="dropdown-item text-danger" href="/logout">Logout</a>  
                         @endauth
-    
                         @guest
                           <a class="dropdown-item" href="/login">Login</a>
                         @endguest
@@ -127,14 +133,15 @@
                   <a class="nav-link active text-light" aria-current="page" href="/" >Home</a>
                   <a class="nav-link text-light" href="/projetos/criar" >Editor de codigo</a>
                   <a class="nav-link text-light" href="/projetos" >Comunidade</a>
+                  @auth
                   <a class="nav-link text-light" href="/usuarios/{{ Auth::user()->id }}/{{ Auth::user()->nickname }}/projetos" >Meus projetos</a>
                   <a class="nav-link text-light" href="/usuarios/{{ Auth::user()->id }}/{{ Auth::user()->nickname }}" >Meu Perfil</a>
                   <div class="dropdown-divider bg-light"></div>
+                  @endauth
 
                   @auth
                     <a class="nav-link text-light" href="/logout" >Logout</a>  
                   @endauth
-
                   @guest
                     <a class="nav-link text-light" href="/login" >Login</a>
                   @endguest
@@ -146,7 +153,7 @@
           </nav>
           <div class="container mt-5">
             <div class="row">
-              <div class="col sidebar">
+              <sidebar class="col-2 sidebar">
                 <div>
                     <h5 class="mb-4 fw-light sidebar__titulo">Menu</h5>
                     <div>
@@ -166,7 +173,7 @@
                         </ul>
                     </div>
                 </div>
-              </div>
+              </sidebar>
               @yield('conteudo')
             </div>
           </div>
