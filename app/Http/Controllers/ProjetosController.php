@@ -70,7 +70,7 @@ class ProjetosController extends Controller
         if ($validador->fails()) {
             $response['success'] = false;
             $response['message'] = $validador->errors();
-            return response()->json($response);
+            return response()->json($response, 410);
         }
         
         $dadosValidados = $validador->validated();
@@ -94,7 +94,7 @@ class ProjetosController extends Controller
     {
         $projetos = $this->buscador->pesquisar($request->q);
 
-        return view('editor.comunidade', compact('projetos'));
+        return response()->view('editor.comunidade', compact('projetos'));
     }
 
 

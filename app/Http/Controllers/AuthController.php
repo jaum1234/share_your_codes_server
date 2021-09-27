@@ -44,7 +44,7 @@ class AuthController extends Controller
         }   
     }
 
-    public function verificarSenha($senha, $hashSenha)
+    private function verificarSenha($senha, $hashSenha)
     {
         if (!Hash::check($senha, $hashSenha)) {
             throw new \Exception("Senha inválida");

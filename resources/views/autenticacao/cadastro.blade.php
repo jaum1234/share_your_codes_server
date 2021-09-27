@@ -10,7 +10,7 @@
                     <label for="email" class="form-label fw-light">E-mail</label>
                     
                     <input 
-                        type="email" 
+                        type="text" 
                         name="email" 
                         class="rounded form-control text-light auth__input">
                         

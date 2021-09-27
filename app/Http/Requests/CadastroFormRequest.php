@@ -25,7 +25,7 @@ class CadastroFormRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required|unique:users',
+            'email' => 'required|unique:users|email',
             'nickname' => 'required|unique:users',
             'password' => 'required|min:8|confirmed',
             'password_confirmation' => 'required'
@@ -45,9 +45,9 @@ class CadastroFormRequest extends FormRequest
 
             'password.min' => 'A senha precisa ter no mínimo 8 caracteres',
 
-            'password.confirmed' => 'As senhas nao correspodem'
+            'password.confirmed' => 'As senhas nao correspodem',
 
-            
+            'email.email' => 'E-mail inválido'
         ];
     }
 }

@@ -16,7 +16,7 @@ use App\Http\Requests\CadastroFormRequest;
 use App\Http\Requests\UsuarioFormResquest;
 use App\Http\Requests\ValidacaoNomeUsuarioRequest;
 
-class UserController extends Controller
+class RegisterController extends Controller
 {
     private $repository;
 
@@ -30,22 +30,20 @@ class UserController extends Controller
         $user = Auth::user();
         $mensagem = $request->session()->get('mensagem');
 
-        return view('user.user', compact('user', 'mensagem'));
+        return response()->view('user.user', compact('user', 'mensagem'), 200);
     }
     
     public function update(UsuarioFormRequest $request, Int $id)
     { 
         $usuario = User::find($id);
-        $usuario->fill([
-            'name' => $request->name, 
-            'nickname' => $request->nickname
-        ]);
+        $usuario->name = $request->name;
+        $usuario->nickname = $request->nickname;
         $usuario->save();
 
         $response['success'] = true;
         $response['message'] = 'Dados atualizados com sucesso!';
         
-        return json_encode($response);   
+        return response()->json($response, 200);   
     }
 
     public function meusProjetos(Request $request)
@@ -54,7 +52,7 @@ class UserController extends Controller
             ->orderBy('nome')
             ->paginate(4);
 
-        return view(
+        return response()->view(
         'editor.meus-projetos', 
         compact('projetos')
         );   
@@ -64,7 +62,11 @@ class UserController extends Controller
     {
         $titulo = 'Cadastro';
 
-        return view('autenticacao.cadastro', compact('titulo'));
+        return response()->view(
+            'autenticacao.cadastro', 
+            compact('titulo'), 
+            200
+        );
     }
 
     public function store(CadastroFormRequest $request)
@@ -78,7 +80,7 @@ class UserController extends Controller
                 "Cadastro efetuado com sucesso. Agora realize o login."
             );
 
-            return redirect('/login');
+            return redirect('/login', 302);
         }
     }
 

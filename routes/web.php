@@ -7,7 +7,7 @@ use App\Http\Controllers\UserController;
 
 
 
-Route::redirect('/', '/projetos', 301);
+Route::redirect('/', '/projetos', 302);
 
 Route::middleware('auth')->group(function () {
     Route::prefix('/projetos')->group(function () {
@@ -37,8 +37,8 @@ Route::get('/login', [AuthController::class, 'formLogin'])->name('form.login');
 Route::get('/cadastro', [UserController::class, 'create'])->name('form.cadastro');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::post('/login/do', [AuthController::class, 'logar'])->name('login');
-Route::post('/cadastro/do', [UserController::class, 'store'])->name('cadastro');
+Route::post('/login/do', [RegisterController::class, 'logar'])->name('login');
+Route::post('/cadastro/do', [RegisterController::class, 'store'])->name('cadastro');
     
 
 
