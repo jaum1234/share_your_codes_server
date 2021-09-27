@@ -40,9 +40,17 @@ class RegisterController extends Controller
 
     public function cadastrar(Request $request)
     {
+        $validator = $this->registerService->validar($request);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors());
+        }
+
+        $dadosValidados = $validator->validated();
+
         if ($request->password === $request->password_confirmation) {
                
-            $this->registerService->registrar($request);
+            $this->registerService->registrar($dadosValidados);
 
             $request->session()->flash(
                 'mensagem',

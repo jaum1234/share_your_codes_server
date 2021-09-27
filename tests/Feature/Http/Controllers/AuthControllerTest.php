@@ -56,7 +56,7 @@ class AuthControllerTest extends TestCase
 
         $data = [
             'email' => $user->email,
-            'password' => 'senha errada'
+            'password' => 'senha errada, bem errada'
         ];
 
         //Act
@@ -64,7 +64,7 @@ class AuthControllerTest extends TestCase
 
         //Assert
         $response->assertStatus(302);
-        $response->assertSessionHas('erro');
+        $response->assertSessionHasErrors('erro');
 
         $this->assertGuest();
     }

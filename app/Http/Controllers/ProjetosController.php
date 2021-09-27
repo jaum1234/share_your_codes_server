@@ -7,16 +7,17 @@ use Illuminate\Http\Request;
 use App\Service\BuscadorDeProjeto;
 use Illuminate\Support\Facades\Auth;
 use App\Repository\ProjetoRepository;
+use App\Service\ProjetoService;
 use Illuminate\Support\Facades\Validator;
 
 class ProjetosController extends Controller
 {
-    private $repository;
+    private $projetoService;
     private $buscador;
 
-    public function __construct(ProjetoRepository $repository, BuscadorDeProjeto $buscador)
+    public function __construct(ProjetoService $service, BuscadorDeProjeto $buscador)
     {
-        $this->repository = $repository;
+        $this->projetoService = $service;
         $this->buscador = $buscador;
     }
     
@@ -58,24 +59,17 @@ class ProjetosController extends Controller
 
     public function store(Request $request)
     {   
-        $validador = Validator::make($request->all(), [
-            'nome' => 'required',
-            'descricao' => 'required',
-            'cor' => 'required',
-            'codigo' => 'required'
-        ], [
-            'required' => 'Esse campo é obrigatório.'
-        ]);
+        $validador = $this->projetoService->validar($request);
 
         if ($validador->fails()) {
             $response['success'] = false;
             $response['message'] = $validador->errors();
-            return response()->json($response, 410);
+            return response()->json($response);
         }
         
         $dadosValidados = $validador->validated();
 
-        $this->repository->add($dadosValidados);
+        $this->projetoService->criar($dadosValidados);
           
         $response['success'] = true;
         $response['message'] = 'Projeto criado com sucesso!';
@@ -83,9 +77,9 @@ class ProjetosController extends Controller
         return response()->json($response, 201); 
     }
 
-    public function destroy(Request $request)
+    public function destroy(int $id)
     {
-        $this->repository->remove($request->id);
+        Projeto::destroy($id);
 
         return redirect()->back();
     }

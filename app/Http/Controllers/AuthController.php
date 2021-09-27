@@ -6,12 +6,19 @@ use App\Http\Requests\CadastroFormRequest;
 use App\Http\Requests\LoginFormRequest;
 use App\Models\User;
 use App\Repository\UserRepository;
+use App\Service\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    private $authService;
+
+    public function __construct(AuthService $service)
+    {
+        $this->authService = $service;
+    }
     
     public function formLogin(Request $request)
     {
@@ -23,16 +30,23 @@ class AuthController extends Controller
 
     public function logar(Request $request)
     {
+        $validator = $this->authService->validar($request);
         
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors());
+        }
+
+        $dadosValidados = $validator->validated();
+
         $credencials = [
-            'email' => $request->email,
-            'password' => $request->password
+            'email' => $dadosValidados['email'],
+            'password' => $dadosValidados['password']
         ];
 
         $user = User::where('email', $request->email)->first();
         
         try {
-            $this->verificarSenha($request->password, $user->password);
+            $this->verificarSenha($dadosValidados['password'], $user->password);
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['erro' => $e->getMessage()]);
         }
