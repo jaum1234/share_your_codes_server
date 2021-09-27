@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
     
-    
     public function formLogin(Request $request)
     {
         $mensagem = $request->session()->get('mensagem');
@@ -22,7 +21,7 @@ class AuthController extends Controller
         return view('autenticacao.login', compact('mensagem', 'titulo'));
     }
 
-    public function logar(LoginFormRequest $request)
+    public function logar(Request $request)
     {
         
         $credencials = [
@@ -59,8 +58,5 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/login');
-    }
-
-   
-   
+    } 
 }

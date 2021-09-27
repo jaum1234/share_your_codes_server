@@ -7,6 +7,7 @@ use App\Models\Projeto;
 use App\Service\Paginador;
 use Illuminate\Http\Request;
 use App\Service\EditorPerfil;
+use App\Service\RegisterService;
 use App\Repository\UserRepository;
 use App\Service\BuscadorDeProjeto;
 use Illuminate\Support\Facades\Auth;
@@ -18,48 +19,16 @@ use App\Http\Requests\ValidacaoNomeUsuarioRequest;
 
 class RegisterController extends Controller
 {
-    private $repository;
+    private $registerService;
 
-    public function __construct(UserRepository $repository)
+    public function __construct(RegisterService $service)
     {
-        $this->repository = $repository;
-    }
-    
-    public function edit(Request $request) 
-    {
-        $user = Auth::user();
-        $mensagem = $request->session()->get('mensagem');
-
-        return response()->view('user.user', compact('user', 'mensagem'), 200);
-    }
-    
-    public function update(UsuarioFormRequest $request, Int $id)
-    { 
-        $usuario = User::find($id);
-        $usuario->name = $request->name;
-        $usuario->nickname = $request->nickname;
-        $usuario->save();
-
-        $response['success'] = true;
-        $response['message'] = 'Dados atualizados com sucesso!';
-        
-        return response()->json($response, 200);   
+        $this->registerService = $service;
     }
 
-    public function meusProjetos(Request $request)
+    public function formCadastro()
     {
-        $projetos = Projeto::where('user_id', Auth::id())
-            ->orderBy('nome')
-            ->paginate(4);
 
-        return response()->view(
-        'editor.meus-projetos', 
-        compact('projetos')
-        );   
-    }
-
-    public function create()
-    {
         $titulo = 'Cadastro';
 
         return response()->view(
@@ -69,11 +38,11 @@ class RegisterController extends Controller
         );
     }
 
-    public function store(CadastroFormRequest $request)
+    public function cadastrar(Request $request)
     {
         if ($request->password === $request->password_confirmation) {
                
-            $this->repository->add($request);
+            $this->registerService->registrar($request);
 
             $request->session()->flash(
                 'mensagem',

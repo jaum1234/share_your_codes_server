@@ -26,7 +26,7 @@
                                 type="text" 
                                 value="{{ $user->name }}" 
                                 class="text-center rounded border-0">
-                                <small class="text-danger">{{ $errors->first('name') }}</small>
+                                <small class="text-danger error__text name__error">{{ $errors->first('name') }}</small>
 
                         </li>
                         <li class="d-flex flex-column align-items-center mb-4">
@@ -41,7 +41,7 @@
                                 type="text" 
                                 value="{{ $user->nickname }}" 
                                 class="text-center rounded border-0">
-                                <small class="text-danger">{{ $errors->first('nickname') }}</small>
+                                <small class="text-danger error__text nickname__error">{{ $errors->first('nickname') }}</small>
 
                                 <div 
                                     class="alert alert-success mt-3 d-none" data-message-box>
@@ -93,6 +93,13 @@
                                 messageBox.addClass('d-none');
                             }, 5000);
                             return;
+                        } else {
+                            $.each(response.message , function(chave, valor) {  
+                                $('small.' + chave + '__error').text(valor);
+                                setTimeout(function() {
+                                    $('.error__text').text('');
+                                }, 10000);
+                            });
                         }
                     }
                 });

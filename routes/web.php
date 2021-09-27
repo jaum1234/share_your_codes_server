@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ProjetosController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProjetosController;
+use App\Http\Controllers\RegisterController;
 
 
 
@@ -23,7 +24,7 @@ Route::middleware('auth')->group(function () {
         
         Route::get('/{id}/{nick}', [UserController::class, 'edit'])->name('usuarios.editar');
         
-        Route::get('/{id}/{nick}/projetos', [UserController::class, 'meusProjetos'])->name('usuarios.projetos');
+        Route::get('/{id}/{nick}/projetos', [UserController::class, 'projetosUsuario'])->name('usuarios.projetos');
         Route::post('/{id}/editar', [UserController::class, 'update'])->name('usuarios.atualizar');
     });
 });
@@ -34,11 +35,11 @@ Route::get('/projetos/criar', [ProjetosController::class, 'create'])->name('proj
 
 
 Route::get('/login', [AuthController::class, 'formLogin'])->name('form.login');
-Route::get('/cadastro', [UserController::class, 'create'])->name('form.cadastro');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/login/do', [AuthController::class, 'logar'])->name('login');
 
-Route::post('/login/do', [RegisterController::class, 'logar'])->name('login');
-Route::post('/cadastro/do', [RegisterController::class, 'store'])->name('cadastro');
+Route::get('/cadastro', [RegisterController::class, 'formCadastro'])->name('form.cadastro');
+Route::post('/cadastro/do', [RegisterController::class, 'cadastrar'])->name('cadastro');
     
 
 
