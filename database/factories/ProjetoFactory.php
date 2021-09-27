@@ -22,17 +22,10 @@ class ProjetoFactory extends Factory
     public function definition()
     {
         return [
-<<<<<<< HEAD
             'nome' => 'nome do projeto',
             'descricao' => 'descricao do projeto',
             'codigo' => 'codigo do projeto',
             'cor' => 'cor do projeto'
-=======
-            'nome' => 'teste-' . rand(1,100),
-            'descricao' => 'descriçao-' . rand(1,100),
-            'codigo' => 'codigo-' . rand(1,100),
-            'cor' => '#000000', 
->>>>>>> 74623675326c79154dd712dbfc9b2623daf246c3
         ];
     }
 }
