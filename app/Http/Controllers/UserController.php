@@ -56,8 +56,13 @@ class UserController extends Controller
             ->orderBy('nome')
             ->paginate(4);
 
+<<<<<<< HEAD
         return response()->view(
         'editor.meus-projetos', 
+=======
+        return view(
+        'user.meus-projetos', 
+>>>>>>> 74623675326c79154dd712dbfc9b2623daf246c3
         compact('projetos')
         );   
     }

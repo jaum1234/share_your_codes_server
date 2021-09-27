@@ -63,7 +63,11 @@
                             name="descricao"
                             cols="23"
                             rows="2"
+<<<<<<< HEAD
                             class="rounded p-3 input-text fw-light form-control editor__descricao text-light"
+=======
+                            class="rounded p-3 input-text fw-light hidden-overflow"
+>>>>>>> 74623675326c79154dd712dbfc9b2623daf246c3
                             id="descricao-projeto"
                             placeholder="Descriçao do projeto">
                             
