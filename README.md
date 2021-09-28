@@ -27,10 +27,10 @@
 ## Funcionalidades
 
 - Salvar projetos
-![salvando-projeto](https://i.gyazo.com/7c93c4bfa3b9cf24a14feca41ba7e7b4.mp4)
+![salvando-projeto](https://i.gyazo.com/7c93c4bfa3b9cf24a14feca41ba7e7b4.gif)
 
 - Highlight de sintaxe
-![highlight-js](https://i.gyazo.com/06c0d64de3c6c2e3c3ef85a55988da12.mp4)
+![highlight-js](https://i.gyazo.com/06c0d64de3c6c2e3c3ef85a55988da12.gif)
 
 ## Executando no locahost
 
