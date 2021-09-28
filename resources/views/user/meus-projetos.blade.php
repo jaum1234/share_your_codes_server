@@ -2,26 +2,26 @@
 
 @section('conteudo')  
         <div class="projeto col-10 projetos">
-            @foreach ($projetos as $projeto)
             <form
-            action="/projetos/excluir/{{ $projeto->id }}"
+            action=""
             method="POST"
             name="formDeleteProject">
             @csrf
-                <div class="modal fade" id="warningModal" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header bg-light">
-                                <h5 class="modal-title" id="warningModalLabel">Tem certeza que deseja excluir esse projeto?</h5>
-                            </div>
-                            <div class="modal-footer bg-light">
-                                <button type="submit" class="btn btn-success">Sim</button>
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Não</button>
-                            </div>
+            <div class="modal fade" id="warningModal" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-light">
+                            <h5 class="modal-title" id="warningModalLabel">Tem certeza que deseja excluir esse projeto?</h5>
+                        </div>
+                        <div class="modal-footer bg-light">
+                            <button type="submit" class="btn btn-success">Sim</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Não</button>
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
+        </form>
+        @foreach ($projetos as $projeto)
             <div class=" mb-5 projeto">
                 <a 
                     href="/projetos/{{ $projeto->id }}/{{ $projeto->nome }}" 
@@ -36,7 +36,7 @@
                             <h5 class=" fw-light">{{ $projeto->nome }}</h5>
                             <p class=" fw-light">{{ $projeto->descricao }}</p>
                             <div class="d-flex align-items-center">
-                                <button class="bg-transparent border-0" data-botao-deletar>
+                                <button class="bg-transparent border-0" data-botao-deletar id="{{ $projeto->id }}">
                                     <i class="fas fa-trash text-danger"></i>
                                 </button>
                             </div>
@@ -53,9 +53,14 @@
 @push('scripts')
     <script>
         $(function() {  
-            $('[data-botao-deletar]').on("click", function (event) {
-                event.preventDefault();  
-                return $('#warningModal').modal('show'); 
+            $('[data-botao-deletar]').each(function() {  
+                $(this).on("click", function (event) {
+                    event.preventDefault();  
+                    idProjeto = $(this).attr("id");
+                    modal = $('#warningModal');
+                    modal.modal('show');
+                    $('form[name="formDeleteProject"]').attr("action", "/projetos/excluir/" + idProjeto) 
+                });
             });
         })
     </script>    
