@@ -16,7 +16,7 @@
 
 ## Sobre o projeto
 
-O "Editor de Código - Alura Challange" se propõe a ser uma plataforma onde usuários podem escrever e compartilhar trechos de códigos acompanhados de um simples, porém adorável marcação de sintaxe.
+O "Editor de Código - Alura Challange" se propõe a ser uma plataforma em que usuários podem criar e postar trechos de código e compartilha-los com a comunidade ou em suas redes sociais.
 
 O projeto faz parte da primeira edição do Alura Challange, evento relizado pela platafora de ensino Alura, visando fortaceler 3 pilares essencias para um desenvolvedor:
 
@@ -44,6 +44,9 @@ O projeto faz parte da primeira edição do Alura Challange, evento relizado pel
 
 - Pesquisar projetos
 ![pesquisa](https://i.gyazo.com/a7fec16b54ed8f8e609894c6bc40ac91.gif)
+
+- Compartilhar projeto nas redes sociais
+![compartilhar](https://i.gyazo.com/4488bc86f0873ab30c611d9ac0d0d9f2.gif)
 
 - Excluir projeto
 ![exclusao-de-projeto](https://i.gyazo.com/b62570f7e418bc25cd55fb865127602c.gif)
