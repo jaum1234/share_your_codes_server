@@ -24,15 +24,9 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-transparent ">
             <div class="container-fluid">
-<<<<<<< HEAD
                 <a class="navbar-brand text-uppercase fs-3 brand" href="/">
                   <span class="text-light brand__alura">Alura</span>
                   <span class="ms-1 rounded ps-1 pe-1 brand__dev" data-dev>dev</span>
-=======
-                <a class="navbar-brand text-uppercase fs-3" href="/">
-                  <span class="text-light">Alura</span>
-                  <span id="dev" class="ms-1 rounded ps-1 pe-1 logo_dev">dev</span>
->>>>>>> 74623675326c79154dd712dbfc9b2623daf246c3
                 </a>
                 <form action="{{ route('pesquisar') }}" method="POST" class="nav__form">
                   @csrf
@@ -179,12 +173,7 @@
                         </ul>
                     </div>
                 </div>
-<<<<<<< HEAD
               </sidebar>
-=======
-              </div>
-
->>>>>>> 74623675326c79154dd712dbfc9b2623daf246c3
               @yield('conteudo')
               
             </div>
@@ -200,17 +189,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
 
     <!--Meus scripts-->
-<<<<<<< HEAD
     @stack('scripts')
-=======
-    <script type="module" src="/js/projetos/compartilhar.js"></script>
-    <script src="/js/editor/contador-de-caracteres.js"></script>
-    <script src="/js/user/editar-perfil.js"></script>
-    <script type="module" src="/js/editor/sem-highlight.js" ></script>
-    <script type="module" src="/js/editor/salvar-projeto.js"></script>
-    <script src="/js/editor/selecionar-cor-borda.js"></script>
-    <script src="/js/editor/com-highlight.js" ></script>
-    <script src="/js/cor-logo.js"></script>
->>>>>>> 74623675326c79154dd712dbfc9b2623daf246c3
 </body>
 </html>

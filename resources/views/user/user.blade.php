@@ -72,7 +72,7 @@
         </div>        
 @endsection
 @push('scripts')
-    <script src="{{ asset('/js/editar-perfil.js') }}"></script>
+    <script src="{{ asset('/js/user/editar-perfil.js') }}"></script>
     <script>
         $(function() {
             const UsuarioId = '{{ $user->id }}';

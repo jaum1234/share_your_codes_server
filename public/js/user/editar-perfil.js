@@ -1,27 +1,33 @@
-/**
- *  Exibe formulario pra alterar
- * dados do perfil do usuario
- */
-const botaoEditar = $("#botao-editar");
-const botaoConfirmar = $("#botao-confirmar");
-
-const nomeUsuario = $("#nome-usuario");
-const inputNomeUsuario =  $("#input-nome-usuario");
-
-const nomeCompleto = $("#nome-completo");
-const inputNomeCompleto = $("#input-nome-completo")
+const botaoEditar = $("[data-botao-editar]");
+const botaoConfirmar = $("[data-botao-confirmar]");
 
 botaoEditar.on('click', function() {
-    nomeUsuario.attr("hidden", true);
-    inputNomeUsuario.attr("hidden", false);
+    $("#nome-usuario").attr("hidden", true);
+    $("#input-nome-usuario").attr("hidden", false);
 
-    nomeCompleto.attr("hidden", true);
-    inputNomeCompleto.attr("hidden", false);
+    $("#nome-completo").attr("hidden", true);
+    const inputNomeCompleto = $("#input-nome-completo").attr("hidden", false);
     inputNomeCompleto.width('300px');
 
     botaoEditar.attr("hidden", true);
-    botaoConfirmar.attr("hidden", false);
-})
+    $("#botao-confirmar").attr("hidden", false);
+    
+});
+
+botaoConfirmar.on('click', function() {
+    $("#nome-usuario").attr("hidden", false);
+    $("#input-nome-usuario").attr("hidden", true);
+
+    $("#nome-completo").attr("hidden", false);
+    $("#input-nome-completo").attr("hidden", true);
+
+    botaoEditar.attr("hidden", false);
+    $("#botao-confirmar").attr("hidden", true);
+});
+
+ 
+   
+
 
 
 

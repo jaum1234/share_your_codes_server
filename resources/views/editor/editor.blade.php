@@ -63,11 +63,7 @@
                             name="descricao"
                             cols="23"
                             rows="2"
-<<<<<<< HEAD
                             class="rounded p-3 input-text fw-light form-control editor__descricao text-light"
-=======
-                            class="rounded p-3 input-text fw-light hidden-overflow"
->>>>>>> 74623675326c79154dd712dbfc9b2623daf246c3
                             id="descricao-projeto"
                             placeholder="Descriçao do projeto">
                             
@@ -98,11 +94,11 @@
 
 @endsection
 @push('scripts')
-    <script src="{{ asset('js/whitespaces.js') }}"></script>
-    <script type="module" src="{{ asset('/js/salvar-projeto.js') }}"></script>
-    <script src="{{ asset('js/contador-de-caracteres.js') }}"></script>
-    <script type="module" src="{{ asset('js/highlight.js') }}" ></script>
-    <script src="{{ asset('/js/selecionar-cor-borda.js') }}"></script>
+    <script src="{{ asset('js/editor/whitespaces.js') }}"></script>
+    <script type="module" src="{{ asset('/js/editor/salvar-projeto.js') }}"></script>
+    <script src="{{ asset('js/editor/contador-de-caracteres.js') }}"></script>
+    <script type="module" src="{{ asset('js/editor/highlight.js') }}" ></script>
+    <script src="{{ asset('/js/editor/selecionar-cor-borda.js') }}"></script>
     <script>
         $(function() {  
             $('form[name="formSaveProject"]').on('submit', function (event) {  
