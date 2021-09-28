@@ -26,36 +26,11 @@
   
 ## Funcionalidades
 
-<ul>
-  <li>
-    <p>Criar projetos que irão conter o trecho de código a ser compartilhardo, com nome e uma descrição de até 50 caracteres</p>
-    <img src="https://i.gyazo.com/cdbec812d40a119b0f4df41d586dc5aa.gif" width="700" height="350">
-  </li>
-  <li>
-    <p>Alterar a cor de borda para a exibição do projeto</p>
-    <img src="https://i.gyazo.com/f9bd308a5b1bce9e7c32cdee0d49a3f0.gif" width="700" height="350">
-  </li>
-   <li>
-    <p>Marcação de sintaxe</p>
-    <img src="https://i.gyazo.com/ba6e7f73d9024fb670591de419c89866.gif" width="700" height="350">
-  </li>
-  <li>
-    <p>Busca por nome de projeto</p>
-    <img src="https://i.gyazo.com/0d1136b82b1b483fc01fba6d324312a4.gif" width="700" height="350">
-  </li>
-  <li>
-    <p>Compartilhamento de projetos em outras mídias sociais</p>
-    <img src="https://i.gyazo.com/2ed8452c1f1a54e25a5c95cb8c0abf74.gif" width="700" height="350">
-  </li>
-  <li>
-    <p>Alterar informações de usuário</p>
-    <img src="https://i.gyazo.com/d81b58ac557df46bc0edadf6ceda97b6.gif" width="700" height="350">
-  </li>
-  <li>
-    <p>Sistema de cadastro e login</p>
-    <img src="https://i.gyazo.com/fdc06832a9dc6343dfd53f45d03d5a36.gif" width="700" height="350">
-  </li>
-</ul>
+- Salvar projetos
+![salvando-projeto](https://i.gyazo.com/7c93c4bfa3b9cf24a14feca41ba7e7b4.mp4)
+
+- Highlight de sintaxe
+![highlight-js](https://i.gyazo.com/06c0d64de3c6c2e3c3ef85a55988da12.mp4)
 
 ## Executando no locahost
 
