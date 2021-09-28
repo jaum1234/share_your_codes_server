@@ -1,16 +1,10 @@
 # Editor de Codigo - Alura Challange
 
 
-<div>
-   <!--Home-->
-  <img src="https://i.gyazo.com/689aeb9d67c0a7f377b09da6779baa31.png" width="480" height="250">
-    <!--Editor-->
-  <img src="https://i.gyazo.com/59048ea2d824e97edc3af928ada5dd4a.png"  width="480" height="250">
-    <!--Comunidade-->
-  <img src="https://i.gyazo.com/f3cdcf569f9466f84fe3f704e38e6cdf.png"  width="480" height="250"> 
-    <!--Perfil-->
-  <img src="https://i.gyazo.com/6d672dd3d883f9bc577b68b541007d6f.png"  width="480" height="250">
-</div>
+
+<!--editor-->
+![alt text](https://gyazo.com/00ece030b6655ce923bca591e355e8b2)
+
 
 ## Contatos
 
