@@ -17,6 +17,7 @@
 ## Sobre o projeto
 
 O "Editor de Código - Alura Challange" se propõe a ser uma plataforma onde usuários podem escrever e compartilhar trechos de códigos acompanhados de um simples, porém adorável marcação de sintaxe.
+
 O projeto faz parte da primeira edição do Alura Challange, evento relizado pela platafora de ensino Alura, visando fortaceler 3 pilares essencias para um desenvolvedor:
 
 1. Engajar
