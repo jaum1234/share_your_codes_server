@@ -3,7 +3,7 @@
 
 
 <!--editor-->
-![alt text](https://gyazo.com/00ece030b6655ce923bca591e355e8b2)
+![editor](https://i.gyazo.com/00ece030b6655ce923bca591e355e8b2.png)
 
 
 ## Contatos
