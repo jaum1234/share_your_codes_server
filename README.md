@@ -59,14 +59,14 @@ Agir
 
 ### Passo a passo:
 
-1- Clone projeto
-2- Rode o composer install na linha de comando na pasta do projeto
-3- Copie o arquivo .env.example para o arquivo .env
-4- No arquivo .env mude as configurações do banco de dados para as suas configurações
-5- Rode o php artisan key:generate na linha de comando
-6- Rode php artisan migrate
-7- Rode php artisan serve
-8- Acesse o localhost:8000
+1. Clone projeto
+2. Rode o composer install na linha de comando na pasta do projeto
+3. Copie o arquivo .env.example para o arquivo .env
+4. No arquivo .env mude as configurações do banco de dados para as suas configurações
+5. Rode o php artisan key:generate na linha de comando
+6. Rode php artisan migrate
+7. Rode php artisan serve
+8. Acesse o localhost:8000
 
 ## Tecnologia utilizadas
 
