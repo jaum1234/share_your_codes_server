@@ -38,6 +38,9 @@ Agir
 - Highlight de sintaxe
 ![highlight-js](https://i.gyazo.com/06c0d64de3c6c2e3c3ef85a55988da12.gif)
 
+- Estilizar projeto
+![estilo](https://i.gyazo.com/a2914f5ce45d0a35cd7d6c441da9c20b.gif)
+
 - Pesquisar projetos
 ![pesquisa](https://i.gyazo.com/a7fec16b54ed8f8e609894c6bc40ac91.gif)
 
