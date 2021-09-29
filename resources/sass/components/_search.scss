@@ -1,0 +1,15 @@
+@use '../abstracts/mixins';
+
+.search {
+    width: 70%;
+
+    @include mixins.for-desktop {
+        margin-right: 5rem;
+        width: 62%;
+    }
+
+    &__input {
+        @include mixins.defaut-text-input;
+        width: 100%;
+    }
+}

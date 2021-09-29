@@ -3,7 +3,7 @@
 @section('conteudo')
 
             
-            <div class="col-lg-10 mb-2" id="segunda-coluna" class="compartilhar">
+            <div class="col-10 mb-2 compartilhar">
                 
                 <div style="border-color: {{ $projeto->cor }}" class="code editor editor--compartilhar fw-light text-light mt-3 rounded p-3 mb-3" data-codigo-highlight>
 {{ $projeto->codigo }}

@@ -7,13 +7,25 @@
   width: 100%;
   resize: none;
 }
+.editor__compartilhar {
+  width: 100% !important;
+}
 @media (min-width: 1200px) {
   .editor {
     height: 400px !important;
-    width: 100%;
+    width: 100% !important;
   }
   .editor--mini {
     height: 300px !important;
+  }
+}
+
+.compartilhar {
+  width: 100% !important;
+}
+@media (min-width: 1200px) {
+  .compartilhar {
+    width: 83.3% !important;
   }
 }
 
@@ -24,6 +36,21 @@
 
 .brand__dev {
   background-color: white;
+}
+
+.search {
+  width: 70%;
+}
+@media (min-width: 1200px) {
+  .search {
+    margin-right: 5rem;
+    width: 62%;
+  }
+}
+.search__input {
+  background-color: #2D415B !important;
+  resize: none !important;
+  width: 100%;
 }
 
 .error {
@@ -45,9 +72,15 @@
 }
 
 .projetos {
+  width: 100% !important;
   display: flex;
   flex-wrap: wrap;
   justify-content: start;
+}
+@media (min-width: 1200px) {
+  .projetos {
+    width: 83.3% !important;
+  }
 }
 .projetos .projeto {
   padding-right: 20px;
@@ -93,43 +126,33 @@
   width: 100%;
 }
 
-.nav-link {
-  display: none !important;
-}
-.nav__lupa {
-  display: none !important;
-}
-.nav__buscador {
-  background-color: #2D415B !important;
-  display: inline !important;
-  width: 50% !important;
-}
-.nav__dropdown {
-  display: inline !important;
-}
-@media (min-width: 1200px) {
-  .nav__form {
-    width: 1000px;
-  }
-}
 @media (max-width: 989.98px) {
-  .nav-link {
-    display: flex !important;
+  .nav__tablet {
+    display: none;
   }
-  .nav__lupa {
-    display: inline !important;
-  }
-  .nav__dropdown {
-    display: none !important;
-  }
-  .nav__buscador {
-    display: none !important;
-  }
-  .nav__dropdown {
+
+  .nav__desktop {
     display: none;
   }
 }
+@media (min-width: 990px) and (max-width: 1199.98px) {
+  .nav__mobile {
+    display: none;
+  }
 
+  .nav__desktop {
+    display: none;
+  }
+}
+@media (min-width: 1200px) {
+  .nav__mobile {
+    display: none;
+  }
+
+  .nav__tablet {
+    display: none;
+  }
+}
 .botao-highlight {
   background: #072958 !important;
   width: auto;
@@ -149,6 +172,11 @@
   margin-top: 10px;
 }
 @media (max-width: 989.98px) {
+  .sidebar {
+    display: none !important;
+  }
+}
+@media (min-width: 990px) and (max-width: 1199.98px) {
   .sidebar {
     display: none !important;
   }

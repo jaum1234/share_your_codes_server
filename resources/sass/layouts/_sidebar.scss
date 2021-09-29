@@ -9,6 +9,10 @@
         display: none !important;
     }
 
+    @include for-tablet {
+        display: none !important;
+    }
+
     &__item {
         transition: 0.5s ease-in-out;
 

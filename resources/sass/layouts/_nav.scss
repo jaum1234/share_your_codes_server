@@ -1,54 +1,28 @@
 @import '../abstracts/mixins';
 
-.nav {
-
-    &-link {
-        display: none !important;
+@include for-phone {
+    .nav__tablet {
+        display: none;
     }
-
-
-    &__lupa {
-        display: none !important;
+    .nav__desktop {
+        display: none;
     }
+}
 
-    &__buscador {
-        background-color: #2D415B !important;
-        display: inline !important;
-        width: 50% !important;
+@include for-tablet {
+    .nav__mobile {
+        display: none;
     }
-
-    &__dropdown {
-        display: inline !important;
+    .nav__desktop {
+        display: none;
     }
+}
 
-    @include for-desktop {
-        &__form {
-            width: 1000px ;
-        }
+@include for-desktop {
+    .nav__mobile {
+        display: none;
     }
-
-    @include for-phone {
-
-        &-link {
-            display: flex !important;
-        }
-
-        &__lupa {
-            display: inline !important;
-        }
-
-        &__dropdown {
-            display: none !important;
-        }
-
-        &__buscador {
-            display: none !important;
-        }
-    
-        &__dropdown {
-            display: none;
-        }
+    .nav__tablet {
+        display: none;
     }
-
-    
 }
