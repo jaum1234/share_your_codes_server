@@ -2,7 +2,7 @@
     <div class="container-fluid ">
         <a class="navbar-brand text-light fs-2 fw-light" href="#">Aluradev</a>
         <form action="{{ route('pesquisar') }}" class="search">
-            <input type="text" class="search__input form-control text-light fw-light">
+            <input type="text" class="search__input form-control text-light fw-light" placeholder="Busque aqui...">
         </form>
         <button class="navbar-toggler text-light border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-bars"></i>

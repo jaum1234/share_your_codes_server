@@ -2,7 +2,7 @@
     <div class="container-fluid ">
         <a class="navbar-brand text-light fs-2 fw-light" href="#">Aluradev</a>
         <form action="{{ route('pesquisar') }}" class="search">
-            <input type="text" class="search__input form-control text-light fw-light">
+            <input type="text" class="search__input form-control text-light fw-light" placeholder="Busque aqui...">
         </form>
         <div class="btn-group">
             <button type="button" class="btn text-light" data-bs-toggle="dropdown" aria-expanded="false">
