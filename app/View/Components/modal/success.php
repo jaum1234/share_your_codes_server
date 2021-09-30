@@ -1,14 +1,11 @@
 <?php
 
-namespace App\View\Components\Modal;
+namespace App\View\Components\modal;
 
 use Illuminate\View\Component;
 
-use function PHPUnit\Framework\isReadable;
-
-class Search extends Component
+class success extends Component
 {
-
     /**
      * Create a new component instance.
      *
@@ -16,6 +13,7 @@ class Search extends Component
      */
     public function __construct()
     {
+        //
     }
 
     /**
@@ -25,9 +23,6 @@ class Search extends Component
      */
     public function render()
     {
-        return view('components.modal.search');
-        
+        return view('components.modal.success');
     }
-
-
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\modal;
 
 use Illuminate\View\Component;
 
-class navbar extends Component
+class excluir extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class navbar extends Component
      */
     public function render()
     {
-        return view('components.navbar');
+        return view('components.modal.excluir');
     }
 }
