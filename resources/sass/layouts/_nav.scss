@@ -1,5 +1,22 @@
 @import '../abstracts/mixins';
 
+.nav {
+
+
+    &__logo {
+        font-weight: 400;
+        letter-spacing: 0.12rem;
+        text-transform: uppercase;
+
+        &--dev {
+            color: #051D3B;
+            background-color: white;
+            border-radius: 4px;
+        }
+    }
+
+}
+
 @include for-phone {
     .nav__tablet {
         display: none;
