@@ -32,7 +32,7 @@ class RegisterController extends Controller
         $titulo = 'Cadastro';
 
         return response()->view(
-            'autenticacao.cadastro', 
+            'pages.cadastro', 
             compact('titulo'), 
             200
         );

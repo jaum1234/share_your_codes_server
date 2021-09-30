@@ -25,7 +25,7 @@ class AuthController extends Controller
         $mensagem = $request->session()->get('mensagem');
         $titulo = 'Login';
 
-        return view('autenticacao.login', compact('mensagem', 'titulo'));
+        return response()->view('pages.login', compact('mensagem', 'titulo'));
     }
 
     public function logar(Request $request)

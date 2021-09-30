@@ -122,6 +122,9 @@
   width: 100%;
 }
 
+.nav {
+  margin-top: 1rem;
+}
 .nav__logo {
   font-weight: 400;
   letter-spacing: 0.12rem;

@@ -22,7 +22,7 @@ class UserController extends Controller
         $user = Auth::user();
         $mensagem = $request->session()->get('mensagem');
 
-        return response()->view('user.user', compact('user', 'mensagem'), 200);
+        return response()->view('pages.user', compact('user', 'mensagem'), 200);
     }
     
     public function update(Request $request, Int $id)
@@ -57,7 +57,7 @@ class UserController extends Controller
             ->paginate(4);
 
         return response()->view(
-        'user.meus-projetos', 
+        'pages.meus-projetos', 
         compact('projetos')
         );   
     }

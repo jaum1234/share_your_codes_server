@@ -23,7 +23,7 @@ class ProjetosController extends Controller
     
     public function create()
     {
-        return response()->view('editor.editor');
+        return response()->view('pages.editor');
     }
 
     
@@ -51,8 +51,8 @@ class ProjetosController extends Controller
             ->orderBy('nome')
             ->paginate(4);
 
-        return view(
-            'editor.comunidade', 
+        return response()->view(
+            'pages.comunidade', 
             compact('projetos')
         );
     }
@@ -88,7 +88,7 @@ class ProjetosController extends Controller
     {
         $projetos = $this->buscador->pesquisar($request->q);
 
-        return response()->view('editor.comunidade', compact('projetos'));
+        return response()->view('pages.comunidade', compact('projetos'));
     }
 
 
