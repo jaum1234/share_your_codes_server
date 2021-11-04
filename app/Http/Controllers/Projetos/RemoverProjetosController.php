@@ -10,7 +10,6 @@ class RemoverProjetosController extends Controller
     public function destroy(int $id)
     {
         Projeto::destroy($id);
-
         return redirect()->back();
     }
 }

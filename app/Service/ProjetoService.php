@@ -16,28 +16,4 @@ class ProjetoService
 
         return $projeto;
     }
-
-    public function pesquisar(string $criterio)
-    {
-        $query = $criterio; 
-        $projetos = Projeto::where('nome', 'LIKE', '%' . $query . '%')
-            ->paginate(4);
-        $projetos->appends(['q' => $query]);
-
-        return $projetos;
-    }
-
-    public function validar(Request $request)
-    {
-        $validador = Validator::make($request->all(), [
-            'nome' => 'required',
-            'descricao' => 'required',
-            'cor' => 'required',
-            'codigo' => 'required'
-        ], [
-            'required' => 'Esse campo é obrigatório.'
-        ]);
-
-        return $validador;
-    }
 }

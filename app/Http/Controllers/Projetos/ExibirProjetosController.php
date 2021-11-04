@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Projetos;
 use App\Models\Projeto;
 use App\Service\Buscador;
 use Illuminate\Http\Request;
-use App\Service\ProjetoService;
 use App\Http\Controllers\Controller;
 
 class ExibirProjetosController extends Controller

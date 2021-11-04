@@ -2,7 +2,6 @@
 namespace App\Service;
 
 use App\Models\Projeto;
-
 class Buscador
 {
     private $model;

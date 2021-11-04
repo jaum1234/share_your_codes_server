@@ -2,7 +2,7 @@
     <div class="container-fluid d-flex align-items-center">
         <h1 class="navbar-brand text-light nav__logo fs-3 align-self-center">Alura<span class="nav__logo--dev px-1 ms-2">dev</span></h1>
         <form action="{{ route('pesquisar') }}" class="search">
-            <input type="text" class="search__input form-control text-light fw-light" placeholder="Busque aqui...">
+            <input name="q" type="text" class="search__input form-control text-light fw-light" placeholder="Busque aqui...">
         </form>
         <div class="btn-group">
             <button type="button" class="btn text-light" data-bs-toggle="dropdown" aria-expanded="false">

@@ -20,7 +20,7 @@ Route::middleware('auth')->group(function () {
         Route::any('/pesquisar', [ExibirProjetosController::class, 'search'])->name('pesquisar');
         
         Route::post('', [CriarProjetosController::class, 'store'])->name('projetos.salvar');
-        Route::post('/excluir/{id}', [ExcluirProjetosController::class, 'destroy'])->name('projetos.excluir');
+        Route::post('/excluir/{id}', [RemoverProjetosController::class, 'destroy'])->name('projetos.excluir');
     });
     
     Route::prefix('/usuarios')->group(function () {

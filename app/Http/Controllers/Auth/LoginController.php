@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CadastroFormRequest;
-use App\Http\Requests\LoginFormRequest;
+
 use App\Models\User;
-use App\Repository\UserRepository;
 use App\Service\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

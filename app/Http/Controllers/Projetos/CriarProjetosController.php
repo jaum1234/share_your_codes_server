@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers\Projetos;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Service\Validadores\ProjetosValidador;
 
 class CriarProjetosController extends Controller
 {
+    private $validador;
+
+    public function __construct(ProjetosValidador $projetosValidador)
+    {
+        $this->validador = $projetosValidador;
+    }
+
     public function create()
     {
         return response()->view('pages.editor');
@@ -14,7 +24,7 @@ class CriarProjetosController extends Controller
 
     public function store(Request $request)
     {   
-        $validador = $this->projetoService->validar($request);
+        $validador = $this->validador->validar($request);
 
         if ($validador->fails()) {
             $response['success'] = false;
@@ -24,7 +34,8 @@ class CriarProjetosController extends Controller
         
         $dadosValidados = $validador->validated();
 
-        $this->projetoService->criar($dadosValidados);
+        $user = User::find(Auth::id());
+        $user->projetos()->create($dadosValidados);
           
         $response['success'] = true;
         $response['message'] = 'Projeto criado com sucesso!';
