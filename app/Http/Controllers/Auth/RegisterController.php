@@ -7,15 +7,15 @@ use Illuminate\Http\Request;
 use App\Service\RegisterService;
 
 use App\Http\Controllers\Controller;
-
+use App\Service\Validadores\RegisterValidador;
 
 class RegisterController extends Controller
 {
-    private $registerService;
+    private $validador;
 
-    public function __construct(RegisterService $service)
+    public function __construct(RegisterValidador $registerValidador)
     {
-        $this->registerService = $service;
+        $this->validador = $registerValidador;
     }
 
     public function formCadastro()
@@ -32,7 +32,7 @@ class RegisterController extends Controller
 
     public function cadastrar(Request $request)
     {
-        $validator = $this->registerService->validar($request);
+        $validator = $this->validador->validar($request);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors());

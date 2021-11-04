@@ -5,17 +5,18 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Service\AuthService;
+use App\Service\Validadores\LoginValidador;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    private $authService;
+    private $validador;
 
-    public function __construct(AuthService $service)
+    public function __construct(LoginValidador $loginValidador)
     {
-        $this->authService = $service;
+        $this->validador = $loginValidador;
     }
     
     public function formLogin(Request $request)
@@ -28,7 +29,7 @@ class LoginController extends Controller
 
     public function logar(Request $request)
     {
-        $validator = $this->authService->validar($request);
+        $validator = $this->validador->validar($request);
         
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors());

@@ -10,8 +10,8 @@ class ProjetosValidador
     public function validar(Request $request)
     {
         $validador = Validator::make($request->all(), [
-            'nome' => 'required',
-            'descricao' => 'required',
+            'nome' => 'required|string',
+            'descricao' => 'required|string',
             'cor' => 'required',
             'codigo' => 'required'
         ], [
