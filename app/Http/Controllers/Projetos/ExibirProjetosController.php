@@ -10,9 +10,8 @@ use App\Http\Controllers\Controller;
 
 class ExibirProjetosController extends Controller
 {
-    public function __construct(ProjetoService $service)
+    public function __construct()
     {
-        $this->projetoService = $service;
         $this->buscador = new Buscador(Projeto::class);
     }
 

@@ -2,59 +2,68 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CadastroFormRequest;
 use App\Http\Requests\LoginFormRequest;
 use App\Models\User;
+use App\Repository\UserRepository;
+use App\Service\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    /**
-     *  Exibe o formulario
-     * de login
-     */
+    private $authService;
+
+    public function __construct(AuthService $service)
+    {
+        $this->authService = $service;
+    }
+    
     public function formLogin(Request $request)
     {
         $mensagem = $request->session()->get('mensagem');
         $titulo = 'Login';
 
-        return view('autenticacao.login', compact('mensagem', 'titulo'));
+        return response()->view('pages.login', compact('mensagem', 'titulo'));
     }
 
-    /**
-     *  Efetua o login
-     */
-    public function logar(LoginFormRequest $request)
+    public function logar(Request $request)
     {
-        $email = $request->email;
-        $senha = $request->password;
+        $validator = $this->authService->validar($request);
+        
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors());
+        }
 
-        $credenciais = [
-            'email' => $email,
-            'password' => $senha
+        $dadosValidados = $validator->validated();
+
+        $credencials = [
+            'email' => $dadosValidados['email'],
+            'password' => $dadosValidados['password']
         ];
 
         $user = User::where('email', $request->email)->first();
-        $hash = Hash::check($request->password, $user->password);
-
-        if (!$hash) {
-            return redirect()
-                ->back()
-                ->withInput()
-                ->withErrors(['erro' => 'Dados invalidos']);
+        
+        try {
+            $this->verificarSenha($dadosValidados['password'], $user->password);
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['erro' => $e->getMessage()]);
         }
-
-        if (Auth::attempt($credenciais)) {
+        
+        if (Auth::attempt($credencials)) {
             $request->session()->regenerate();
-
             return redirect('/projetos/criar');
         }   
     }
 
-    /**
-     *  Efetua o logout
-     */
+    private function verificarSenha($senha, $hashSenha)
+    {
+        if (!Hash::check($senha, $hashSenha)) {
+            throw new \Exception("Senha inválida");
+        }
+    }
+
     public function logout(Request $request)
     {
         Auth::logout();
@@ -63,5 +72,5 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/login');
-    }
+    } 
 }
