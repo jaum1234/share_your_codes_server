@@ -13,7 +13,7 @@ class RegisterValidador
             'nickname' => 'required|unique:users,nickname',
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|confirmed'
+            'password' => 'required|confirmed|string'
         ], [
             'required' => 'Esse campo é obrigatório.',
             'email' => 'E-mail inválido.',
@@ -21,6 +21,16 @@ class RegisterValidador
             'confirmed' => 'As senhas nao correspondem.'
         ]);
 
-        return $validator;
+        if ($validator->fails()) {
+            return [
+                'success' => false,
+                'erros' => $validator->errors()
+            ];
+        }
+
+        return [
+            'success' => true,
+            'dados' => $validator->validated()
+        ];
     }
 }

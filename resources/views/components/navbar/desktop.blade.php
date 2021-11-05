@@ -35,7 +35,7 @@
                 <li>
                     <a 
                         class="dropdown-item text-danger fw-bold" 
-                        href="{{ route('logout') }}">
+                        href="{{ route('login.destroy') }}">
                         Logout
                     </a>
                 </li>
@@ -44,7 +44,7 @@
                 <li>
                     <a 
                         class="dropdown-item text-primary fw-bold" 
-                        href="{{ route('form.login') }}">
+                        href="{{ route('login.create') }}">
                         Login
                     </a>
                 </li>

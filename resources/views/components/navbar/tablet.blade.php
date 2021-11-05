@@ -32,12 +32,12 @@
                 </li>
                 <li><hr class="dropdown-divider"></li>
                 <li class="nav-item">
-                    <a class="nav-link text-danger fw-bold" href="{{ route('logout') }}">Logout</a>
+                    <a class="nav-link text-danger fw-bold" href="{{ route('login.destroy') }}">Logout</a>
                 </li>
                 @endauth
                 @guest
                 <li class="nav-item">
-                    <a class="nav-link text-primary fw-bold" href="{{ route('form.login') }}">Login</a>
+                    <a class="nav-link text-primary fw-bold" href="{{ route('login.create') }}">Login</a>
                 </li>
                 @endguest
             </ul>

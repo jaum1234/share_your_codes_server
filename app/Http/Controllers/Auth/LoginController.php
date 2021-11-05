@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 
 use App\Models\User;
-use App\Service\AuthService;
-use App\Service\Validadores\LoginValidador;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Service\Validadores\LoginValidador;
 
 class LoginController extends Controller
 {
@@ -19,7 +19,7 @@ class LoginController extends Controller
         $this->validador = $loginValidador;
     }
     
-    public function formLogin(Request $request)
+    public function create(Request $request)
     {
         $mensagem = $request->session()->get('mensagem');
         $titulo = 'Login';
@@ -27,7 +27,7 @@ class LoginController extends Controller
         return response()->view('pages.login', compact('mensagem', 'titulo'));
     }
 
-    public function logar(Request $request)
+    public function store(Request $request)
     {
         $validator = $this->validador->validar($request);
         
@@ -63,7 +63,7 @@ class LoginController extends Controller
         }
     }
 
-    public function logout(Request $request)
+    public function destroy(Request $request)
     {
         Auth::logout();
 

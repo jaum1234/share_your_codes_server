@@ -4,7 +4,7 @@
     <div class="container mt-5">
         <div class="col d-flex flex-column text-center">
             <h2 class="fw-light mb-5">{{ $titulo }}</h2>
-            <form action="/cadastro/do" method="post" class="mb-3 d-flex flex-column align-items-center">
+            <form action="{{ route('cadastro.store') }}" method="post" class="mb-3 d-flex flex-column align-items-center">
                 @csrf
                 <small class="text-danger">{{ $errors->first('email') }}</small>
                     <label for="email" class="form-label fw-light">E-mail</label>
@@ -44,7 +44,7 @@
                 
                 <button class="btn btn-primary" type="submit">Cadastrar-se</button>
             </form>
-            <a href="{{ route('form.login') }}" class="text-decoration-none text-center pb-3">Ja possuo cadastro</a>
+            <a href="{{ route('login.create') }}" class="text-decoration-none text-center pb-3">Ja possuo cadastro</a>
         </div>
     </div>
 @endsection

@@ -45,7 +45,7 @@ class RegisterControllerTest extends TestCase
         
         //Assert
         $response->assertStatus(302);
-        $response->assertRedirect(route('form.login'));
+        $response->assertRedirect(route('login.create'));
 
         $this->assertEquals(1, User::count());
         $this->assertEquals('Test User', $user->name);

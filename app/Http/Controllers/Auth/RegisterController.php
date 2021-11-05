@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 
+use App\Models\User;
 use Illuminate\Http\Request;
-use App\Service\RegisterService;
 
+use App\Service\RegisterService;
 use App\Http\Controllers\Controller;
 use App\Service\Validadores\RegisterValidador;
 
@@ -18,7 +19,7 @@ class RegisterController extends Controller
         $this->validador = $registerValidador;
     }
 
-    public function formCadastro()
+    public function create()
     {
 
         $titulo = 'Cadastro';
@@ -30,27 +31,30 @@ class RegisterController extends Controller
         );
     }
 
-    public function cadastrar(Request $request)
+    public function store(Request $request)
     {
         $validator = $this->validador->validar($request);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator->errors());
+        if (!$validator['success']) {
+            return redirect()->back()->withErrors($validator['erros']);
         }
 
-        $dadosValidados = $validator->validated();
-
-        if ($request->password === $request->password_confirmation) {
+        $dadosValidados = $validator['dados'];
                
-            $this->registerService->registrar($dadosValidados);
+        User::create([
+            'name' => $dadosValidados['name'],
+            'nickname' =>$dadosValidados['nickname'],
+            'email' => $dadosValidados['email'],
+            'password' => bcrypt($dadosValidados['password'])
+        ]);;
 
-            $request->session()->flash(
-                'mensagem',
-                "Cadastro efetuado com sucesso. Agora realize o login."
-            );
+        $request->session()->flash(
+            'mensagem',
+            "Cadastro efetuado com sucesso."
+        );
 
-            return redirect('/login', 302);
-        }
+        return redirect(route('login.create'), 302);
+        
     }
 
     

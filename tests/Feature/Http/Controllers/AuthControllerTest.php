@@ -16,7 +16,7 @@ class AuthControllerTest extends TestCase
     public function test_deve_renderizar_pagina_de_login()
     {
         //Act
-        $response = $this->get(route('form.login'));
+        $response = $this->get(route('login.create'));
 
         //Assert
         $response->assertStatus(200);

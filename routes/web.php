@@ -1,15 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Projetos\CriarProjetosController;
 use App\Http\Controllers\Projetos\RemoverProjetosController;
 use App\Http\Controllers\Projetos\ExibirProjetosController;
-
-use App\Http\Controllers\RegisterController;
-
-
 
 Route::redirect('/', '/projetos', 302);
 
