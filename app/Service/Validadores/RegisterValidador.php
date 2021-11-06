@@ -4,7 +4,7 @@ namespace App\Service\Validadores;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class RegisterValidador
+class RegisterValidador extends BaseValidador
 {
 
     public function validar(Request $request)
@@ -21,16 +21,6 @@ class RegisterValidador
             'confirmed' => 'As senhas nao correspondem.'
         ]);
 
-        if ($validator->fails()) {
-            return [
-                'success' => false,
-                'erros' => $validator->errors()
-            ];
-        }
-
-        return [
-            'success' => true,
-            'dados' => $validator->validated()
-        ];
+        return $this->resultato($validator);
     }
 }

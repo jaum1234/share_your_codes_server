@@ -5,7 +5,7 @@ namespace App\Service\Validadores;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class ProjetosValidador
+class ProjetosValidador extends BaseValidador
 {
     public function validar(Request $request)
     {
@@ -18,6 +18,6 @@ class ProjetosValidador
             'required' => 'Esse campo é obrigatório.'
         ]);
 
-        return $validador;
+        return $this->resultato($validador);
     }
 }

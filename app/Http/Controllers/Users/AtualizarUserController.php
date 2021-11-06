@@ -1,20 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Users;
 
 use App\Models\User;
 use App\Models\Projeto;
 use App\Service\UserService;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Service\Validadores\UserValidador;
 use Illuminate\Support\Facades\Auth;
 
-class UserController extends Controller
+class AtualizarUserController extends Controller
 {
     private $userService;
 
-    public function __construct(UserService $service)
+    public function __construct(UserValidador $userValidador)
     {
-        $this->userService = $service;
+        $this->validador = $userValidador;
     }
     
     public function edit(Request $request) 

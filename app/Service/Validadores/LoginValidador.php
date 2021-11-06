@@ -4,7 +4,7 @@ namespace App\Service\Validadores;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class LoginValidador 
+class LoginValidador extends BaseValidador
 {
     public function validar(Request $request)
     {
@@ -17,6 +17,6 @@ class LoginValidador
             'exists' => 'E-mail nao cadastrado.'
         ]);
 
-        return $validator;
+        return $this->resultato($validator);
     }
 }

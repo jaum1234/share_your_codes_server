@@ -1,13 +1,12 @@
 <?php 
-namespace App\Service;
+namespace App\Service\Validadores;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 
-class UserService
+class UserValidador extends BaseValidador
 {
     public function validar(Request $request)
     {
@@ -19,6 +18,6 @@ class UserService
             'unique' => 'Esse nickname já está em uso.'
         ]);
 
-        return $validator;
+        return $this->resultato($validator);
     }
 }
