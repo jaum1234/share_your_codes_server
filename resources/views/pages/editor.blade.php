@@ -5,7 +5,7 @@
     
     <div class="col d-flex conteudo-principal mb-4">
         <x-modal.success/>
-        <form name="formSaveProject" action="/projetos" method="POST" class="conteudo-principal__form" data-conteudo-principal-form>
+        <form id="form-salvar" name="formSalvarProjeto" action="{{ route('projetos.salvar') }}" method="POST" class="conteudo-principal__form" data-conteudo-principal-form>
             @csrf
             
             <div class="col-10 d-flex flex-column conteudo-principal__editor">
@@ -86,42 +86,8 @@
     </div>
 
 @endsection
-@push('scripts')
-    <script src="{{ asset('js/editor/whitespaces.js') }}"></script>
-    <script type="module" src="{{ asset('/js/editor/salvar-projeto.js') }}"></script>
-    <script src="{{ asset('js/editor/contador-de-caracteres.js') }}"></script>
-    <script type="module" src="{{ asset('js/editor/highlight.js') }}" ></script>
-    <script src="{{ asset('/js/editor/selecionar-cor-borda.js') }}"></script>
-    <script>
-        $(function() {  
-            $('form[name="formSaveProject"]').on('submit', function (event) {  
-                event.preventDefault();
-                $.ajax({
-                    type: "POST",
-                    url: "/projetos",
-                    data: $(this).serialize(),
-                    dataType: 'json',
-                    beforeSend: function () {  
-                        '{{ Auth::check() ? '' : redirect("/login") }}'
-                    },
-                    success: function (response) {
-                        if (response.success === true) {
-                            $('#successModal').modal('show');
-                            $('#successModal h5').text(response.message);
-                        } else {
-                            $.each(response.message , function(chave, valor) {  
-                                $('small.' + chave + '__error').text(valor);
-                                setTimeout(function() {
-                                    $('.error__text').text('');
-                                }, 10000);
-                            });
-                        } 
-                        return;
-                    }
-                });
-            })
-        })
-
-        
-    </script>
-@endpush
+@section('js')
+<script type="module" src="{{ asset('js/editor/main.js') }}"></script>
+<script src="{{ asset('js/editor/contador-de-caracteres.js') }}"></script>
+<script src="{{ asset('js/requests/salvar-projeto.js') }}"></script>
+@endsection

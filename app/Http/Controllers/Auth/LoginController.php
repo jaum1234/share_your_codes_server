@@ -31,11 +31,11 @@ class LoginController extends Controller
     {
         $validator = $this->validador->validar($request);
         
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator->errors());
+        if (!$validator['success']) {
+            return redirect()->back()->withErrors($validator['erros']);
         }
 
-        $dadosValidados = $validator->validated();
+        $dadosValidados = $validator['dados'];
 
         $credencials = [
             'email' => $dadosValidados['email'],

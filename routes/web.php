@@ -1,17 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Users\ProjetosUserController;
+use App\Http\Controllers\Users\AtualizarUserController;
 use App\Http\Controllers\Projetos\CriarProjetosController;
-use App\Http\Controllers\Projetos\RemoverProjetosController;
 use App\Http\Controllers\Projetos\ExibirProjetosController;
+use App\Http\Controllers\Projetos\RemoverProjetosController;
 
 Route::redirect('/', '/projetos', 302);
 
 Route::middleware('auth')->group(function () {
     Route::prefix('/projetos')->group(function () {
 
-        Route::get('', [ExibirProjetosController::class, 'index'])->name('projetos');
         Route::any('/pesquisar', [ExibirProjetosController::class, 'search'])->name('pesquisar');
         
         Route::post('', [CriarProjetosController::class, 'store'])->name('projetos.salvar');
@@ -20,10 +20,10 @@ Route::middleware('auth')->group(function () {
     
     Route::prefix('/usuarios')->group(function () {
         
-        Route::get('/{id}/{nick}', [UserController::class, 'edit'])->name('usuarios.editar');
+        Route::get('/{id}/{nick}', [AtualizarUserController::class, 'edit'])->name('usuarios.editar');
         
-        Route::get('/{id}/{nick}/projetos', [UserController::class, 'projetosUsuario'])->name('usuarios.projetos');
-        Route::post('/{id}/editar', [UserController::class, 'update'])->name('usuarios.atualizar');
+        Route::get('/{id}/{nick}/projetos', [ProjetosUserController::class, 'index'])->name('usuarios.projetos');
+        Route::post('/{id}/editar', [AtualizarUserController::class, 'update'])->name('usuarios.atualizar');
     });
 });
 

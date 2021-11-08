@@ -39,13 +39,10 @@
         {{ $projetos->render() }}
     </div>
 @endsection
-@push('scripts')
-    <script>
-
-    </script>
-    <script>
-        document.querySelectorAll('div.code').forEach(el => {
-            hljs.highlightElement(el);
-        }); 
-    </script>
-@endpush
+@section('js')
+<script>
+    document.querySelectorAll('div.code').forEach(el => {
+        hljs.highlightElement(el);
+    }); 
+</script>
+@endsection

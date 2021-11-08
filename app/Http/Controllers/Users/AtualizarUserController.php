@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Users;
 
 use App\Models\User;
 use App\Models\Projeto;
-use App\Service\UserService;
+use App\Service\validador;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Service\Validadores\UserValidador;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AtualizarUserController extends Controller
 {
-    private $userService;
+    private $validador;
 
     public function __construct(UserValidador $userValidador)
     {
@@ -29,21 +29,17 @@ class AtualizarUserController extends Controller
     
     public function update(Request $request, Int $id)
     { 
-        $validator = $this->userService->validar($request);
+        $validator = $this->validador->validar($request);
 
-        if ($validator->fails()) {
-            $response = [
-                'success' => false,
-                'message' => $validator->errors()
-            ];
-            return response()->json($response); 
+        if (!$validator['success']) {
+            return response()->json($validator);
         }
 
-        $dadosValidatos = $validator->validated();
+        $dadosValidados = $validator['dados'];
 
         $usuario = User::find($id);
-        $usuario->name = $dadosValidatos['name'];
-        $usuario->nickname = $dadosValidatos['nickname'];
+        $usuario->name = $dadosValidados['name'];
+        $usuario->nickname = $dadosValidados['nickname'];
         $usuario->save();
 
         $response['success'] = true;
@@ -52,16 +48,6 @@ class AtualizarUserController extends Controller
         return response()->json($response, 200);   
     }
 
-    public function projetosUsuario(Request $request)
-    {
-        $projetos = Projeto::where('user_id', Auth::id())
-            ->orderBy('nome')
-            ->paginate(4);
-
-        return response()->view(
-        'pages.meus-projetos', 
-        compact('projetos')
-        );   
-    }
+    
 
 }

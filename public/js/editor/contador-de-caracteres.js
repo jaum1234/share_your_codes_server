@@ -1,10 +1,6 @@
-$(function() {  
-    contarCaracteres();
-})
-
 const editor = $("[data-editor-codigo]");
 
-function contarCaracteres() {
+export default function contarCaracteres() {
     const contador = $("#contator-caracteres");
     const conteudo = editor.val();
     

@@ -6,7 +6,7 @@ use App\Models\Projeto;
 use App\Service\Buscador;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Auth;
 class ExibirProjetosController extends Controller
 {
     public function __construct()
@@ -38,7 +38,7 @@ class ExibirProjetosController extends Controller
         }
 
         return view(
-            'editor.pagina-projeto', 
+            'pages.pagina-projeto', 
             compact('projeto')
         );
     }

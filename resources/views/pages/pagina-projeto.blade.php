@@ -48,11 +48,11 @@
             </div>
         
 @endsection
-@push('scripts')
+@section('js')
     <script type="module" src="{{ asset('/js/pagina-projeto/compartilhar.js') }}"></script>
     <script>
         document.querySelectorAll('div.code').forEach(el => {
             hljs.highlightElement(el);
         }); 
     </script>
-@endpush
+@endsection

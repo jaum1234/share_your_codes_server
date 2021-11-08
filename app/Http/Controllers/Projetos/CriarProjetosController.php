@@ -24,15 +24,14 @@ class CriarProjetosController extends Controller
 
     public function store(Request $request)
     {   
+        
         $validador = $this->validador->validar($request);
 
-        if ($validador->fails()) {
-            $response['success'] = false;
-            $response['message'] = $validador->errors();
-            return response()->json($response);
+        if (!$validador['success']) {
+            return response()->json($validador);
         }
         
-        $dadosValidados = $validador->validated();
+        $dadosValidados = $validador['dados'];
 
         $user = User::find(Auth::id());
         $user->projetos()->create($dadosValidados);
