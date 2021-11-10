@@ -32,6 +32,8 @@ Route::get('/projetos', [ExibirProjetosController::class, 'index'])->name('proje
 Route::get('/projetos/criar', [CriarProjetosController::class, 'create'])->name('projetos.criar');
 
 
+Route::view('/teste', 'pages.vue');
+
 include __DIR__ . '/auth.php';
     
 
