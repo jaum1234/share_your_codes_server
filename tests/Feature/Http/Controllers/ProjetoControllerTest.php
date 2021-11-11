@@ -25,46 +25,7 @@ class ProjetoControllerTest extends TestCase
         $response->assertViewHas('projetos');
     }
 
-    public function test_deve_criar_um_projeto()
-    {
-        $this->withoutExceptionHandling();
-
-        //Arrange
-        $user = User::factory()->create();
-        $this->actingAs($user);
-
-        $data = [
-            'codigo' => 'codigo',
-            'nome' => 'nome',
-            'descricao' => 'descricao',
-            'cor' => 'black'
-        ];
-
-        //Act
-        $response = $this->post('/projetos', [
-            'codigo' => 'codigo',
-            'nome' => 'nome',
-            'descricao' => 'descricao',
-            'cor' => 'black'
-        ]);
-
-        $projeto = Projeto::first();
-
-        //Assert
-        $response->assertStatus(201);
-
-        $this->assertEquals('nome', $projeto->nome);
-        $this->assertEquals('descricao', $projeto->descricao);
-        $this->assertEquals('codigo', $projeto->codigo);
-        $this->assertEquals('black', $projeto->cor);
-        $this->assertEquals($user->id, $projeto->user->id);
-        $this->assertDatabaseHas('projetos', [
-            'nome' => $projeto->nome,
-            'descricao' => $projeto->descricao,
-            'codigo' => $projeto->codigo,
-            'cor' => $projeto->cor
-        ]);
-    }
+    
 
     public function test_deve_renderizar_pagina_do_projeto()
     {
