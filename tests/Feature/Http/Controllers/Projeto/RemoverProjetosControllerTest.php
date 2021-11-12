@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Http\Controllers;
+namespace Tests\Feature\Http\Controllers\Projeto;
 
 use Tests\TestCase;
 use App\Models\User;
@@ -8,15 +8,9 @@ use App\Models\Projeto;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ProjetoControllerTest extends TestCase
+class RemoverProjetosControllerTest extends TestCase
 {
     use RefreshDatabase;
-
-    
-
-    
-
-    
 
     public function test_deve_excluir_projeto()
     {
@@ -29,10 +23,10 @@ class ProjetoControllerTest extends TestCase
         $projeto = $user->projetos()->save(Projeto::factory()->make());
 
         //Act
-        $response = $this->post("/projetos/excluir/" . $projeto->id );
+        $response = $this->post(route('projetos.destroy', ['id' => $projeto->id]));
 
         //Assert
-        $response->assertStatus(302);
+        $response->assertOk();
 
         $this->assertDatabaseMissing('projetos', [
             'nome' => $projeto->nome,
@@ -41,7 +35,4 @@ class ProjetoControllerTest extends TestCase
             'cor' => $projeto->cor
         ]);
     }
-
-    
-
 }

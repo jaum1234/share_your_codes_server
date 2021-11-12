@@ -14,8 +14,8 @@ Route::middleware('auth')->group(function () {
 
         Route::any('/pesquisar', [ExibirProjetosController::class, 'search'])->name('pesquisar');
         
-        Route::post('', [CriarProjetosController::class, 'store'])->name('projetos.salvar');
-        Route::post('/excluir/{id}', [RemoverProjetosController::class, 'destroy'])->name('projetos.excluir');
+        Route::post('', [CriarProjetosController::class, 'store'])->name('projetos.store');
+        Route::post('/excluir/{id}', [RemoverProjetosController::class, 'destroy'])->name('projetos.destroy');
     });
     
     Route::prefix('/usuarios')->group(function () {
@@ -27,9 +27,9 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-Route::get('projetos/{id}/{nome}', [ExibirProjetosController::class, 'show'])->name('projetos.projeto');
-Route::get('/projetos', [ExibirProjetosController::class, 'index'])->name('projetos');
-Route::get('/projetos/criar', [CriarProjetosController::class, 'create'])->name('projetos.criar');
+Route::get('projetos/{id}/{nome}', [ExibirProjetosController::class, 'show'])->name('projetos.show');
+Route::get('/projetos', [ExibirProjetosController::class, 'index'])->name('projetos.index');
+Route::get('/projetos/criar', [CriarProjetosController::class, 'create'])->name('projetos.create');
 
 
 Route::view('/teste', 'pages.vue');

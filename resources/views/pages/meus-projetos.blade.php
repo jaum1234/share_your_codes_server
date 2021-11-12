@@ -17,7 +17,7 @@
                         <div class="projeto__info rounded p-3">
                             <h5 class=" fw-light">{{ $projeto->nome }}</h5>
                             <p class=" fw-light">{{ $projeto->descricao }}</p>
-                            <form name="formExcluirProjeto" action="{{ route('projetos.excluir', ['id' => $projeto->id]) }}">
+                            <form name="formExcluirProjeto" action="{{ route('projetos.destroy', ['id' => $projeto->id]) }}">
                                 @csrf
                                 <input data-input="excluir" type="hidden" value="{{ $projeto->id }}">
                                 <div class="d-flex align-items-center">

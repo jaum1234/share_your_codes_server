@@ -2,7 +2,7 @@
 @section('conteudo')
 <div class="col d-flex conteudo-principal mb-4">
     <x-modal.success/>
-    <form id="form-salvar" name="formSalvarProjeto" action="{{ route('projetos.salvar') }}" method="POST" class="conteudo-principal__form" data-conteudo-principal-form>
+    <form id="form-salvar" name="formSalvarProjeto" action="{{ route('projetos.store') }}" method="POST" class="conteudo-principal__form" data-conteudo-principal-form>
         @csrf
         
         <div class="col-10 d-flex flex-column conteudo-principal__editor">

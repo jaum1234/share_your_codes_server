@@ -1,15 +1,27 @@
 <?php
 
-namespace Tests\Feature\Http\Controllers;
+namespace Tests\Feature\Http\Controllers\Projeto;
 
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Projeto;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class CriarProjetoControllerTest extends TestCase
+class CriarProjetosControllerTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function test_deve_renderizar_pagina_criacao_projeto() 
+    {
+        $this->withoutExceptionHandling();
+
+        //Arrange & Act
+        $response = $this->get(route('projetos.create'));
+
+        //Assert
+        $response->assertStatus(200);
+        $response->assertViewIs('pages.editor');
+    }
 
     public function test_deve_criar_um_projeto()
     {
@@ -27,12 +39,16 @@ class CriarProjetoControllerTest extends TestCase
         ];
 
         //Act
-        $response = $this->post(route('projetos.salvar'), $data);
+        $response = $this->post(route('projetos.store'), $data);
 
         $projeto = Projeto::first();
 
         //Assert
         $response->assertStatus(201);
+        $response->assertJson([
+            'success' => true,
+            'message' => 'Projeto criado com sucesso!'
+        ]);
 
         $this->assertEquals('nome', $projeto->nome);
         $this->assertEquals('descricao', $projeto->descricao);
@@ -43,7 +59,8 @@ class CriarProjetoControllerTest extends TestCase
             'nome' => $projeto->nome,
             'descricao' => $projeto->descricao,
             'codigo' => $projeto->codigo,
-            'cor' => $projeto->cor
+            'cor' => $projeto->cor,
+            'user_id' => $user->id
         ]);
     }
 }
