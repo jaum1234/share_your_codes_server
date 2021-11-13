@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Projeto;
 use Illuminate\Database\Seeder;
 
-class ProdutoSeeder extends Seeder
+class ProjetoSeeder extends Seeder
 {
     /**
      * Run the database seeds.

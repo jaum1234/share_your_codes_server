@@ -28,7 +28,7 @@ class ProjetosUserControllerTest extends TestCase
 
         //Assert
         $response->assertStatus(200);
-        $response->assertViewIs('pages.meus-projetos');
+        $response->assertViewIs('users.projetos');
         $response->assertViewHas('projetos');
     }
 }

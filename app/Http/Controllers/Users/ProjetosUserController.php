@@ -16,7 +16,7 @@ class ProjetosUserController extends Controller
             ->paginate(4);
 
         return response()->view(
-        'pages.meus-projetos', 
+        'users.projetos', 
         compact('projetos')
         );   
     }
