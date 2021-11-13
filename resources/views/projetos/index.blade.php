@@ -8,7 +8,7 @@
             
             <div class=" mb-5 projetos__projeto projeto">
                 <a
-                href="/projetos/{{ $projeto->id }}/{{ $projeto->nome }}"
+                href="{{ route('projetos.show', ['id' => $projeto->id]) }}"
                 class="text-decoration-none text-light">
                     <div class="d-flex flex-column">
                         

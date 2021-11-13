@@ -21,14 +21,14 @@
                 <li class="nav-item">
                     <a 
                         class="nav-link text-light fw-light" 
-                        href="{{ route('users.projetos', ['id' => Auth::user()->id, 'nick' => Auth::user()->nickname]) }}">
+                        href="{{ route('users.projetos', ['id' => Auth::user()->id]) }}">
                         Meus Projetos
                     </a>
                 </li>
                 <li class="nav-item">
                     <a 
                         class="nav-link text-light fw-light" 
-                        href="{{ route('users.edit', ['id' => Auth::user()->id, 'nick' => Auth::user()->nickname]) }}">
+                        href="{{ route('users.edit', ['id' => Auth::user()->id]) }}">
                         Meu perfil
                     </a>
                 </li>

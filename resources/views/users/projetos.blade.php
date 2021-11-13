@@ -6,7 +6,7 @@
         @foreach ($projetos as $projeto)
             <div class="mb-5 projeto" data-projeto="{{ $projeto->id }}">
                 <a 
-                    href="/projetos/{{ $projeto->id }}/{{ $projeto->nome }}" 
+                    href="{{ route('projetos.show', ['id' => $projeto->id]) }}" 
                     class="text-decoration-none text-light">
                     <div class="d-flex flex-column">
 
