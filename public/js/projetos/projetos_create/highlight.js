@@ -1,6 +1,6 @@
 
-import {setLocalStorage} from '../local-storage.js'
-import {getLocalStorage} from "../local-storage.js";
+import {setLocalStorage} from '../../local-storage.js'
+import {getLocalStorage} from "../../local-storage.js";
 
 const editor = $('[data-editor-codigo]');
 

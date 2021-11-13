@@ -41,13 +41,13 @@
               <div>
                   <ul class="list-unstyled fw-light">
                       <li class="mb-3 sidebar__item">
-                          <a href="/projetos/criar" class="text-decoration-none text-light">
+                          <a href="{{ route('projetos.create') }}" class="text-decoration-none text-light">
                             <i class="fas fa-code fs-6 sidebar__icone"></i>
                             Editor de código
                           </a>
                       </li>
                       <li class="mb-2 sidebar__item">
-                          <a href="/projetos" class="text-decoration-none text-light">
+                          <a href="{{ route('projetos.index') }}" class="text-decoration-none text-light">
                             <i class="fas fa-users fs-6 sidebar__icone"></i>
                             Comunidade
                           </a>

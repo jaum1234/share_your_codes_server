@@ -1,4 +1,4 @@
-import {setLocalStorage} from '../local-storage.js'
+import {setLocalStorage} from '../../local-storage.js'
 
 function salvarProjetoLocastorage() {
     $('[data-conteudo-principal-form]').on('submit', function() {

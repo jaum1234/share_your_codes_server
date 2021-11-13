@@ -49,10 +49,5 @@
         
 @endsection
 @section('js')
-    <script type="module" src="{{ asset('/js/pagina-projeto/compartilhar.js') }}"></script>
-    <script>
-        document.querySelectorAll('div.code').forEach(el => {
-            hljs.highlightElement(el);
-        }); 
-    </script>
+    <script type="module" src="{{ asset('js/projetos/projetos_show/main.js') }}"></script>
 @endsection

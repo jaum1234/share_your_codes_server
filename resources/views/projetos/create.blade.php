@@ -83,30 +83,5 @@
 </div>
 @endsection
 @section('js')
-<script type="module" src="{{ asset('js/editor/main.js') }}"></script>
-<script src="{{ asset('js/requests/salvar-projeto.js') }}"></script>
-<script>
-$('form[name="formSalvarProjeto"]').on("submit", event => {
-    event.preventDefault();
-
-    '{{ Auth::check() ? '' : redirect(route("login.create")) }}'
-
-    salvarProjeto()
-    .then(data => {
-        if (data.success) {
-            Swal.fire({
-                title: 'Projeto salvo com sucesso!',
-                icon: 'success'
-            });
-            return;
-        }
-        $.each(data.erros , function(chave, valor) {  
-            $('small.' + chave + '__error').text(valor);
-            setTimeout(function() {
-                $('.error__text').text('');
-            }, 10000);
-        });
-    })
-});
-</script>
+<script type="module" src="{{ asset('js/projetos/projetos_create/main.js') }}"></script>
 @endsection

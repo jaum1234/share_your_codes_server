@@ -5,7 +5,7 @@
         <i class="fas fa-user-circle fs-1 profile mb-4"></i>
         <div>
 
-            <form action="/usuarios/{{ $user->id }}/editar" method="POST" name="formAtualizarUsuario">
+            <form action="{{ route('users.update', ['id' => $user->id]) }}" method="POST" name="formAtualizarUsuario">
                 @csrf
 
             <input type="hidden" value="{{ $user->id }}" id="hidden-user-id">
@@ -73,6 +73,5 @@
 </div>        
 @endsection
 @section('js')
-    <script src="{{ asset('/js/user/editar-perfil.js') }}"></script>
-    <script src="{{ asset('js/requests/atualizar-usuario.js') }}"></script>
+    <script type="module" src="{{ asset('js/users/users_edit/main.js') }}"></script>
 @endsection

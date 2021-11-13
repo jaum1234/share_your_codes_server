@@ -40,9 +40,5 @@
     </div>
 @endsection
 @section('js')
-<script>
-    document.querySelectorAll('div.code').forEach(el => {
-        hljs.highlightElement(el);
-    }); 
-</script>
+<script src="{{ asset('js/shared/highlight.js') }}"></script>
 @endsection
