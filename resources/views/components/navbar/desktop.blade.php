@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-xl navbar-light bg-transparent nav">
     <div class="container-fluid d-flex align-items-center">
-        <h1 class="navbar-brand text-light nav__logo fs-3 align-self-center">Alura<span class="nav__logo--dev px-1 ms-2">dev</span></h1>
+        <h1 class="navbar-brand text-light nav__logo fs-3 align-self-center">
+            <img width="135px" src="{{ asset('img/logo.png') }}" alt="logo do site">
+        </h1>
         <form action="{{ route('pesquisar') }}" class="search">
             <input name="q" type="text" class="search__input form-control text-light fw-light" placeholder="Busque aqui...">
         </form>
@@ -27,7 +29,7 @@
                 <li>
                     <a 
                         class="dropdown-item" 
-                        href="{{ route('usuarios.editar', ['id' => Auth::user()->id, 'nick' => Auth::user()->nickname]) }}">
+                        href="{{ route('usuarios.edit', ['id' => Auth::user()->id, 'nick' => Auth::user()->nickname]) }}">
                         Meu perfil
                     </a>
                 </li>

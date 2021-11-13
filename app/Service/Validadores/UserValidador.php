@@ -18,6 +18,6 @@ class UserValidador extends BaseValidador
             'unique' => 'Esse nickname já está em uso.'
         ]);
 
-        return $this->resultato($validator);
+        return $this->resultado($validator);
     }
 }

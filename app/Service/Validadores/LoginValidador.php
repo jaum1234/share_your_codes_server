@@ -17,6 +17,6 @@ class LoginValidador extends BaseValidador
             'exists' => 'E-mail nao cadastrado.'
         ]);
 
-        return $this->resultato($validator);
+        return $this->resultado($validator);
     }
 }

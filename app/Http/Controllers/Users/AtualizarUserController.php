@@ -22,9 +22,8 @@ class AtualizarUserController extends Controller
     public function edit(Request $request) 
     {
         $user = Auth::user();
-        $mensagem = $request->session()->get('mensagem');
 
-        return response()->view('pages.user', compact('user', 'mensagem'), 200);
+        return response()->view('pages.user', compact('user'), 200);
     }
     
     public function update(Request $request, Int $id)

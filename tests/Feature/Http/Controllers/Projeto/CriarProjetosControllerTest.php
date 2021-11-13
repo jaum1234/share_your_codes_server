@@ -63,4 +63,66 @@ class CriarProjetosControllerTest extends TestCase
             'user_id' => $user->id
         ]);
     }
+
+    /**
+     * @dataProvider dadosParaValidacao
+     */
+    public function test_deve_falhar_ao_nao_preencher_os_campo_corretamente(array $camposPreechidos)
+    {
+        $this->withoutExceptionHandling();
+
+        //Arrange
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $data = $camposPreechidos;
+
+        //Act
+        $response = $this->post(route('projetos.store'), $data);
+
+        //Assert
+        $response->assertJson([
+            'success' => false,
+        ]);
+        
+        $this->assertDatabaseMissing('projetos', $data);
+    }
+
+    public function dadosParaValidacao()
+    {
+        return [
+            'campo código vazio' => [
+                [
+                    'codigo' => '',
+                    'nome' => 'nome',
+                    'descricao' => 'descricao',
+                    'cor' => 'black'
+                ]
+            ],
+            'campo descricao vazio' => [
+                [
+                    'codigo' => 'codigo',
+                    'nome' => 'nome',
+                    'descricao' => '',
+                    'cor' => 'black'
+                ]
+            ],
+            'campo nome vazio' => [
+                [
+                    'codigo' => 'codigo',
+                    'nome' => '',
+                    'descricao' => 'descricao',
+                    'cor' => 'black'
+                ]
+            ],
+            'campo cor vazio' => [
+                [
+                    'codigo' => 'codigo',
+                    'nome' => 'nome',
+                    'descricao' => 'descricao',
+                    'cor' => ''
+                ]
+            ]
+        ];
+    }
 }

@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-xl navbar-light bg-transparent nav">
     <div class="container-fluid">
-        <h1 class="navbar-brand text-light nav__logo fs-3 align-self-center">Alura<span class="nav__logo--dev px-1 ms-2">dev</span></h1>
+        <h1 class="navbar-brand text-light nav__logo fs-3 align-self-center">
+            <img width="135px" src="{{ asset('img/logo.png') }}" alt="logo do site">
+        </h1>
         <div class="d-flex align-items-center">
             <x-modal.search/>
             <button class="navbar-toggler text-light border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,7 +28,7 @@
                 <li class="nav-item">
                     <a 
                         class="nav-link text-light fw-light" 
-                        href="{{ route('usuarios.editar', ['id' => Auth::user()->id, 'nick' => Auth::user()->nickname]) }}">
+                        href="{{ route('usuarios.edit', ['id' => Auth::user()->id, 'nick' => Auth::user()->nickname]) }}">
                         Meu perfil
                     </a>
                 </li>

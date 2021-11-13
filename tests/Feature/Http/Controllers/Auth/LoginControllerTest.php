@@ -1,26 +1,24 @@
 <?php
 
-namespace Tests\Feature\Http\Controllers;
+namespace Tests\Feature\Http\Controllers\Auth;
 
 use Tests\TestCase;
 use App\Models\User;
-use Exception;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class AuthControllerTest extends TestCase
+class LoginControllerTest extends TestCase
 {
     use RefreshDatabase;
 
     public function test_deve_renderizar_pagina_de_login()
     {
-        //Act
+        //Arrange & Act
         $response = $this->get(route('login.create'));
 
         //Assert
         $response->assertStatus(200);
-        $response->assertViewIs('autenticacao.login');
+        $response->assertViewIs('pages.login');
         $response->assertViewHas('titulo', 'Login');
         $response->assertSessionMissing('mensagem');
     }
@@ -38,11 +36,11 @@ class AuthControllerTest extends TestCase
         ];
 
         //Act
-        $response = $this->post(route('login'), $data);
+        $response = $this->post(route('login.store'), $data);
 
         //Assert
         $response->assertStatus(302);
-        $response->assertRedirect('/projetos/criar');
+        $response->assertRedirect(route('projetos.create'));
 
         $this->assertAuthenticated();
     }
@@ -60,7 +58,7 @@ class AuthControllerTest extends TestCase
         ];
 
         //Act
-        $response = $this->post(route('login'), $data);
+        $response = $this->post(route('login.store'), $data);
 
         //Assert
         $response->assertStatus(302);
@@ -68,6 +66,4 @@ class AuthControllerTest extends TestCase
 
         $this->assertGuest();
     }
-
-   
 }

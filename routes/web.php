@@ -20,10 +20,10 @@ Route::middleware('auth')->group(function () {
     
     Route::prefix('/usuarios')->group(function () {
         
-        Route::get('/{id}/{nick}', [AtualizarUserController::class, 'edit'])->name('usuarios.editar');
+        Route::get('/{id}/{nick}', [AtualizarUserController::class, 'edit'])->name('usuarios.edit');
         
         Route::get('/{id}/{nick}/projetos', [ProjetosUserController::class, 'index'])->name('usuarios.projetos');
-        Route::post('/{id}/editar', [AtualizarUserController::class, 'update'])->name('usuarios.atualizar');
+        Route::post('/{id}/editar', [AtualizarUserController::class, 'update'])->name('usuarios.update');
     });
 });
 

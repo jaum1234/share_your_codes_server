@@ -21,6 +21,6 @@ class RegisterValidador extends BaseValidador
             'confirmed' => 'As senhas nao correspondem.'
         ]);
 
-        return $this->resultato($validator);
+        return $this->resultado($validator);
     }
 }

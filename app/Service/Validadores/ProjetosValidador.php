@@ -18,6 +18,6 @@ class ProjetosValidador extends BaseValidador
             'required' => 'Esse campo é obrigatório.'
         ]);
 
-        return $this->resultato($validador);
+        return $this->resultado($validador);
     }
 }
