@@ -25,7 +25,7 @@ class RegisterController extends Controller
         $titulo = 'Cadastro';
 
         return response()->view(
-            'pages.cadastro', 
+            'auth.cadastro', 
             compact('titulo'), 
             200
         );

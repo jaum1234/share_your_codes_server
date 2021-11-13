@@ -11,28 +11,23 @@ Route::redirect('/', '/projetos', 302);
 
 Route::middleware('auth')->group(function () {
     Route::prefix('/projetos')->group(function () {
-
-        Route::any('/pesquisar', [ExibirProjetosController::class, 'search'])->name('pesquisar');
-        
+        Route::get('/create', [CriarProjetosController::class, 'create'])->name('projetos.create');
         Route::post('', [CriarProjetosController::class, 'store'])->name('projetos.store');
-        Route::post('/excluir/{id}', [RemoverProjetosController::class, 'destroy'])->name('projetos.destroy');
+        Route::delete('/{id}', [RemoverProjetosController::class, 'destroy'])->name('projetos.destroy');
+        Route::any('/pesquisar', [ExibirProjetosController::class, 'search'])->name('pesquisar');
     });
     
-    Route::prefix('/usuarios')->group(function () {
-        
-        Route::get('/{id}/{nick}', [AtualizarUserController::class, 'edit'])->name('usuarios.edit');
-        
-        Route::get('/{id}/{nick}/projetos', [ProjetosUserController::class, 'index'])->name('usuarios.projetos');
-        Route::post('/{id}/editar', [AtualizarUserController::class, 'update'])->name('usuarios.update');
+    Route::prefix('/users')->group(function () {
+        Route::get('/{id}/edit', [AtualizarUserController::class, 'edit'])->name('users.edit');
+        Route::put('/{id}', [AtualizarUserController::class, 'update'])->name('users.update');
+        Route::get('/{id}/projetos', [ProjetosUserController::class, 'index'])->name('users.projetos');
     });
 });
 
-Route::get('projetos/{id}/{nome}', [ExibirProjetosController::class, 'show'])->name('projetos.show');
-Route::get('/projetos', [ExibirProjetosController::class, 'index'])->name('projetos.index');
-Route::get('/projetos/criar', [CriarProjetosController::class, 'create'])->name('projetos.create');
-
-
-Route::view('/teste', 'pages.vue');
+Route::prefix('/projetos')->group(function () {
+    Route::get('', [ExibirProjetosController::class, 'index'])->name('projetos.index');
+    Route::get('/{id}', [ExibirProjetosController::class, 'show'])->name('projetos.show');
+});
 
 include __DIR__ . '/auth.php';
     

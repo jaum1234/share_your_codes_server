@@ -18,7 +18,7 @@ class LoginControllerTest extends TestCase
 
         //Assert
         $response->assertStatus(200);
-        $response->assertViewIs('pages.login');
+        $response->assertViewIs('auth.login');
         $response->assertViewHas('titulo', 'Login');
         $response->assertSessionMissing('mensagem');
     }

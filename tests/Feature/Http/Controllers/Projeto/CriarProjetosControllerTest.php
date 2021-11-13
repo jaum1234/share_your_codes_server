@@ -15,12 +15,16 @@ class CriarProjetosControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        //Arrange & Act
+        //Arrange
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        //Act
         $response = $this->get(route('projetos.create'));
 
         //Assert
         $response->assertStatus(200);
-        $response->assertViewIs('pages.editor');
+        $response->assertViewIs('projetos.create');
     }
 
     public function test_deve_criar_um_projeto()

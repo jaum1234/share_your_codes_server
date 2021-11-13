@@ -22,14 +22,14 @@
                 <li>
                     <a 
                         class="dropdown-item" 
-                        href="{{ route('usuarios.projetos', ['id' => Auth::user()->id, 'nick' => Auth::user()->nickname]) }}">
+                        href="{{ route('users.projetos', ['id' => Auth::user()->id, 'nick' => Auth::user()->nickname]) }}">
                         Meus projetos
                     </a>
                 </li>
                 <li>
                     <a 
                         class="dropdown-item" 
-                        href="{{ route('usuarios.edit', ['id' => Auth::user()->id, 'nick' => Auth::user()->nickname]) }}">
+                        href="{{ route('users.edit', ['id' => Auth::user()->id, 'nick' => Auth::user()->nickname]) }}">
                         Meu perfil
                     </a>
                 </li>

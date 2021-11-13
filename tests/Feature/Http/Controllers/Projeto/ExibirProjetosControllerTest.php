@@ -21,7 +21,7 @@ class ExibirProjetosControllerTest extends TestCase
 
         //Assert
         $response->assertOk();
-        $response->assertViewIs('pages.comunidade');
+        $response->assertViewIs('projetos.index');
         $response->assertViewHas('projetos');
     }
 
@@ -44,7 +44,7 @@ class ExibirProjetosControllerTest extends TestCase
 
         //Assert
         $response->assertOk(200);
-        $response->assertViewIs('pages.pagina-projeto');
+        $response->assertViewIs('projetos.show');
         $response->assertViewHas('projeto');
     }
 
@@ -71,7 +71,7 @@ class ExibirProjetosControllerTest extends TestCase
         $response->assertSee($projeto->codigo);
         $response->assertSee($projeto->nome);
         $response->assertSee($projeto->descricao);
-        $response->assertViewIs('pages.comunidade');
+        $response->assertViewIs('projetos.index');
         $response->assertViewHas('projetos');
     }
 }

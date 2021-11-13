@@ -21,7 +21,7 @@ class ProjetosUserControllerTest extends TestCase
 
         //Act
         $response = $this->get(
-            route('usuarios.projetos',
+            route('users.projetos',
              ['id' => $user->id, 'nick' => $user->nickname]
             )
         );

@@ -11,7 +11,7 @@ class AtualizarUserControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_deve_renderizar_pagina_do_usuario()
+    public function test_deve_renderizar_pagina_de_edicao_do_usuario()
     {
         $this->withoutExceptionHandling();
 
@@ -20,12 +20,12 @@ class AtualizarUserControllerTest extends TestCase
         $this->actingAs($user);
 
         //Act
-        $response = $this->get(route('usuarios.edit', ['id' => $user->id, 'nick' => $user->nickname]));
+        $response = $this->get(route('users.edit', ['id' => $user->id, 'nick' => $user->nickname]));
 
         //Assert
         $response->assertStatus(200);
         $response->assertViewHas('user');
-        $response->assertViewIs('pages.user');
+        $response->assertViewIs('users.edit');
     }
 
     public function test_deve_atualizar_dados_do_usuario()
@@ -42,7 +42,7 @@ class AtualizarUserControllerTest extends TestCase
         $this->actingAs($user);
 
         //Act
-        $response = $this->post(route('usuarios.update', ['id' => $user->id]), $data);
+        $response = $this->put(route('users.update', ['id' => $user->id]), $data);
 
         //Assert
         $response->assertStatus(200);
@@ -70,7 +70,7 @@ class AtualizarUserControllerTest extends TestCase
         $data = $dados;
 
         //Act
-        $response = $this->post(route('usuarios.update', ['id' => $user->id]), $data);
+        $response = $this->put(route('users.update', ['id' => $user->id]), $data);
 
         //Assert
         $response->assertJson([
@@ -103,7 +103,7 @@ class AtualizarUserControllerTest extends TestCase
     //    $data = ['name' => 'nome 1', 'nickname' => 'nickname 2'];
 //
     //    //Act
-    //    $response = $this->post(route('usuarios.update', ['id' => $user1->id]), $data);
+    //    $response = $this->post(route('users.update', ['id' => $user1->id]), $data);
 //
     //    //Assert
     //    $response->assertJson([

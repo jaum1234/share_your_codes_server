@@ -19,7 +19,7 @@ class CriarProjetosController extends Controller
 
     public function create()
     {
-        return response()->view('pages.editor');
+        return response()->view('projetos.create');
     }
 
     public function store(Request $request)

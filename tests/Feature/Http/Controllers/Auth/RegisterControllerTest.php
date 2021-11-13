@@ -21,7 +21,7 @@ class RegisterControllerTest extends TestCase
 
         //Assert
         $response->assertStatus(200);
-        $response->assertViewIs('pages.cadastro');
+        $response->assertViewIs('auth.cadastro');
         $response->assertViewHas('titulo', 'Cadastro'); 
     }
 

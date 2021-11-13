@@ -21,7 +21,7 @@ class ExibirProjetosController extends Controller
             ->paginate(4);
 
         return response()->view(
-            'pages.comunidade', 
+            'projetos.index', 
             compact('projetos')
         );
     }
@@ -38,7 +38,7 @@ class ExibirProjetosController extends Controller
         }
 
         return view(
-            'pages.pagina-projeto', 
+            'projetos.show', 
             compact('projeto')
         );
     }
@@ -47,6 +47,6 @@ class ExibirProjetosController extends Controller
     {
         $projetos = $this->buscador->pesquisar($request->q);
 
-        return response()->view('pages.comunidade', compact('projetos'));
+        return response()->view('projetos.index', compact('projetos'));
     }
 }

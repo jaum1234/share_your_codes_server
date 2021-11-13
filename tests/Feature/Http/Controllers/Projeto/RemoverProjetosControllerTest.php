@@ -23,7 +23,7 @@ class RemoverProjetosControllerTest extends TestCase
         $projeto = $user->projetos()->save(Projeto::factory()->make());
 
         //Act
-        $response = $this->post(route('projetos.destroy', ['id' => $projeto->id]));
+        $response = $this->delete(route('projetos.destroy', ['id' => $projeto->id]));
 
         //Assert
         $response->assertOk();
