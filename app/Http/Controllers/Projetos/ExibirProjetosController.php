@@ -20,10 +20,10 @@ class ExibirProjetosController extends Controller
             ->orderBy('nome')
             ->paginate(4);
 
-        return response()->view(
-            'projetos.index', 
-            compact('projetos')
-        );
+        return response()->json([
+            'success' => true,
+            'projetos' => $projetos
+        ]);
     }
 
     public function show(Request $request) 
@@ -37,10 +37,10 @@ class ExibirProjetosController extends Controller
             return response()->view('errors.404', ['error' => $e->getMessage()]);
         }
 
-        return view(
-            'projetos.show', 
-            compact('projeto')
-        );
+        return response()->json([
+            'success' => true,
+            'projeto' => $projeto
+        ]);
     }
 
     public function search(Request $request)

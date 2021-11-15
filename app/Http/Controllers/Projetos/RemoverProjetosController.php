@@ -9,6 +9,11 @@ class RemoverProjetosController extends Controller
 {
     public function destroy(int $id)
     {
-        Projeto::destroy($id);
+        $projeto = Projeto::destroy($id);
+        return response()->json([
+            'success' => true,
+            'projeto' => $projeto,
+            'msg' => 'Projeto ' . $id . ' excluido!'
+        ]);
     }
 }

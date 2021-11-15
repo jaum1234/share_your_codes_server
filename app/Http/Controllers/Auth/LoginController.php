@@ -18,21 +18,16 @@ class LoginController extends Controller
     {
         $this->validador = $loginValidador;
     }
-    
-    public function create(Request $request)
-    {
-        $mensagem = $request->session()->get('mensagem');
-        $titulo = 'Login';
-
-        return response()->view('auth.login', compact('mensagem', 'titulo'));
-    }
 
     public function store(Request $request)
     {
         $validator = $this->validador->validar($request);
         
         if (!$validator['success']) {
-            return redirect()->back()->withErrors($validator['erros']);
+            return response()->json([
+                'success' => false,
+                'err' => $validator['erros']
+            ]);
         }
 
         $dadosValidados = $validator['dados'];
@@ -51,8 +46,11 @@ class LoginController extends Controller
         }
         
         if (Auth::attempt($credencials)) {
-            $request->session()->regenerate();
-            return redirect(route('projetos.create'));
+            //$request->session()->regenerate();
+            return response()->json([
+                'success' => true,
+                'msg' => 'Usuário logado com sucesso'
+            ]);
         }   
     }
 

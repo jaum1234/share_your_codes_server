@@ -17,11 +17,6 @@ class CriarProjetosController extends Controller
         $this->validador = $projetosValidador;
     }
 
-    public function create()
-    {
-        return response()->view('projetos.create');
-    }
-
     public function store(Request $request)
     {   
         
@@ -34,11 +29,15 @@ class CriarProjetosController extends Controller
         $dadosValidados = $validador['dados'];
 
         $user = User::find(Auth::id());
-        $user->projetos()->create($dadosValidados);
+        $projeto = $user->projetos()->create($dadosValidados);
           
         $response['success'] = true;
         $response['message'] = 'Projeto criado com sucesso!';
         
-        return response()->json($response, 201); 
+        return response()->json([
+            'success' => true,
+            'projeto' => $projeto,
+            'msg' => 'Projeto criado com sucesso!'
+        ], 201); 
     }
 }

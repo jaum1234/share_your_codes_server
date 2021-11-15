@@ -6,7 +6,6 @@
         <div class="col d-flex flex-column text-center auth">
             <h2 class="fw-light mb-5">{{ $titulo }}</h2>
             <form action="{{ route('login.store') }}" method="post" class="mb-3 d-flex flex-column align-items-center">
-                @csrf
                     <small class="text-danger">{{ $errors->first('email') }}</small>
                     <label for="email" class="form-label fw-light">E-mail</label>
                     <input 

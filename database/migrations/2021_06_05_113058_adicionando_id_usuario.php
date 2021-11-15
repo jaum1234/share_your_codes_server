@@ -14,11 +14,8 @@ class AdicionandoIdUsuario extends Migration
     public function up()
     {
         Schema::table('projetos', function (Blueprint $table) {
-            $table->unsignedInteger('user_id')->index()->nullable();
 
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users');
+            $table->foreignId('user_id')->constrained('users');
         });
     }
 
