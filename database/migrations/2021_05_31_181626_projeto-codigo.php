@@ -14,15 +14,11 @@ class ProjetoCodigo extends Migration
     public function up()
     {
         Schema::create('projetos', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('id');
             $table->string('codigo');
             $table->string('nome');
             $table->string('descricao');
-            $table->string('linguagem');
             $table->string('cor');
-            $table->integer('curtida')->default(0);
-            
-
         });
     }
 
