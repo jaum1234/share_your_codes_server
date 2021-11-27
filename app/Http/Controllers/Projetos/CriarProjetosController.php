@@ -29,14 +29,9 @@ class CriarProjetosController extends Controller
         
         $dadosValidados = $validador['dados'];
 
+        $user = User::find(Auth::user()->id);
         
-        $projeto = Projeto::create([
-            'nome' => $request->nome,
-            'codigo' => $request->codigo,
-            'descricao' => $request->descricao,
-            'cor' => $request->cor,
-            'user_id' => 1
-        ]);
+        $projeto = $user->projetos()->create($dadosValidados);
         
         return response()->json([
             'success' => true,

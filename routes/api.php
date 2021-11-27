@@ -17,19 +17,18 @@ use App\Http\Controllers\Projetos\RemoverProjetosController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::prefix('/projetos')->group(function () {
-    Route::get('', [ExibirProjetosController::class, 'index'])->name('projetos.index');
-    Route::get('/{id}', [ExibirProjetosController::class, 'show'])->name('projetos.show');
-    Route::any('/pesquisar', [ExibirProjetosController::class, 'search'])->name('pesquisar');
-
-    Route::get('/create', [CriarProjetosController::class, 'create'])->name('projetos.create');
-    Route::post('', [CriarProjetosController::class, 'store'])->name('projetos.store');
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('/projetos')->group(function () {
+        Route::get('', [ExibirProjetosController::class, 'index'])->name('projetos.index');
+        Route::get('/{id}', [ExibirProjetosController::class, 'show'])->name('projetos.show');
+        Route::any('/pesquisar', [ExibirProjetosController::class, 'search'])->name('pesquisar');
     
-    Route::delete('/{id}', [RemoverProjetosController::class, 'destroy'])->name('projetos.destroy');
+        Route::get('/create', [CriarProjetosController::class, 'create'])->name('projetos.create');
+        Route::post('', [CriarProjetosController::class, 'store'])->name('projetos.store');
+        
+        Route::delete('/{id}', [RemoverProjetosController::class, 'destroy'])->name('projetos.destroy');
+    });
+    
 });
 
 include __DIR__ . '/auth.php';

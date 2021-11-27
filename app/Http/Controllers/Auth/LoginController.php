@@ -19,55 +19,44 @@ class LoginController extends Controller
         $this->validador = $loginValidador;
     }
 
-    public function store(Request $request)
+    public function store()
     {
-        $validator = $this->validador->validar($request);
-        
-        if (!$validator['success']) {
-            return response()->json([
-                'success' => false,
-                'err' => $validator['erros']
-            ]);
+        $credentials = request(['email', 'password']);
+
+        if (! $token = Auth::attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        $dadosValidados = $validator['dados'];
-
-        $credencials = [
-            'email' => $dadosValidados['email'],
-            'password' => $dadosValidados['password']
-        ];
-
-        $user = User::where('email', $request->email)->first();
-        
-        try {
-            $this->verificarSenha($dadosValidados['password'], $user->password);
-        } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['erro' => $e->getMessage()]);
-        }
-        
-        if (Auth::attempt($credencials)) {
-            //$request->session()->regenerate();
-            return response()->json([
-                'success' => true,
-                'msg' => 'Usuário logado com sucesso'
-            ]);
-        }   
+        return $this->respondWithToken($token);
     }
 
-    private function verificarSenha($senha, $hashSenha)
+    
+    public function me()
     {
-        if (!Hash::check($senha, $hashSenha)) {
-            throw new \Exception("Senha inválida");
-        }
+        return response()->json(Auth::user());
     }
 
-    public function destroy(Request $request)
+    
+    public function logout()
     {
         Auth::logout();
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        return response()->json(['message' => 'Successfully logged out']);
+    }
 
-        return redirect(route('login.create'));
-    } 
+   
+    public function refresh()
+    {
+        return $this->respondWithToken(Auth::refresh());
+    }
+
+   
+    protected function respondWithToken($token)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => Auth::factory()->getTTL() * 60
+        ]);
+    }
 }
