@@ -19,12 +19,6 @@ class AtualizarUserController extends Controller
         $this->validador = $userValidador;
     }
     
-    public function edit(Request $request) 
-    {
-        $user = Auth::user();
-        return response()->view('users.edit', compact('user'), 200);
-    }
-    
     public function update(Request $request, Int $id)
     { 
         $validator = $this->validador->validar($request);

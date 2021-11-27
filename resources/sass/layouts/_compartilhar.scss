@@ -1,9 +1,0 @@
-@use '../abstracts/mixins';
-
-.compartilhar {
-    width: 100% !important;
-
-    @include mixins.for-desktop {
-        width: 83.3% !important;
-    }
-}
