@@ -18,9 +18,9 @@ class Projeto extends Model
         'nome',
         'descricao',
         'cor',
-        'linguagem',
         'codigo',
         'curtida',
+        'user_id'
         
     ];
 

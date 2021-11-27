@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Projetos;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Projeto;
 use Illuminate\Support\Facades\Auth;
 use App\Service\Validadores\ProjetosValidador;
 
@@ -28,11 +29,14 @@ class CriarProjetosController extends Controller
         
         $dadosValidados = $validador['dados'];
 
-        $user = User::find(Auth::id());
-        $projeto = $user->projetos()->create($dadosValidados);
-          
-        $response['success'] = true;
-        $response['message'] = 'Projeto criado com sucesso!';
+        
+        $projeto = Projeto::create([
+            'nome' => $request->nome,
+            'codigo' => $request->codigo,
+            'descricao' => $request->descricao,
+            'cor' => $request->cor,
+            'user_id' => 1
+        ]);
         
         return response()->json([
             'success' => true,
