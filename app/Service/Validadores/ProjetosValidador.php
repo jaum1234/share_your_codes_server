@@ -12,8 +12,8 @@ class ProjetosValidador extends BaseValidador
         $validador = Validator::make($request->all(), [
             'nome' => 'required|string',
             'descricao' => 'required|string',
-            'cor' => 'required',
-            'codigo' => 'required'
+            'cor' => 'string',
+            'codigo' => 'required|string'
         ], [
             'required' => 'Esse campo é obrigatório.'
         ]);

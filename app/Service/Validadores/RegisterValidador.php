@@ -11,7 +11,7 @@ class RegisterValidador extends BaseValidador
     {
         $validator = Validator::make($request->all(), [
             'nickname' => 'required|unique:users,nickname',
-            'name' => 'required',
+            'name' => 'required|string',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|confirmed|string'
         ], [
