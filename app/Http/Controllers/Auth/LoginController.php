@@ -29,6 +29,12 @@ class LoginController extends Controller
 
         $dadosValidados = $validator['dados'];
 
+        $user = User::where('email', $dadosValidados['email'])->first();
+
+        if (!Hash::check($dadosValidados['password'], $user->password)) {
+            return response()->json(['erros' => ['password' => 'Senha incorreta']]);
+        }
+
         $credentials = ['email' => $dadosValidados['email'], 'password' => $dadosValidados['password']];
 
         if (!$token = Auth::attempt($credentials)) {
