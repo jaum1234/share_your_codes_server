@@ -9,7 +9,7 @@ abstract class BaseValidador
 {
     abstract public function validar(Request $request);
 
-    public function resultado($validator)
+    protected function resultado($validator)
     {
         if ($validator->fails()) {
             return [

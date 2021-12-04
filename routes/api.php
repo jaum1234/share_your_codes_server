@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Users\ProjetosUserController;
+use App\Http\Controllers\Users\AtualizarUserController;
 use App\Http\Controllers\Projetos\CriarProjetosController;
 use App\Http\Controllers\Projetos\ExibirProjetosController;
 use App\Http\Controllers\Projetos\RemoverProjetosController;
@@ -19,9 +21,13 @@ use App\Http\Controllers\Projetos\RemoverProjetosController;
 
 Route::middleware(['auth'])->group(function () {
     Route::prefix('/projetos')->group(function () {
-        
         Route::post('', [CriarProjetosController::class, 'store'])->name('projetos.store');
         Route::delete('/{id}', [RemoverProjetosController::class, 'destroy'])->name('projetos.destroy');
+    });
+
+    Route::prefix('/users')->group(function () {
+        Route::put('/{id}', [AtualizarUserController::class, 'update'])->name('users.update');
+        Route::get('/{id}/projetos', [ProjetosUserController::class, 'index'])->name('users.projetos');
     });
 });
 

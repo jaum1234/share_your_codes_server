@@ -19,15 +19,23 @@ class LoginController extends Controller
         $this->validador = $loginValidador;
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $credentials = request(['email', 'password']);
+        $validator = $this->validador->validar($request);
 
-        if (! $token = Auth::attempt($credentials)) {
+        if (!$validator['success']) {
+            return response()->json($validator);
+        }
+
+        $dadosValidados = $validator['dados'];
+
+        $credentials = ['email' => $dadosValidados['email'], 'password' => $dadosValidados['password']];
+
+        if (!$token = Auth::attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        return $this->respondWithToken($token);
+        return $this->respondWithTokenAndUserData($token);
     }
 
     
@@ -37,10 +45,9 @@ class LoginController extends Controller
     }
 
     
-    public function logout()
+    public function destroy()
     {
         Auth::logout();
-
         return response()->json(['message' => 'Successfully logged out']);
     }
 
@@ -51,12 +58,28 @@ class LoginController extends Controller
     }
 
    
+    protected function respondWithTokenAndUserData($token)
+    {
+        return response()->json([
+            'success' => true,
+            'user' => [
+                'id' => Auth::user()->id, 
+                'name' => Auth::user()->name, 
+                'nickname' => Auth::user()->nickname
+            ],
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => Auth::factory()->getTTL() * 20
+        ]);
+    }
+
     protected function respondWithToken($token)
     {
         return response()->json([
+            'success' => true,
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => Auth::factory()->getTTL() * 60
+            'expires_in' => Auth::factory()->getTTL() * 20
         ]);
     }
 }

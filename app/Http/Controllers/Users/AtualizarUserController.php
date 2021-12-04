@@ -35,6 +35,7 @@ class AtualizarUserController extends Controller
         $usuario->save();
 
         $response['success'] = true;
+        $response['dados'] = ['new_nickname' => $usuario->nickname, 'new_name' => $usuario->name];
         $response['message'] = 'Dados atualizados com sucesso!';
         
         return response()->json($response, 200);   

@@ -11,8 +11,8 @@ class UserValidador extends BaseValidador
     public function validar(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nickname' => 'required|unique:users,nickname,' . Auth::user()->getAuthIdentifier(),
-            'name' => 'required|required'
+            'nickname' => 'required|string|unique:users,nickname,' . Auth::user()->getAuthIdentifier(),
+            'name' => 'required|string'
         ], [
             'required' => 'Esse campo é obrigatório.',
             'unique' => 'Esse nickname já está em uso.'

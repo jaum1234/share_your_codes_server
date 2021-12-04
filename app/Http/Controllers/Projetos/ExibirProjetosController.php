@@ -3,25 +3,27 @@
 namespace App\Http\Controllers\Projetos;
 
 use App\Models\Projeto;
+
 use App\Service\Buscador;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\ProjetoCollection;
+use App\Http\Resources\ProjetoResource;
+
 class ExibirProjetosController extends Controller
 {
     public function __construct()
     {
-        $this->buscador = new Buscador(Projeto::class);
+        $this->buscador = new Buscador(Projeto::class, ProjetoResource::class);
     }
 
     public function index(Request $request)
     {
-        $projetos = Projeto::query()
-            ->orderBy('nome')
-            ->paginate(4);
-
+        $projetos = ProjetoResource::collection(Projeto::paginate($request->limit));
+        
         return response()->json([
             'success' => true,
+            'total' => $projetos->total(),
             'projetos' => $projetos
         ]);
     }
@@ -47,6 +49,10 @@ class ExibirProjetosController extends Controller
     {
         $projetos = $this->buscador->pesquisar($request->q);
 
-        return response()->view('projetos.index', compact('projetos'));
+        return response()->json([
+            'success' => true,
+            'total' => $projetos->total(),
+            'projetos' => $projetos
+        ]);
     }
 }

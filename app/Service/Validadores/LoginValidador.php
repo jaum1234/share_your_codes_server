@@ -9,12 +9,13 @@ class LoginValidador extends BaseValidador
     public function validar(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'password' => 'required|string',
+            'password' => 'required||string|exists:user,password',
             'email' => 'required|email|exists:users,email',
         ], [
             'required' => 'Esse campo é obrigatório.',
             'email' => 'E-mail inválido.',
-            'exists' => 'E-mail nao cadastrado.'
+            'exists' => ':attribute incorreto',
+            'current_password' => 'Senha incorreta.'
         ]);
 
         return $this->resultado($validator);
