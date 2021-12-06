@@ -8,5 +8,5 @@ use App\Http\Controllers\Auth\RegisterController;
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 Route::get('/refreshtoken', [LoginController::class, 'refresh'])->name('login.refresh');
 Route::get('/logout', [LoginController::class, 'destroy'])->name('login.destroy');
-Route::post('/cadastro', [RegisterController::class, 'store'])->name('cadastro.store');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 

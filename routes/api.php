@@ -24,7 +24,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('', [CriarProjetosController::class, 'store'])->name('projetos.store');
         Route::delete('/{id}', [RemoverProjetosController::class, 'destroy'])->name('projetos.destroy');
     });
-
+    
     Route::prefix('/users')->group(function () {
         Route::put('/{id}', [AtualizarUserController::class, 'update'])->name('users.update');
         Route::get('/{id}/projetos', [ProjetosUserController::class, 'index'])->name('users.projetos');
@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::any('/pesquisar', [ExibirProjetosController::class, 'search'])->name('pesquisar');
 Route::get('/projetos', [ExibirProjetosController::class, 'index'])->name('projetos.index');
-Route::get('projetos/{id}', [ExibirProjetosController::class, 'show'])->name('projetos.show');
+Route::get('/projetos/{id}', [ExibirProjetosController::class, 'show'])->name('projetos.show');
 
 include __DIR__ . '/auth.php';
 
