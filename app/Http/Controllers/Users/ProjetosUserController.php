@@ -17,7 +17,7 @@ class ProjetosUserController extends Controller
 
         return (new ResponseOutput(
             true,
-            [$projetos],
+            ['projetos' => $projetos],
             200,
             '',
             $projetos->total()

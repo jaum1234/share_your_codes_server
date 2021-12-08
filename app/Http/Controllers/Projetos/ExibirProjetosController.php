@@ -24,7 +24,7 @@ class ExibirProjetosController extends Controller
         
         return (new ResponseOutput(
             true, 
-            [$projetos], 
+            ['projetos' => $projetos], 
             200, 
             '', 
             $projetos->total()
@@ -44,7 +44,7 @@ class ExibirProjetosController extends Controller
 
         return (new ResponseOutput(
             true, 
-            [$projeto], 
+            ['projeto' => $projeto], 
             200, 
             '',
             1
@@ -57,7 +57,7 @@ class ExibirProjetosController extends Controller
 
         return (new ResponseOutput(
             true, 
-            [$projetos], 
+            ['projetos' => $projetos], 
             200, 
             '',
             $projetos->total()
