@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProjetoCollection;
 use App\Http\Resources\ProjetoResource;
+use App\Service\ResponseOutput\ResponseOutput;
 
 class ExibirProjetosController extends Controller
 {
@@ -21,11 +22,13 @@ class ExibirProjetosController extends Controller
     {
         $projetos = ProjetoResource::collection(Projeto::paginate($request->limit));
         
-        return response()->json([
-            'success' => true,
-            'total' => $projetos->total(),
-            'projetos' => $projetos
-        ]);
+        return (new ResponseOutput(
+            true, 
+            [$projetos], 
+            200, 
+            '', 
+            $projetos->total()
+            ))->jsonOutput();
     }
 
     public function show(Request $request) 
@@ -39,20 +42,25 @@ class ExibirProjetosController extends Controller
             return response()->view('errors.404', ['error' => $e->getMessage()]);
         }
 
-        return response()->json([
-            'success' => true,
-            'projeto' => $projeto
-        ]);
+        return (new ResponseOutput(
+            true, 
+            [$projeto], 
+            200, 
+            '',
+            1
+            ))->jsonOutput();
     }
 
     public function search(Request $request)
     {
         $projetos = $this->buscador->pesquisar($request->q);
 
-        return response()->json([
-            'success' => true,
-            'total' => $projetos->total(),
-            'projetos' => $projetos
-        ]);
+        return (new ResponseOutput(
+            true, 
+            [$projetos], 
+            200, 
+            '',
+            $projetos->total()
+            ))->jsonOutput();
     }
 }

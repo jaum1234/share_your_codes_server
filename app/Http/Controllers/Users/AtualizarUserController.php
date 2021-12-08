@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Users;
 
 use App\Models\User;
-use App\Models\Projeto;
-use App\Service\validador;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Service\ResponseOutput\ResponseOutput;
 use App\Service\Validadores\UserValidador;
-use Illuminate\Support\Facades\Auth;
+
 
 class AtualizarUserController extends Controller
 {
@@ -33,12 +32,12 @@ class AtualizarUserController extends Controller
         $usuario->name = $dadosValidados['name'];
         $usuario->nickname = $dadosValidados['nickname'];
         $usuario->save();
-
-        $response['success'] = true;
-        $response['dados'] = ['new_nickname' => $usuario->nickname, 'new_name' => $usuario->name];
-        $response['message'] = 'Dados atualizados com sucesso!';
         
-        return response()->json($response, 200);   
+        return (new ResponseOutput(
+            true,
+            ['new_nickname' => $usuario->nickname, 'new_name' => $usuario->name],
+            200,
+        ))->jsonOutput();   
     }
 
     

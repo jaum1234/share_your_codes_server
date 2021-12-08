@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Projeto;
+use App\Service\ResponseOutput\ResponseOutput;
 use Illuminate\Support\Facades\Auth;
 use App\Service\Validadores\ProjetosValidador;
 
@@ -33,10 +34,12 @@ class CriarProjetosController extends Controller
         
         $projeto = $user->projetos()->create($dadosValidados);
         
-        return response()->json([
-            'success' => true,
-            'projeto' => $projeto,
-            'msg' => 'Projeto criado com sucesso!'
-        ], 201); 
+        return (new ResponseOutput(
+            true,
+            [$projeto],
+            201,
+            '',
+            1
+        ))->jsonOutput();
     }
 }
