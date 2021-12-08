@@ -23,7 +23,11 @@ class AtualizarUserController extends Controller
         $validator = $this->validador->validar($request);
 
         if (!$validator['success']) {
-            return response()->json($validator);
+            return (new ResponseOutput(
+                false,
+                $validator,
+                400
+            ))->jsonOutput();
         }
 
         $dadosValidados = $validator['dados'];

@@ -25,7 +25,11 @@ class CriarProjetosController extends Controller
         $validador = $this->validador->validar($request);
 
         if (!$validador['success']) {
-            return response()->json($validador);
+            return (new ResponseOutput(
+                false,
+                $validador,
+                400
+            ))->jsonOutput();
         }
         
         $dadosValidados = $validador['dados'];
@@ -36,10 +40,8 @@ class CriarProjetosController extends Controller
         
         return (new ResponseOutput(
             true,
-            [$projeto],
+            ['projeto' => $projeto],
             201,
-            '',
-            1
         ))->jsonOutput();
     }
 }

@@ -13,10 +13,8 @@ class RemoverProjetosController extends Controller
         $projeto = Projeto::destroy($id);
         return (new ResponseOutput(
             true,
-            [$projeto],
+            [],
             200,
-            '',
-            0
         ))->jsonOutput();
     }
 }

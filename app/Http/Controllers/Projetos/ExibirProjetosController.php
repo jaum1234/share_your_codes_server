@@ -24,30 +24,20 @@ class ExibirProjetosController extends Controller
         
         return (new ResponseOutput(
             true, 
-            ['projetos' => $projetos], 
+            ['total' => $projetos->total(), 'projetos' => $projetos], 
             200, 
-            '', 
-            $projetos->total()
             ))->jsonOutput();
     }
 
     public function show(Request $request) 
     {
-        try {
-            $projeto = Projeto::find($request->id); 
-            if (is_null($projeto)) {
-                throw new \DomainException("Parece que a página que você procura não existe.");
-            }
-        } catch (\DomainException $e){
-            return response()->view('errors.404', ['error' => $e->getMessage()]);
-        }
+        
+        $projeto = Projeto::find($request->id); 
 
         return (new ResponseOutput(
             true, 
             ['projeto' => $projeto], 
             200, 
-            '',
-            1
             ))->jsonOutput();
     }
 
@@ -57,10 +47,8 @@ class ExibirProjetosController extends Controller
 
         return (new ResponseOutput(
             true, 
-            ['projetos' => $projetos], 
+            ['total' => $projetos->total(), 'projetos' => $projetos], 
             200, 
-            '',
-            $projetos->total()
             ))->jsonOutput();
     }
 }
