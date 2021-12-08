@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Service\ResponseOutput\ResponseOutput;
 use App\Service\Validadores\RegisterValidador;
 
 class RegisterController extends Controller
@@ -20,7 +21,11 @@ class RegisterController extends Controller
         $validator = $this->validator->validar($request);
 
         if (!$validator['success']) {
-            return response()->json($validator);
+            return (new ResponseOutput(
+                false,
+                $validator,
+                400,
+            ))->jsonOutput();
         }
 
         $dadosValidados = $validator['dados'];
@@ -32,8 +37,6 @@ class RegisterController extends Controller
             'password' => bcrypt($dadosValidados['password']) 
         ]);
 
-        return response()->json([
-            'success' => true,
-        ]);
+        return (new ResponseOutput(true, [], 201, 'Cadastro realizado com sucesso!'))->jsonOutput();
     }
 }
