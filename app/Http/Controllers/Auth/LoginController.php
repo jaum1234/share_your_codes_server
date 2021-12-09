@@ -84,7 +84,6 @@ class LoginController extends Controller
         return $this->respondWithToken(Auth::refresh());
     }
 
-   
     protected function respondWithTokenAndUserData($token)
     {
         return (new ResponseOutput(
@@ -97,7 +96,7 @@ class LoginController extends Controller
                     ],
                     'access_token' => $token,
                     'token_type' => 'bearer',
-                    'expires_in' => Auth::factory()->getTTL() * 20
+                    'expires_in' => Auth::factory()->getTTL() * 5
             ],
             200,
         ))->jsonOutput(); 
@@ -110,7 +109,7 @@ class LoginController extends Controller
             [
                 'access_token' => $token,
                 'token_type' => 'bearer',
-                'expires_in' => Auth::factory()->getTTL() * 20
+                'expires_in' => Auth::factory()->getTTL() * 5
             ],
             200
         ))->jsonOutput(); 
