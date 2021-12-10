@@ -10,7 +10,7 @@ class RemoverProjetosController extends Controller
 {
     public function destroy(int $id)
     {
-        $projeto = Projeto::destroy($id);
+        Projeto::destroy($id);
         return (new ResponseOutput(
             true,
             [],

@@ -32,7 +32,7 @@ class ExibirProjetosController extends Controller
     public function show(Request $request) 
     {
         
-        $projeto = Projeto::find($request->id); 
+        $projeto = ProjetoResource::collection(Projeto::where('id', $request->id)->get()); 
 
         return (new ResponseOutput(
             true, 
