@@ -10,15 +10,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ProjetoCollection;
 use App\Http\Resources\ProjetoResource;
 use App\Service\ResponseOutput\ResponseOutput;
+use Illuminate\Http\JsonResponse;
 
 class ExibirProjetosController extends Controller
 {
+    private Buscador $buscador;
+
     public function __construct()
     {
         $this->buscador = new Buscador(Projeto::class, ProjetoResource::class);
     }
 
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse
     {
         $projetos = ProjetoResource::collection(Projeto::paginate($request->limit));
         
@@ -29,7 +32,7 @@ class ExibirProjetosController extends Controller
             ))->jsonOutput();
     }
 
-    public function show(Request $request) 
+    public function show(Request $request): JsonResponse
     {
         
         $projeto = ProjetoResource::collection(Projeto::where('id', $request->id)->get()); 
@@ -41,7 +44,7 @@ class ExibirProjetosController extends Controller
             ))->jsonOutput();
     }
 
-    public function search(Request $request)
+    public function search(Request $request): JsonResponse
     {
         $projetos = $this->buscador->pesquisar($request->q);
 

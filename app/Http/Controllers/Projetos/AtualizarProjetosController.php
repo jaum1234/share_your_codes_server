@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers\Projetos;
 
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Projeto;
 use App\Service\ResponseOutput\ResponseOutput;
-use Illuminate\Support\Facades\Auth;
 use App\Service\Validadores\ProjetosValidador;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
-class CriarProjetosController extends Controller
+class AtualizarProjetosController extends Controller
 {
     private ProjetosValidador $validador;
 
@@ -20,29 +16,18 @@ class CriarProjetosController extends Controller
         $this->validador = $projetosValidador;
     }
 
-    public function store(Request $request): JsonResponse
-    {   
-        
+    public function atualizar(Request $request)
+    {
         $validador = $this->validador->validar($request);
 
         if (!$validador['success']) {
             return (new ResponseOutput(
                 false,
                 $validador,
-                400
+                410
             ))->jsonOutput();
         }
-        
-        $dadosValidados = $validador['dados'];
 
-        $user = User::find(Auth::user()->id);
         
-        $projeto = $user->projetos()->create($dadosValidados);
-        
-        return (new ResponseOutput(
-            true,
-            ['projeto' => $projeto],
-            201,
-        ))->jsonOutput();
     }
 }

@@ -11,17 +11,18 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Service\Validadores\LoginValidador;
 use Facade\FlareClient\Http\Response;
+use Illuminate\Http\JsonResponse;
 
 class LoginController extends Controller
 {
-    private $validador;
+    private LoginValidador $validador;
 
     public function __construct(LoginValidador $loginValidador)
     {
         $this->validador = $loginValidador;
     }
 
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $validator = $this->validador->validar($request);
 
@@ -79,12 +80,12 @@ class LoginController extends Controller
     }
 
    
-    public function refresh()
+    public function refresh(): JsonResponse
     {
         return $this->respondWithToken(Auth::refresh());
     }
 
-    protected function respondWithTokenAndUserData($token)
+    protected function respondWithTokenAndUserData($token): JsonResponse
     {
         return (new ResponseOutput(
             true,
@@ -102,7 +103,7 @@ class LoginController extends Controller
         ))->jsonOutput(); 
     }
 
-    protected function respondWithToken($token)
+    protected function respondWithToken($token): JsonResponse
     {
         return (new ResponseOutput(
             true,

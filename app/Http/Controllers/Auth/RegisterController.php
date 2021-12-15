@@ -6,17 +6,18 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Service\ResponseOutput\ResponseOutput;
 use App\Service\Validadores\RegisterValidador;
+use Illuminate\Http\JsonResponse;
 
 class RegisterController extends Controller
 {
-    private $validator;
+    private RegisterValidador $validator;
 
     public function __construct(RegisterValidador $registerValidator)
     {
         $this->validator = $registerValidator;
     }
 
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $validator = $this->validator->validar($request);
 
