@@ -14,20 +14,16 @@ class CriarProjetosControllerTest extends TestCase
 
     use RefreshDatabase;
 
-    public function test_deve_renderizar_pagina_criacao_projeto() 
+    public function test_deve_listar_todos_os_projetos() 
     {
         $this->withoutExceptionHandling();
 
-        //Arrange
-        $user = User::factory()->create();
-        $token = JWTAuth::fromUser($user);
-
-        //Act
-        $response = $this->get(route('projetos.create'));
+        //Arrange & Act 
+        $response = $this->get(route('projetos.index'));
 
         //Assert
         $response->assertStatus(200);
-        $response->assertViewIs('projetos.create');
+        $response->assertJson(['ola']);
     }
 
     public function test_deve_criar_um_projeto()
