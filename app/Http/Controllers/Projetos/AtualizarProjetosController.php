@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Projetos;
 
+use App\Models\Projeto;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Service\ResponseOutput\ResponseOutput;
 use App\Service\Validadores\ProjetosValidador;
-use Illuminate\Http\Request;
 
 class AtualizarProjetosController extends Controller
 {
@@ -16,8 +18,9 @@ class AtualizarProjetosController extends Controller
         $this->validador = $projetosValidador;
     }
 
-    public function atualizar(Request $request)
+    public function update(Request $request, int $id): JsonResponse
     {
+
         $validador = $this->validador->validar($request);
 
         if (!$validador['success']) {
@@ -28,6 +31,23 @@ class AtualizarProjetosController extends Controller
             ))->jsonOutput();
         }
 
-        
+        $dadosValidados = $validador['dados'];
+
+        $projeto = Projeto::find($id);
+
+        $projeto->nome = $dadosValidados['nome'];
+        $projeto->descricao = $dadosValidados['descricao'];
+        $projeto->codigo = $dadosValidados['codigo'];
+        $projeto->cor = $dadosValidados['cor'];
+
+        $projeto->save();
+
+        return (new ResponseOutput(
+            true,
+            [
+                'projeto' => $projeto
+            ],
+            200
+        ))->jsonOutput();
     }
 }

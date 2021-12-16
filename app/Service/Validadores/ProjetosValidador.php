@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ProjetosValidador extends BaseValidador
 {
-    public function validar(Request $request)
+    public function validar(Request $request): array
     {
         $validador = Validator::make($request->all(), [
             'nome' => 'required|string',

@@ -74,7 +74,7 @@ class LoginController extends Controller
         return (new ResponseOutput(
             true,
             [],
-            201,
+            200,
             'Logout realizado com sucesso!'
         ))->jsonOutput();
     }
@@ -97,7 +97,7 @@ class LoginController extends Controller
                     ],
                     'access_token' => $token,
                     'token_type' => 'bearer',
-                    'expires_in' => Auth::factory()->getTTL() * 5
+                    'expires_in' => Auth::factory()->getTTL() * 1
             ],
             200,
         ))->jsonOutput(); 
@@ -110,7 +110,7 @@ class LoginController extends Controller
             [
                 'access_token' => $token,
                 'token_type' => 'bearer',
-                'expires_in' => Auth::factory()->getTTL() * 5
+                'expires_in' => Auth::factory()->getTTL() * 1
             ],
             200
         ))->jsonOutput(); 

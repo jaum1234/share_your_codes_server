@@ -5,10 +5,13 @@ namespace Tests\Feature\Http\Controllers\Projeto;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Projeto;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CriarProjetosControllerTest extends TestCase
 {
+  
+
     use RefreshDatabase;
 
     public function test_deve_renderizar_pagina_criacao_projeto() 
@@ -17,7 +20,7 @@ class CriarProjetosControllerTest extends TestCase
 
         //Arrange
         $user = User::factory()->create();
-        $this->actingAs($user);
+        $token = JWTAuth::fromUser($user);
 
         //Act
         $response = $this->get(route('projetos.create'));
