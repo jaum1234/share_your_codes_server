@@ -43,12 +43,5 @@ class AtualizarProjetosController extends BaseController
             ['projeto' => $projeto],
             "Projeto atualizado.",
         );
-        //return (new ResponseOutput(
-        //    true,
-        //    [
-        //        'projeto' => $projeto
-        //    ],
-        //    200
-        //))->jsonOutput();
     }
 }

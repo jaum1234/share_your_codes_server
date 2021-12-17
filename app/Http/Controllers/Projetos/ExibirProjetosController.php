@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ProjetoCollection;
 use App\Http\Resources\ProjetoResource;
 use App\Service\ResponseOutput\ResponseOutput;
+use Exception;
 use Illuminate\Http\JsonResponse;
 
 class ExibirProjetosController extends BaseController
@@ -38,7 +39,7 @@ class ExibirProjetosController extends BaseController
     {
         
         $projeto = ProjetoResource::collection(Projeto::where('id', $request->id)->get()); 
-
+        
         return $this->responseOutput->set(
             true,
             ['projeto' => $projeto],
