@@ -31,8 +31,8 @@ class LoginController extends BaseController
         }
 
         $dadosValidados = $validator['dados'];
-
         $user = User::where('email', $dadosValidados['email'])->first();
+
 
         if (!Hash::check($dadosValidados['password'], $user->password)) {
             return $this->responseOutput->set(
@@ -55,7 +55,6 @@ class LoginController extends BaseController
 
         return $this->respondWithTokenAndUserData();
     }
-
     
     public function me()
     {
