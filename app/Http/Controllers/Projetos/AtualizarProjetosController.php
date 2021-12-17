@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Projetos;
 
+use App\Http\Controllers\BaseController;
 use App\Models\Projeto;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use App\Http\Controllers\Controller;
-use App\Service\ResponseOutput\ResponseOutput;
 use App\Service\Validadores\ProjetosValidador;
 
-class AtualizarProjetosController extends Controller
+class AtualizarProjetosController extends BaseController
 {
     private ProjetosValidador $validador;
 
     public function __construct(ProjetosValidador $projetosValidador)
     {
+        parent::__construct();
         $this->validador = $projetosValidador;
     }
 
@@ -24,11 +24,7 @@ class AtualizarProjetosController extends Controller
         $validador = $this->validador->validar($request);
 
         if (!$validador['success']) {
-            return (new ResponseOutput(
-                false,
-                $validador,
-                410
-            ))->jsonOutput();
+            return $this->responseOutput->validationErrors($validador);
         }
 
         $dadosValidados = $validador['dados'];
@@ -42,12 +38,17 @@ class AtualizarProjetosController extends Controller
 
         $projeto->save();
 
-        return (new ResponseOutput(
+        return $this->responseOutput->set(
             true,
-            [
-                'projeto' => $projeto
-            ],
-            200
-        ))->jsonOutput();
+            ['projeto' => $projeto],
+            "Projeto atualizado.",
+        );
+        //return (new ResponseOutput(
+        //    true,
+        //    [
+        //        'projeto' => $projeto
+        //    ],
+        //    200
+        //))->jsonOutput();
     }
 }

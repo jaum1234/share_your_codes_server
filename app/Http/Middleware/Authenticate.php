@@ -2,10 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use App\Service\ResponseOutput\ResponseOutput;
+use App\Service\ResponseOutput\JsonResponseOutput;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
@@ -20,20 +19,38 @@ class Authenticate
      */
     public function handle($request, $next, $guard = null)
     {
+        $responseOutput = new JsonResponseOutput();
         
         if (!Auth::check()) {
             try {
                 JWTAuth::parseToken()->authenticate();
-            } catch (\Exception $e) {
-                if ($e instanceof TokenExpiredException) {
-                    $newToken = Auth::refresh();
-                    return (new ResponseOutput(false, ['new_token' => $newToken], 200))->jsonOutput();
-                } else if ($e instanceof TokenInvalidException) {
-                    return response()->json(['success' => 'invalido'], 401);
-                } 
+            } catch (TokenExpiredException $e) {
                 
-                return response()->json(['success' => false], 401);
-            }
+                $newToken = Auth::refresh();
+
+                return $responseOutput->set(
+                    false,
+                    ['new_token' => $newToken],
+                    "Token expirou. Um novo foi disponibilizado.",
+                    200
+                );
+
+            } catch (TokenInvalidException $e) {
+                return $responseOutput->set(
+                    false,
+                    [],
+                    "Token inválido.",
+                    401
+                );
+            } catch (TokenBlacklistedException $e) { 
+                return $responseOutput->set(
+                    false,
+                    [],
+                    "Token foi adicionado a lista negra.",
+                    401
+                );
+            }    
+            return $responseOutput->set(false, [], "Nao autorizado", 401);
         }
 
         return $next($request);

@@ -5,8 +5,8 @@ namespace Tests\Feature\Http\Controllers\Projeto;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Projeto;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class RemoverProjetosControllerTest extends TestCase
 {
@@ -18,15 +18,23 @@ class RemoverProjetosControllerTest extends TestCase
 
         //Arrange
         $user = User::factory()->create();
-        $this->actingAs($user);
+        $token = JWTAuth::fromUser($user);
 
         $projeto = $user->projetos()->save(Projeto::factory()->make());
 
         //Act
-        $response = $this->delete(route('projetos.destroy', ['id' => $projeto->id]));
+        $response = $this->delete(route(
+            'projetos.destroy', 
+            ['id' => $projeto->id],
+        ), [], ['Authorization' => 'Bearer ' . $token]);
 
         //Assert
         $response->assertOk();
+        $response->assertJsonStructure([
+            'success',
+            'data' => [],
+            'message'
+        ]);
 
         $this->assertDatabaseMissing('projetos', [
             'nome' => $projeto->nome,

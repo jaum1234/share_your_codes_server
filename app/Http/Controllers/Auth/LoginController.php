@@ -2,23 +2,22 @@
 
 namespace App\Http\Controllers\Auth;
 
-
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Service\ResponseOutput\ResponseOutput;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\BaseController;
 use App\Service\Validadores\LoginValidador;
-use Facade\FlareClient\Http\Response;
-use Illuminate\Http\JsonResponse;
 
-class LoginController extends Controller
+class LoginController extends BaseController
 {
     private LoginValidador $validador;
+    private string $accessToken;
 
     public function __construct(LoginValidador $loginValidador)
     {
+        parent::__construct();
         $this->validador = $loginValidador;
     }
 
@@ -26,12 +25,9 @@ class LoginController extends Controller
     {
         $validator = $this->validador->validar($request);
 
-        if (!$validator['success']) {
-            return (new ResponseOutput(
-                false,
-                $validator,
-                400,
-            ))->jsonOutput();
+        if (!$validator['success']) 
+        {
+            return $this->responseOutput->validationErrors($validator);
         }
 
         $dadosValidados = $validator['dados'];
@@ -39,26 +35,25 @@ class LoginController extends Controller
         $user = User::where('email', $dadosValidados['email'])->first();
 
         if (!Hash::check($dadosValidados['password'], $user->password)) {
-            return (new ResponseOutput(
+            return $this->responseOutput->set(
                 false,
                 [],
-                400,
-                'Senha incorreta'
-            ))->jsonOutput();
+                "Senha inválida.",
+                400
+            );
         }
 
         $credentials = ['email' => $dadosValidados['email'], 'password' => $dadosValidados['password']];
 
-        if (!$token = Auth::attempt($credentials)) {
-            return (new ResponseOutput(
+        if (!$this->accessToken = Auth::attempt($credentials)) {
+            return $this->responseOutput->set(
                 false,
                 [],
-                401,
-                'Erro ao realizar a autenticaçao.',
-            ))->jsonOutput();
+                "Credenciais inválidas."
+            );
         }
 
-        return $this->respondWithTokenAndUserData($token);
+        return $this->respondWithTokenAndUserData();
     }
 
     
@@ -71,48 +66,56 @@ class LoginController extends Controller
     public function destroy()
     {
         Auth::logout();
-        return (new ResponseOutput(
+
+        $response = $this->responseOutput->set(
             true,
-            [],
-            200,
-            'Logout realizado com sucesso!'
-        ))->jsonOutput();
+        );
+
+        return response()->json($response);
     }
 
    
     public function refresh(): JsonResponse
     {
-        return $this->respondWithToken(Auth::refresh());
+        $this->accessToken = Auth::refresh();   
+        return $this->respondWithToken();
     }
 
-    protected function respondWithTokenAndUserData($token): JsonResponse
+    protected function respondWithTokenAndUserData(): JsonResponse
     {
-        return (new ResponseOutput(
-            true,
+        $response = $this->responseOutput->set(
+            true, 
             [
-                    'user' => [
-                        'id' => Auth::user()->id, 
-                        'name' => Auth::user()->name, 
-                        'nickname' => Auth::user()->nickname
-                    ],
-                    'access_token' => $token,
-                    'token_type' => 'bearer',
-                    'expires_in' => Auth::factory()->getTTL() * 1
+                'user' => [
+                    'id' => Auth::user()->id, 
+                    'name' => Auth::user()->name, 
+                    'nickname' => Auth::user()->nickname
+                ],
+                'token' => $this->token()
             ],
-            200,
-        ))->jsonOutput(); 
+            "Login realizado com sucesso."
+        );
+
+        return $response;
     }
 
-    protected function respondWithToken($token): JsonResponse
+    protected function respondWithToken(): JsonResponse
     {
-        return (new ResponseOutput(
+        $response = $this->responseOutput->set(
             true,
-            [
-                'access_token' => $token,
-                'token_type' => 'bearer',
-                'expires_in' => Auth::factory()->getTTL() * 1
-            ],
-            200
-        ))->jsonOutput(); 
+            ['token' => $this->token()],
+            "Token enviado com sucesso."
+        );
+
+        return response()->json($response, 200);
+    }
+
+    private function token(): array
+    {
+        return [
+            'access_token' => $this->accessToken,
+            'token_type' => 'bearer',
+            'expires_in' => Auth::factory()->getTTL()
+        ];
     }
 }

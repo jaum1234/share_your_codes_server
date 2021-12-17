@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers\Projeto;
 
+use App\Http\Resources\ProjetoResource;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Projeto;
@@ -10,60 +11,63 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CriarProjetosControllerTest extends TestCase
 {
-  
-
     use RefreshDatabase;
 
-    public function test_deve_listar_todos_os_projetos() 
+    private User $user;
+    private string $token;
+    private array $header;
+
+    protected function setUp(): void
     {
-        $this->withoutExceptionHandling();
-
-        //Arrange & Act 
-        $response = $this->get(route('projetos.index'));
-
-        //Assert
-        $response->assertStatus(200);
-        $response->assertJson(['ola']);
+        parent::setUp();
+    
+        $this->user = User::factory()->create();
+        $this->token = JWTAuth::fromUser($this->user);
+        $this->header = [
+            'Authorization' => 'Bearer ' . $this->token
+        ];
     }
+    
 
     public function test_deve_criar_um_projeto()
     {
         $this->withoutExceptionHandling();
 
-        //Arrange
-        $user = User::factory()->create();
-        $this->actingAs($user);
-
         $data = [
-            'codigo' => 'codigo',
-            'nome' => 'nome',
-            'descricao' => 'descricao',
+            'codigo' => 'codigo do projeto',
+            'nome' => 'nome do projeto',
+            'descricao' => 'descricao do projeto',
             'cor' => 'black'
         ];
 
         //Act
-        $response = $this->post(route('projetos.store'), $data);
+        $response = $this->post(
+            route('projetos.store'), 
+            $data, 
+            $this->header
+        );
 
         $projeto = Projeto::first();
 
         //Assert
         $response->assertStatus(201);
-        $response->assertJson([
-            'success' => true,
-            'message' => 'Projeto criado com sucesso!'
+        $response->assertJsonStructure([
+            'success',
+            'data',
+            'message'
         ]);
 
-        $this->assertEquals('nome', $projeto->nome);
-        $this->assertEquals('descricao', $projeto->descricao);
-        $this->assertEquals('codigo', $projeto->codigo);
+        $this->assertEquals('nome do projeto', $projeto->nome);
+        $this->assertEquals('descricao do projeto', $projeto->descricao);
+        $this->assertEquals('codigo do projeto', $projeto->codigo);
         $this->assertEquals('black', $projeto->cor);
-        $this->assertEquals($user->id, $projeto->user->id);
+        $this->assertEquals($this->user->id, $projeto->user->id);
         $this->assertDatabaseHas('projetos', [
             'nome' => $projeto->nome,
             'descricao' => $projeto->descricao,
             'codigo' => $projeto->codigo,
             'cor' => $projeto->cor,
-            'user_id' => $user->id
+            'user_id' => $this->user->id
         ]);
     }
 
@@ -74,18 +78,17 @@ class CriarProjetosControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        //Arrange
-        $user = User::factory()->create();
-        $this->actingAs($user);
-
         $data = $camposPreechidos;
 
         //Act
-        $response = $this->post(route('projetos.store'), $data);
+        $response = $this->post(route('projetos.store'), $data, $this->header);
 
         //Assert
-        $response->assertJson([
-            'success' => false,
+        $response->assertStatus(400);
+        $response->assertJsonStructure([
+            'success',
+            'data',
+            'message'
         ]);
         
         $this->assertDatabaseMissing('projetos', $data);

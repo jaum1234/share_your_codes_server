@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers\Projeto;
 
+use App\Http\Resources\ProjetoResource;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Projeto;
@@ -12,7 +13,7 @@ class ExibirProjetosControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_deve_renderizar_pagina_da_comunidade()
+    public function test_deve_listar_todos_os_projetos()
     {
         $this->withoutExceptionHandling();
 
@@ -21,11 +22,28 @@ class ExibirProjetosControllerTest extends TestCase
 
         //Assert
         $response->assertOk();
-        $response->assertViewIs('projetos.index');
-        $response->assertViewHas('projetos');
+        $response->assertJsonStructure([
+            'success',
+            'data' => [
+                'total', 
+                'projetos' => [ '*' =>
+                    [
+                        'nome',
+                        'descricao',
+                        'codigo',
+                        'cor',
+                        'user' => [
+                            'id',
+                            'nickname'
+                        ]
+                    ]
+                ]
+            ],
+            'message'
+        ]);
     }
 
-    public function test_deve_renderizar_pagina_do_projeto()
+    public function test_deve_exibir_um_unico_projeto()
     {
         $this->withoutExceptionHandling();
 
@@ -37,15 +55,38 @@ class ExibirProjetosControllerTest extends TestCase
         $response = $this->get(
             route('projetos.show', [
                 'id' => $projeto->id, 
-                'nome' => $projeto->nome
                 ]
             )
         );
 
         //Assert
-        $response->assertOk(200);
-        $response->assertViewIs('projetos.show');
-        $response->assertViewHas('projeto');
+        $response->assertOk();
+        $response->assertJsonStructure([
+            'success',
+            'data' => [
+                'projeto' => [ '*' =>
+                    [
+                        'nome',
+                        'descricao',
+                        'codigo',
+                        'cor',
+                        'user' => [
+                            'id',
+                            'nickname'
+                        ]
+                    ]
+                ]
+            ],
+            'message'
+        ]);
+        $response->assertSee($projeto->codigo);
+        $response->assertSee($projeto->nome);
+        $response->assertSee($projeto->descricao);
+        $response->assertSee($projeto->cor);
+        $response->assertSee($projeto->user->id);
+        $response->assertSee($projeto->user->nickname);
+        $response->assertSee('');
+        
     }
 
     public function test_deve_buscar_projetos_por_query_parameter()
@@ -54,9 +95,12 @@ class ExibirProjetosControllerTest extends TestCase
 
         //Arrange
         $user = User::factory()->create();
-        $this->actingAs($user);
 
-        $projeto = $user->projetos()->save(Projeto::factory()->make());
+        for ($i = 0; $i < 4; $i++) {
+            $user->projetos()->save(Projeto::factory()->make());
+        }
+
+        $projeto = Projeto::find(2);
 
         //Act
         $response = $this->get(
@@ -68,10 +112,32 @@ class ExibirProjetosControllerTest extends TestCase
 
         //Assert
         $response->assertOk();
+        $response->assertJsonStructure([
+            'success',
+            'data' => [
+                'total', 
+                'projetos' => [ '*' =>
+                    [
+                        'nome',
+                        'descricao',
+                        'codigo',
+                        'cor',
+                        'user' => [
+                            'id',
+                            'nickname'
+                        ]
+                    ]
+                ]
+            ],
+            'message'
+        ]);
         $response->assertSee($projeto->codigo);
         $response->assertSee($projeto->nome);
         $response->assertSee($projeto->descricao);
-        $response->assertViewIs('projetos.index');
-        $response->assertViewHas('projetos');
+        $response->assertSee($projeto->cor);
+        $response->assertSee($projeto->user->id);
+        $response->assertSee($projeto->user->nickname);
+        $response->assertSee('');
+       
     }
 }

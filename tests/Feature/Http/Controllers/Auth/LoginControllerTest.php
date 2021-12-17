@@ -4,6 +4,8 @@ namespace Tests\Feature\Http\Controllers\Auth;
 
 use Tests\TestCase;
 use App\Models\User;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -11,17 +13,6 @@ class LoginControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_deve_renderizar_pagina_de_login()
-    {
-        //Arrange & Act
-        $response = $this->get(route('login.create'));
-
-        //Assert
-        $response->assertStatus(200);
-        $response->assertViewIs('auth.login');
-        $response->assertViewHas('titulo', 'Login');
-        $response->assertSessionMissing('mensagem');
-    }
 
     public function test_deve_logar_usuario()
     {
@@ -34,15 +25,31 @@ class LoginControllerTest extends TestCase
             'email' => $user->email,
             'password' => 'password'
         ];
-
+        
         //Act
         $response = $this->post(route('login.store'), $data);
+        $content = $response->decodeResponseJson();
+        
 
         //Assert
-        $response->assertStatus(302);
-        $response->assertRedirect(route('projetos.create'));
-
+        $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'success',
+            'data' => [
+                'user' => [
+                    'name',
+                    'nickname',
+                ],
+                'token' => [
+                    'access_token',
+                    'token_type',
+                    'expires_in'
+                ]
+            ],
+            'message'
+        ]);
         $this->assertAuthenticated();
+        
     }
 
     public function test_deve_retornar_erro_se_senha_invalida()
@@ -61,8 +68,12 @@ class LoginControllerTest extends TestCase
         $response = $this->post(route('login.store'), $data);
 
         //Assert
-        $response->assertStatus(302);
-        $response->assertSessionHasErrors('erro');
+        $response->assertStatus(400);
+        $response->assertJsonStructure([
+            'success',
+            'data' => [],
+            'message'
+        ]);
 
         $this->assertGuest();
     }

@@ -6,27 +6,25 @@ use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AtualizarUserControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_deve_renderizar_pagina_de_edicao_do_usuario()
+    private User $user;
+    private string $token;
+    private array $header;
+
+    protected function setUp(): void
     {
-        $this->withoutExceptionHandling();
-
-        //Arrange 
-        $user = User::factory()->create();
-        $this->actingAs($user);
-
-        //Act
-        $response = $this->get(route('users.edit', ['id' => $user->id, 'nick' => $user->nickname]));
-
-        //Assert
-        $response->assertStatus(200);
-        $response->assertViewHas('user');
-        $response->assertViewIs('users.edit');
+        parent::setUp();
+    
+        $this->user = User::factory()->create();
+        $this->token = JWTAuth::fromUser($this->user);
+        $this->header = ['Authorization' => 'Bearer ' . $this->token];
     }
+    
 
     public function test_deve_atualizar_dados_do_usuario()
     {
@@ -38,21 +36,30 @@ class AtualizarUserControllerTest extends TestCase
             'nickname' => 'novo nick'
         ];
 
-        $user = User::factory()->create();
-        $this->actingAs($user);
-
         //Act
-        $response = $this->put(route('users.update', ['id' => $user->id]), $data);
+        $response = $this->put(
+            route('users.update', ['id' => $this->user->id]), 
+            $data,
+            $this->header
+        );
+        $content = $response->decodeResponseJson();
 
         //Assert
         $response->assertStatus(200);
-        $response->assertJson([
-            'success' => true,
-            'message' => 'Dados atualizados com sucesso!'
+        $response->assertJsonStructure([
+            'success',
+            'data' => [
+                'new_nickname',
+                'new_name'
+            ],
+            'message'
         ]);
 
+        $this->assertTrue($content['success']);
+        $this->assertEquals($data['name'], $content['data']['new_name']);
+        $this->assertEquals($data['nickname'], $content['data']['new_nickname']);
         $this->assertDatabaseHas('users', $data);
-        $this->assertDatabaseMissing('users', ['name' => $user->name, 'nickname' => $user->nickname]);
+        $this->assertDatabaseMissing('users', ['name' => $this->user->name, 'nickname' => $this->user->nickname]);
     }
 
     /**
@@ -63,20 +70,23 @@ class AtualizarUserControllerTest extends TestCase
         $this->withoutExceptionHandling();
 
         //Arrange
-        $user = User::factory()->create();
-        $this->actingAs($user);
-
-
         $data = $dados;
 
         //Act
-        $response = $this->put(route('users.update', ['id' => $user->id]), $data);
+        $response = $this->put(
+            route('users.update', ['id' => $this->user->id]), 
+            $data,
+            $this->header
+        );
+        $content = $response->decodeResponseJson();
 
         //Assert
-        $response->assertJson([
-            'success' => false,
+        $response->assertJsonStructure([
+            'success',
+            'data' => ['erros'],
+            'message'
         ]);
-        
+        $this->assertFalse($content['success']);
         $this->assertDatabaseMissing('users', $data);
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Projetos;
 
+use App\Http\Controllers\BaseController;
 use App\Models\Projeto;
 
 use App\Service\Buscador;
@@ -12,12 +13,13 @@ use App\Http\Resources\ProjetoResource;
 use App\Service\ResponseOutput\ResponseOutput;
 use Illuminate\Http\JsonResponse;
 
-class ExibirProjetosController extends Controller
+class ExibirProjetosController extends BaseController
 {
     private Buscador $buscador;
 
     public function __construct()
     {
+        parent::__construct();
         $this->buscador = new Buscador(Projeto::class, ProjetoResource::class);
     }
 
@@ -25,11 +27,11 @@ class ExibirProjetosController extends Controller
     {
         $projetos = ProjetoResource::collection(Projeto::paginate($request->limit));
         
-        return (new ResponseOutput(
-            true, 
-            ['total' => $projetos->total(), 'projetos' => $projetos], 
-            200, 
-            ))->jsonOutput();
+        return $this->responseOutput->set(
+            true,
+            ['total' => $projetos->total(), 'projetos' => $projetos],
+            "Projetos listados."
+        );
     }
 
     public function show(Request $request): JsonResponse
@@ -37,21 +39,21 @@ class ExibirProjetosController extends Controller
         
         $projeto = ProjetoResource::collection(Projeto::where('id', $request->id)->get()); 
 
-        return (new ResponseOutput(
-            true, 
-            ['projeto' => $projeto], 
-            200, 
-            ))->jsonOutput();
+        return $this->responseOutput->set(
+            true,
+            ['projeto' => $projeto],
+            "Projeto exibido."
+        );
     }
 
     public function search(Request $request): JsonResponse
     {
         $projetos = $this->buscador->pesquisar($request->q);
 
-        return (new ResponseOutput(
-            true, 
-            ['total' => $projetos->total(), 'projetos' => $projetos], 
-            200, 
-            ))->jsonOutput();
+        return $this->responseOutput->set(
+            true,
+            ['total' => $projetos->total() ,'projetos' => $projetos],
+            "Projetos encontrados."
+        );
     }
 }

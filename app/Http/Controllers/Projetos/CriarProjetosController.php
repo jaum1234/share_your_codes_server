@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Projetos;
 
+use App\Http\Controllers\BaseController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,12 +12,13 @@ use Illuminate\Support\Facades\Auth;
 use App\Service\Validadores\ProjetosValidador;
 use Illuminate\Http\JsonResponse;
 
-class CriarProjetosController extends Controller
+class CriarProjetosController extends BaseController
 {
     private ProjetosValidador $validador;
 
     public function __construct(ProjetosValidador $projetosValidador)
     {
+        parent::__construct();
         $this->validador = $projetosValidador;
     }
 
@@ -26,11 +28,7 @@ class CriarProjetosController extends Controller
         $validador = $this->validador->validar($request);
 
         if (!$validador['success']) {
-            return (new ResponseOutput(
-                false,
-                $validador,
-                400
-            ))->jsonOutput();
+            return $this->responseOutput->validationErrors($validador);
         }
         
         $dadosValidados = $validador['dados'];
@@ -39,10 +37,11 @@ class CriarProjetosController extends Controller
         
         $projeto = $user->projetos()->create($dadosValidados);
         
-        return (new ResponseOutput(
+        return $this->responseOutput->set(
             true,
             ['projeto' => $projeto],
-            201,
-        ))->jsonOutput();
+            "Projeto criado.",
+            201
+        );
     }
 }

@@ -12,19 +12,6 @@ class RegisterControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_deve_renderizar_pagina_de_registro()
-    {
-        $this->withoutExceptionHandling();
-
-        //Arrange & Act
-        $response = $this->get(route('cadastro.create'));
-
-        //Assert
-        $response->assertStatus(200);
-        $response->assertViewIs('auth.cadastro');
-        $response->assertViewHas('titulo', 'Cadastro'); 
-    }
-
     public function test_deve_registrar_um_usuario()
     {
         $this->withoutExceptionHandling();
@@ -39,13 +26,12 @@ class RegisterControllerTest extends TestCase
         ];
 
         //Act
-        $response = $this->post(route('cadastro.create'), $data);
+        $response = $this->post(route('register.store'), $data);
         
         $user = User::first();
         
         //Assert
-        $response->assertStatus(302);
-        $response->assertRedirect(route('login.create'));
+        $response->assertStatus(201);
 
         $this->assertEquals(1, User::count());
         $this->assertEquals('Test User', $user->name);
@@ -70,11 +56,14 @@ class RegisterControllerTest extends TestCase
         $data = $camposPreechidos;
 
         //Act
-        $response = $this->post(route('cadastro.store'), $data);
+        $response = $this->post(route('register.store'), $data);
 
-        //Assert
-        $response->assertSessionHasErrors();
-        
+        //Assert 
+        $response->assertJsonStructure([
+            'success',
+            'data' => ['erros'],
+            'message'
+        ]);
         $this->assertDatabaseMissing('users', $data);
     }
 
