@@ -29,13 +29,8 @@ class RemoverProjetosControllerTest extends TestCase
         ), [], ['Authorization' => 'Bearer ' . $token]);
 
         //Assert
-        $response->assertOk();
-        $response->assertJsonStructure([
-            'success',
-            'data' => [],
-            'message'
-        ]);
-
+        $response->assertStatus(204);
+       
         $this->assertDatabaseMissing('projetos', [
             'nome' => $projeto->nome,
             'descricao' => $projeto->descricao,

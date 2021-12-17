@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Users;
 
+use App\Http\Controllers\BaseController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,12 +10,13 @@ use App\Service\ResponseOutput\ResponseOutput;
 use App\Service\Validadores\UserValidador;
 
 
-class AtualizarUserController extends Controller
+class AtualizarUserController extends BaseController
 {
     private $validador;
 
     public function __construct(UserValidador $userValidador)
     {
+        parent::__construct();
         $this->validador = $userValidador;
     }
     
@@ -23,11 +25,7 @@ class AtualizarUserController extends Controller
         $validator = $this->validador->validar($request);
 
         if (!$validator['success']) {
-            return (new ResponseOutput(
-                false,
-                $validator,
-                400
-            ))->jsonOutput();
+            return $this->responseOutput->validationErrors($validator);
         }
 
         $dadosValidados = $validator['dados'];
@@ -37,11 +35,11 @@ class AtualizarUserController extends Controller
         $usuario->nickname = $dadosValidados['nickname'];
         $usuario->save();
         
-        return (new ResponseOutput(
+        return $this->responseOutput->set(
             true,
-            ['new_nickname' => $usuario->nickname, 'new_name' => $usuario->name],
-            200,
-        ))->jsonOutput();   
+            ["new_nickname" => $usuario->nickname, "new_name" => $usuario->name],
+            "Dados do usuário atualizados."
+        );   
     }
 
     
