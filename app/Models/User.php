@@ -26,8 +26,6 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         'nickname',
     ];
 
-    
-
     public $timestamps = false;
 
     /**

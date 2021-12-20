@@ -21,6 +21,11 @@ use App\Http\Controllers\Projetos\RemoverProjetosController;
 */
 
 Route::middleware(['auth'])->group(function () {
+
+    Route::get('/checktoken', function() {
+        return response()->json('token');
+    });
+
     Route::prefix('/projetos')->group(function () {
         Route::post('', [CriarProjetosController::class, 'store'])->name('projetos.store');
         Route::delete('/{id}', [RemoverProjetosController::class, 'destroy'])->name('projetos.destroy');

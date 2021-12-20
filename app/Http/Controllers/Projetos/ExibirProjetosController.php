@@ -7,11 +7,7 @@ use App\Models\Projeto;
 
 use App\Service\Buscador;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Resources\ProjetoCollection;
 use App\Http\Resources\ProjetoResource;
-use App\Service\ResponseOutput\ResponseOutput;
-use Exception;
 use Illuminate\Http\JsonResponse;
 
 class ExibirProjetosController extends BaseController
