@@ -1,23 +1,32 @@
 <?php 
 namespace App\Service\Validadores;
 
-
+use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class ProjetosValidador extends BaseValidador
+class ProjetosValidador
 {
-    public function validar(Request $request): array
+    public static function validar(Request $request): ValidationValidator
     {
-        $validador = Validator::make($request->all(), [
+        return Validator::make($request->all(), self::rules(), self::messages());
+    }
+
+    private static function rules(): array
+    {
+        return [
             'nome' => 'required|string',
             'descricao' => 'required|string',
             'cor' => 'string',
             'codigo' => 'required|string'
-        ], [
-            'required' => 'Esse campo é obrigatório.'
-        ]);
+        ];
+    }
 
-        return $this->resultado($validador);
+    private static function messages()
+    {
+        return [
+            'required' => 'Campo :attribute deve ser obrigatório.',
+            'string' => ':attribute deve ser uma string válida.'
+        ];
     }
 }

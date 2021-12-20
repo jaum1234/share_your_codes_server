@@ -11,24 +11,21 @@ use Illuminate\Http\JsonResponse;
 
 class CriarProjetosController extends BaseController
 {
-    private ProjetosValidador $validador;
-
     public function __construct(ProjetosValidador $projetosValidador)
     {
         parent::__construct();
-        $this->validador = $projetosValidador;
     }
 
     public function store(Request $request): JsonResponse
     {   
         
-        $validador = $this->validador->validar($request);
+        $validador = ProjetosValidador::validar($request);
 
-        if (!$validador['success']) {
-            return $this->responseOutput->validationErrors($validador);
+        if ($validador->fails()) {
+            return $this->responseOutput->validationErrors($validador->errors());
         }
         
-        $dadosValidados = $validador['dados'];
+        $dadosValidados = $validador->validated();
 
         $user = User::find(Auth::user()->id);
         

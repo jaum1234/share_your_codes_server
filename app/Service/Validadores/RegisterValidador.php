@@ -4,23 +4,31 @@ namespace App\Service\Validadores;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class RegisterValidador extends BaseValidador
+class RegisterValidador
 {
 
-    public function validar(Request $request)
+    public static function validar(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        return Validator::make($request->all(), self::rules(), self::messages());
+    }
+
+    private static function rules(): array
+    {
+        return [
             'nickname' => 'required|unique:users,nickname',
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|confirmed|string'
-        ], [
+        ];
+    }
+
+    private static function messages(): array
+    {
+        return [
             'required' => 'Esse campo é obrigatório.',
             'email' => 'E-mail inválido.',
             'unique' => ':attribute já cadastrado.',
             'confirmed' => 'As senhas nao correspondem.'
-        ]);
-
-        return $this->resultado($validator);
+        ];
     }
 }

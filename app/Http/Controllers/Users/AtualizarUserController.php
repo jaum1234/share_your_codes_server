@@ -22,13 +22,13 @@ class AtualizarUserController extends BaseController
     
     public function update(Request $request, Int $id)
     { 
-        $validator = $this->validador->validar($request);
+        $validator = UserValidador::validar($request);
 
-        if (!$validator['success']) {
-            return $this->responseOutput->validationErrors($validator);
+        if ($validator->fails()) {
+            return $this->responseOutput->validationErrors($validator->errors());
         }
 
-        $dadosValidados = $validator['dados'];
+        $dadosValidados = $validator->validated();
 
         $usuario = User::find($id);
         $usuario->name = $dadosValidados['name'];

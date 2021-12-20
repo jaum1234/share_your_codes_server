@@ -15,19 +15,18 @@ class AtualizarProjetosController extends BaseController
     public function __construct(ProjetosValidador $projetosValidador)
     {
         parent::__construct();
-        $this->validador = $projetosValidador;
     }
 
     public function update(Request $request, int $id): JsonResponse
     {
 
-        $validador = $this->validador->validar($request);
+        $validador = ProjetosValidador::validar($request);
 
-        if (!$validador['success']) {
-            return $this->responseOutput->validationErrors($validador);
+        if ($validador->fails()) {
+            return $this->responseOutput->validationErrors($validador->errors());
         }
 
-        $dadosValidados = $validador['dados'];
+        $dadosValidados = $validador->validated();
 
         $projeto = Projeto::find($id);
 

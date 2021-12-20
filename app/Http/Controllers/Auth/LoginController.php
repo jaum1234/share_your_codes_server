@@ -12,27 +12,24 @@ use App\Service\Validadores\LoginValidador;
 
 class LoginController extends BaseController
 {
-    private LoginValidador $validador;
     private string $accessToken;
 
     public function __construct(LoginValidador $loginValidador)
     {
         parent::__construct();
-        $this->validador = $loginValidador;
     }
 
     public function store(Request $request): JsonResponse
     {
-        $validator = $this->validador->validar($request);
+        $validator = LoginValidador::validar($request);
 
-        if (!$validator['success']) 
+        if ($validator->fails()) 
         {
-            return $this->responseOutput->validationErrors($validator);
+            return $this->responseOutput->validationErrors($validator->errors());
         }
 
-        $dadosValidados = $validator['dados'];
+        $dadosValidados = $validator->validated();
         $user = User::where('email', $dadosValidados['email'])->first();
-
 
         if (!Hash::check($dadosValidados['password'], $user->password)) {
             return $this->responseOutput->set(

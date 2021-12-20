@@ -14,20 +14,19 @@ class RegisterController extends BaseController
     public function __construct(RegisterValidador $registerValidator)
     {
         parent::__construct();
-        $this->validator = $registerValidator;
     }
 
     public function store(Request $request): JsonResponse
     {
-        $validator = $this->validator->validar($request);
+        $validator = RegisterValidador::validar($request);
 
-        if (!$validator['success']) {
-            return $this->responseOutput->validationErrors($validator);
+        if ($validator->fails()) {
+            return $this->responseOutput->validationErrors($validator->errors());
         }
 
-        $dadosValidados = $validator['dados'];
+        $dadosValidados = $validator->validated();
 
-        $user = User::create([
+        User::create([
             'email' => $dadosValidados['email'],
             'nickname' => $dadosValidados['nickname'],
             'name' => $dadosValidados['name'],

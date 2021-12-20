@@ -29,7 +29,7 @@ class JsonResponseOutput
     public function validationErrors($erros) {
         return response()->json([
             'success' => false,
-            'data' => $erros,
+            'data' => ['erros' => $erros],
             'message' => "Houve um erro ao preencher os campos."
         ], 400); 
     }
