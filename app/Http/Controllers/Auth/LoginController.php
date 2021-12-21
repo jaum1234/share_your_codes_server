@@ -34,7 +34,7 @@ class LoginController extends BaseController
         if (!Hash::check($dadosValidados['password'], $user->password)) {
             return $this->responseOutput->set(
                 false,
-                [],
+                ['erros' => ['password' => 'Senha incorreta.']],
                 "Senha inválida.",
                 400
             );
@@ -103,7 +103,7 @@ class LoginController extends BaseController
             "Token enviado com sucesso."
         );
 
-        return response()->json($response, 200);
+        return $response;
     }
 
     private function token(): array

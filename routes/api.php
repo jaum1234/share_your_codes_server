@@ -20,27 +20,31 @@ use App\Http\Controllers\Projetos\RemoverProjetosController;
 |
 */
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['cors'])->group(function () {
 
-    Route::get('/checktoken', function() {
-        return response()->json('token');
-    });
-
-    Route::prefix('/projetos')->group(function () {
-        Route::post('', [CriarProjetosController::class, 'store'])->name('projetos.store');
-        Route::delete('/{id}', [RemoverProjetosController::class, 'destroy'])->name('projetos.destroy');
-        Route::put('/{id}', [AtualizarProjetosController::class, 'update'])->name('projeto.update');
+    Route::middleware(['auth'])->group(function () {
+    
+        Route::get('/checktoken', function() {
+            return response()->json('token');
+        });
+    
+        Route::prefix('/projetos')->group(function () {
+            Route::post('', [CriarProjetosController::class, 'store'])->name('projetos.store');
+            Route::delete('/{id}', [RemoverProjetosController::class, 'destroy'])->name('projetos.destroy');
+            Route::put('/{id}', [AtualizarProjetosController::class, 'update'])->name('projeto.update');
+        });
+        
+        Route::prefix('/users')->group(function () {
+            Route::put('/{id}', [AtualizarUserController::class, 'update'])->name('users.update');
+            Route::get('/{id}/projetos', [ProjetosUserController::class, 'index'])->name('users.projetos');
+        });
     });
     
-    Route::prefix('/users')->group(function () {
-        Route::put('/{id}', [AtualizarUserController::class, 'update'])->name('users.update');
-        Route::get('/{id}/projetos', [ProjetosUserController::class, 'index'])->name('users.projetos');
-    });
+    Route::any('/pesquisar', [ExibirProjetosController::class, 'search'])->name('pesquisar');
+    Route::get('/projetos', [ExibirProjetosController::class, 'index'])->name('projetos.index');
+    Route::get('/projetos/{id}', [ExibirProjetosController::class, 'show'])->name('projetos.show');
+    
+    include __DIR__ . '/auth.php';
 });
 
-Route::any('/pesquisar', [ExibirProjetosController::class, 'search'])->name('pesquisar');
-Route::get('/projetos', [ExibirProjetosController::class, 'index'])->name('projetos.index');
-Route::get('/projetos/{id}', [ExibirProjetosController::class, 'show'])->name('projetos.show');
-
-include __DIR__ . '/auth.php';
 
