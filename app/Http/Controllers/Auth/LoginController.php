@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\BaseController;
 use App\Service\Validadores\LoginValidador;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends BaseController
 {
@@ -21,14 +22,13 @@ class LoginController extends BaseController
 
     public function store(Request $request): JsonResponse
     {
-        $validator = LoginValidador::validar($request);
-
-        if ($validator->fails()) 
-        {
-            return $this->responseOutput->validationErrors($validator->errors());
+        try {
+            $validator = LoginValidador::validar($request);
+        } catch (ValidationException $e) {
+            return $this->responseOutput->validationErrors($e->errors());
         }
 
-        $dadosValidados = $validator->validated();
+        $dadosValidados = $validator;
         $user = User::where('email', $dadosValidados['email'])->first();
 
         if (!Hash::check($dadosValidados['password'], $user->password)) {

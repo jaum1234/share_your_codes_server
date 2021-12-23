@@ -1,15 +1,17 @@
 <?php 
 namespace App\Service\Validadores;
 
-use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Service\Validadores\BaseValidador;
+use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 
-class LoginValidador
+class LoginValidador extends BaseValidador
 {
-    public static function validar(Request $request): ValidationValidator
+    public static function validar(Request $request): array
     {
-        return Validator::make($request->all(), self::rules(), self::messages());
+        $validador = Validator::make($request->all(), self::rules(), self::messages());
+        return self::resultado($validador);
     }
 
     private static function rules(): array

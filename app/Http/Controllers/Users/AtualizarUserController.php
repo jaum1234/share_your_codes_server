@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Service\ResponseOutput\ResponseOutput;
 use App\Service\Validadores\UserValidador;
-
+use Illuminate\Validation\ValidationException;
 
 class AtualizarUserController extends BaseController
 {
@@ -22,13 +22,13 @@ class AtualizarUserController extends BaseController
     
     public function update(Request $request, Int $id)
     { 
-        $validator = UserValidador::validar($request);
-
-        if ($validator->fails()) {
-            return $this->responseOutput->validationErrors($validator->errors());
+        try {
+            $validator = UserValidador::validar($request);
+        } catch (ValidationException $e) {
+            return $this->responseOutput->validationErrors($e->errors());
         }
 
-        $dadosValidados = $validator->validated();
+        $dadosValidados = $validator;
 
         $usuario = User::find($id);
         $usuario->name = $dadosValidados['name'];

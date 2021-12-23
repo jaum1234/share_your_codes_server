@@ -2,6 +2,8 @@
 
 namespace App\Service\ResponseOutput;
 
+use Illuminate\Http\JsonResponse;
+
 class JsonResponseOutput 
 {
     private bool $success;
@@ -18,7 +20,8 @@ class JsonResponseOutput
         return $this->display();
     }
 
-    private function display() {
+    private function display(): JsonResponse
+    {
         return response()->json([
             'success' => $this->success,
             'data' => $this->data,
@@ -26,7 +29,8 @@ class JsonResponseOutput
         ], $this->statusCode) ;
     }
 
-    public function validationErrors($erros) {
+    public function validationErrors(array $erros): JsonResponse
+    {
         return response()->json([
             'success' => false,
             'data' => ['erros' => $erros],

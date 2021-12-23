@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Service\Validadores\ProjetosValidador;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Validation\ValidationException;
 
 class CriarProjetosController extends BaseController
 {
@@ -16,17 +17,15 @@ class CriarProjetosController extends BaseController
         parent::__construct();
     }
 
-    public function store(Request $request): JsonResponse
+    public function store(Request $request)//: JsonResponse
     {   
-        
-        $validador = ProjetosValidador::validar($request);
-
-        if ($validador->fails()) {
-            return $this->responseOutput->validationErrors($validador->errors());
+        try {
+            $validador = ProjetosValidador::validar($request);
+        } catch (ValidationException $e) {
+            return $this->responseOutput->validationErrors($e->errors());
         }
         
-        $dadosValidados = $validador->validated();
-
+        $dadosValidados = $validador;
         $user = User::find(Auth::user()->id);
         
         $projeto = $user->projetos()->create($dadosValidados);

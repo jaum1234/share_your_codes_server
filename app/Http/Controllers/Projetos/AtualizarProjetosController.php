@@ -7,6 +7,7 @@ use App\Models\Projeto;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Service\Validadores\ProjetosValidador;
+use Illuminate\Validation\ValidationException;
 
 class AtualizarProjetosController extends BaseController
 {
@@ -19,14 +20,13 @@ class AtualizarProjetosController extends BaseController
 
     public function update(Request $request, int $id): JsonResponse
     {
-
-        $validador = ProjetosValidador::validar($request);
-
-        if ($validador->fails()) {
-            return $this->responseOutput->validationErrors($validador->errors());
+        try {
+            $validador = ProjetosValidador::validar($request);
+        } catch (ValidationException $e) {
+            return $this->responseOutput->validationErrors($e->errors());
         }
 
-        $dadosValidados = $validador->validated();
+        $dadosValidados = $validador;
 
         $projeto = Projeto::find($id);
 

@@ -1,11 +1,12 @@
 <?php
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\BaseController;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Service\Validadores\RegisterValidador;
 use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\BaseController;
+use App\Service\Validadores\RegisterValidador;
+use Illuminate\Validation\ValidationException;
 
 class RegisterController extends BaseController
 {
@@ -18,13 +19,13 @@ class RegisterController extends BaseController
 
     public function store(Request $request): JsonResponse
     {
-        $validator = RegisterValidador::validar($request);
-
-        if ($validator->fails()) {
-            return $this->responseOutput->validationErrors($validator->errors());
+        try {
+            $validator = RegisterValidador::validar($request);
+        } catch (ValidationException $e) {
+            return $this->responseOutput->validationErrors($e->errors());
         }
 
-        $dadosValidados = $validator->validated();
+        $dadosValidados = $validator;
 
         User::create([
             'email' => $dadosValidados['email'],
