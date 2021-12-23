@@ -5,7 +5,6 @@ namespace Tests\Feature\Http\Controllers\User;
 use App\Models\Projeto;
 use Tests\TestCase;
 use App\Models\User;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tymon\JWTAuth\Facades\JWTAuth;
 

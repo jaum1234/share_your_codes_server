@@ -15,11 +15,6 @@ class LoginController extends BaseController
 {
     private string $accessToken;
 
-    public function __construct(LoginValidador $loginValidador)
-    {
-        parent::__construct();
-    }
-
     public function store(Request $request): JsonResponse
     {
         try {

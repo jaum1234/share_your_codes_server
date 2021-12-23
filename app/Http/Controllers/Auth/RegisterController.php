@@ -10,13 +10,6 @@ use Illuminate\Validation\ValidationException;
 
 class RegisterController extends BaseController
 {
-    private RegisterValidador $validator;
-
-    public function __construct(RegisterValidador $registerValidator)
-    {
-        parent::__construct();
-    }
-
     public function store(Request $request): JsonResponse
     {
         try {

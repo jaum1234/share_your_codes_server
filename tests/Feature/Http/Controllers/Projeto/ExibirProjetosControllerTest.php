@@ -2,11 +2,9 @@
 
 namespace Tests\Feature\Http\Controllers\Projeto;
 
-use App\Http\Resources\ProjetoResource;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Projeto;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ExibirProjetosControllerTest extends TestCase

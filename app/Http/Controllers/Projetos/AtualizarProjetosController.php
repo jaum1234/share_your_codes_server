@@ -11,13 +11,6 @@ use Illuminate\Validation\ValidationException;
 
 class AtualizarProjetosController extends BaseController
 {
-    private ProjetosValidador $validador;
-
-    public function __construct(ProjetosValidador $projetosValidador)
-    {
-        parent::__construct();
-    }
-
     public function update(Request $request, int $id): JsonResponse
     {
         try {

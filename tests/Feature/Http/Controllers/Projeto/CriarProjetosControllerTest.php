@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Http\Controllers\Projeto;
 
-use App\Http\Resources\ProjetoResource;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Projeto;

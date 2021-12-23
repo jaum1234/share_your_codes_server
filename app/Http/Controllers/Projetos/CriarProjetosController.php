@@ -12,12 +12,7 @@ use Illuminate\Validation\ValidationException;
 
 class CriarProjetosController extends BaseController
 {
-    public function __construct(ProjetosValidador $projetosValidador)
-    {
-        parent::__construct();
-    }
-
-    public function store(Request $request)//: JsonResponse
+    public function store(Request $request): JsonResponse
     {   
         try {
             $validador = ProjetosValidador::validar($request);
