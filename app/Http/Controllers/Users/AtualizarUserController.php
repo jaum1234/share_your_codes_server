@@ -12,7 +12,7 @@ use Illuminate\Validation\ValidationException;
 
 class AtualizarUserController extends BaseController
 {
-    private $validador;
+    private UserValidador $validador;
 
     public function __construct(UserValidador $userValidador)
     {
@@ -23,7 +23,7 @@ class AtualizarUserController extends BaseController
     public function update(Request $request, Int $id)
     { 
         try {
-            $validator = UserValidador::validar($request);
+            $validator = $this->validador->validar($request);
         } catch (ValidationException $e) {
             return $this->responseOutput->validationErrors($e->errors());
         }

@@ -11,6 +11,6 @@ class RemoverProjetosController extends BaseController
     public function destroy(int $id): JsonResponse
     {
         Projeto::destroy($id);
-        return $this->responseOutput->set(true, [], "", 204);
+        return $this->responseOutput->set(true, [], "", 200);
     }
 }

@@ -14,11 +14,18 @@ use Illuminate\Validation\ValidationException;
 class LoginController extends BaseController
 {
     private string $accessToken;
+    private LoginValidador $validador;
+
+    public function __construct(LoginValidador $loginValidador)
+    {
+        parent::__construct();
+        $this->validador = $loginValidador;
+    }
 
     public function store(Request $request): JsonResponse
     {
         try {
-            $validator = LoginValidador::validar($request);
+            $validator = $this->validador->validar($request);
         } catch (ValidationException $e) {
             return $this->responseOutput->validationErrors($e->errors());
         }

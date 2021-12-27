@@ -11,10 +11,18 @@ use Illuminate\Validation\ValidationException;
 
 class AtualizarProjetosController extends BaseController
 {
+    private ProjetosValidador $validador;
+
+    public function __construct(ProjetosValidador $projetosValidador)
+    {
+        parent::__construct();
+        $this->validador = $projetosValidador;
+    }
+
     public function update(Request $request, int $id): JsonResponse
     {
         try {
-            $validador = ProjetosValidador::validar($request);
+            $validador = $this->validador->validar($request);
         } catch (ValidationException $e) {
             return $this->responseOutput->validationErrors($e->errors());
         }

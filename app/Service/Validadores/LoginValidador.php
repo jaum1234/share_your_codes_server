@@ -8,13 +8,7 @@ use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 
 class LoginValidador extends BaseValidador
 {
-    public static function validar(Request $request): array
-    {
-        $validador = Validator::make($request->all(), self::rules(), self::messages());
-        return self::resultado($validador);
-    }
-
-    private static function rules(): array
+    protected function rules(): array
     {
         return [
             'password' => 'required||string',
@@ -22,7 +16,7 @@ class LoginValidador extends BaseValidador
         ];
     }
 
-    private static function messages(): array
+    protected function messages(): array
     {
         return [
             'required' => 'Esse campo é obrigatório.',

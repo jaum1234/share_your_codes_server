@@ -9,13 +9,7 @@ use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 
 class ProjetosValidador extends BaseValidador
 {
-    public static function validar(Request $request): array
-    {
-        $validador = Validator::make($request->all(), self::rules(), self::messages());
-        return self::resultado($validador);
-    }
-
-    private static function rules(): array
+    protected function rules(): array
     {
         return [
             'nome' => 'required|string',
@@ -25,7 +19,7 @@ class ProjetosValidador extends BaseValidador
         ];
     }
 
-    private static function messages()
+    protected function messages(): array
     {
         return [
             'required' => 'Campo :attribute deve ser obrigatório.',

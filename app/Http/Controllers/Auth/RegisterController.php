@@ -10,10 +10,19 @@ use Illuminate\Validation\ValidationException;
 
 class RegisterController extends BaseController
 {
+    private RegisterValidador $validador;
+
+    public function __construct(RegisterValidador $registerValidador)
+    {
+        parent::__construct();
+        $this->validador = $registerValidador;
+
+    }
+    
     public function store(Request $request): JsonResponse
     {
         try {
-            $validator = RegisterValidador::validar($request);
+            $validator = $this->validador->validar($request);
         } catch (ValidationException $e) {
             return $this->responseOutput->validationErrors($e->errors());
         }
