@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\BaseController;
 use App\Service\Validadores\RegisterValidador;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Validation\ValidationException;
 
 class RegisterController extends BaseController
@@ -29,13 +30,16 @@ class RegisterController extends BaseController
 
         $dadosValidados = $validator;
 
-        User::create([
+        $user = User::create([
             'email' => $dadosValidados['email'],
             'nickname' => $dadosValidados['nickname'],
             'name' => $dadosValidados['name'],
             'password' => bcrypt($dadosValidados['password']) 
         ]);
 
+        //event(new Registered($user));
+        //ainda será implementado...
+        
         $response = $this->responseOutput->set(
             true,
             [],
