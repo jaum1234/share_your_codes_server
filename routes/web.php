@@ -7,7 +7,6 @@ use App\Http\Controllers\Projetos\CriarProjetosController;
 use App\Http\Controllers\Projetos\ExibirProjetosController;
 use App\Http\Controllers\Projetos\RemoverProjetosController;
 
-Route::redirect('/', '/projetos', 302);
 
 
 

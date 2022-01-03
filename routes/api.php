@@ -44,6 +44,7 @@ Route::middleware(['cors'])->group(function () {
     Route::get('/projetos', [ExibirProjetosController::class, 'index'])->name('projetos.index');
     Route::get('/projetos/{id}', [ExibirProjetosController::class, 'show'])->name('projetos.show');
     
+    
     include __DIR__ . '/auth.php';
 });
 

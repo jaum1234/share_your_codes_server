@@ -22,7 +22,7 @@ class ProjetosValidador extends BaseValidador
     protected function messages(): array
     {
         return [
-            'required' => 'Campo :attribute deve ser obrigatório.',
+            'required' => 'Campo :attribute é obrigatório.',
             'string' => ':attribute deve ser uma string válida.'
         ];
     }
