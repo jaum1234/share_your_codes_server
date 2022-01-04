@@ -35,7 +35,6 @@ class AtualizarProjetosController extends BaseController
         $projeto->descricao = $dadosValidados['descricao'];
         $projeto->codigo = $dadosValidados['codigo'];
         $projeto->cor = $dadosValidados['cor'];
-
         $projeto->save();
 
         return $this->responseOutput->set(

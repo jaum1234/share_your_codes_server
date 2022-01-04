@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Service\ResponseOutput\ResponseOutput;
 use App\Service\Validadores\UserValidador;
+use ControllerValidavel;
 use Illuminate\Validation\ValidationException;
 
 class AtualizarUserController extends BaseController
