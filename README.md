@@ -1,85 +1,36 @@
-# Editor de Codigo - Alura Challange
+# Laravel API - Share Your Codes
 
+## Endpoints
 
+### Projetos
+- GET: /projetos 
+- GET: /projetos/id 
+- POST: /projetos 
+- PUT: /projetos/id 
+- DELETE: /projetos/id 
 
-![editor](https://i.gyazo.com/00ece030b6655ce923bca591e355e8b2.png)
-![comunidade](https://i.gyazo.com/dc33f4dfa2062f61551465505d20a2fa.png)
-![pagina-do-projeto](https://i.gyazo.com/7234d2415ddfebbf737a7537a87bd473.png)
-![user-page](https://i.gyazo.com/c8b861bec97963efbd431509bcaa5795.png)
+### Usuário
+- POST: /login 
+- GET: /logout 
+- POST: /register
+- GET: /refreshtoken
+- PUT: /users/id/projetos
 
+## Status Code
+- 200: Ok
+- 201: Created
 
-## Contatos
+- 400: Bad request
+- 401: Unautorized
 
-<a href="https://www.linkedin.com/in/joao-v%C3%ADtor-de-souza-coura-b435381a9/">Linkedin</a>
-<br>
-<a href="mailto:joaovitorsouzacoura@gmail.com">joaovitorsouzacoura@gmail.com</a>
+## Design Patterns e boas práticas
+Em vez de utilizar FormRequests para validar os dados recebidos nas requisiçoes, optei como criar meus próprios validadores, e um Desing Pattern muito útil para evitar a repetiçao de código foi o [Template Method](https://refactoring.guru/design-patterns/template-method). Para entender melhor a implementaçao, olhe o diretório **app/Service/Validadores**.
+Para fins de aprendizagem e experimentaçao, o [Princípio da Responsabilidade Única](https://www.devmedia.com.br/arquitetura-o-principio-da-responsabilidade-unica/18700) foi aplicado a risca em todos os controllers, separando-os segundo o CRUD (criaçao, leitura, atualizaçao e remoçao). Além disse, também busquei fazer uso do [Princípio da Inversao de Dependencia](https://dev.to/lucascavalcante/principios-solid-o-que-sao-e-como-aplica-los-no-php-laravel-parte-05-inversao-de-dependencia-3o6e).
 
-## Sobre o projeto
+## Autenticaçao
+A autenticaçao dos usuários foi realizada com [JWT Token](https://jwt.io/). De modo a agilizar o processo, a implementaçao foi feita utilizando o pacote [jwt-auth](https://github.com/tymondesigns/jwt-auth), do Tymondesings.
+Todas as configuraçoes relativas ao token se encontram em **config/jwt.php**.
 
-O "Editor de Código - Alura Challange" se propõe a ser uma plataforma em que usuários podem criar e postar trechos de código e compartilha-los com a comunidade ou em suas redes sociais.
-
-O projeto faz parte da primeira edição do Alura Challange, evento relizado pela platafora de ensino Alura, visando fortaceler 3 pilares essencias para um desenvolvedor:
-
-1. Engajar
-2. Investigar
-3. Agir
-
-  
-## Funcionalidades
-
-- Cadastro
-![cadastro](https://i.gyazo.com/521b8ec2747acd076f54eb43bfd7153a.gif)
-
-- Login
-![login](https://i.gyazo.com/36716176e739b7c11257d73565bd775d.gif)
-
-- Salvar projetos
-![salvando-projeto](https://i.gyazo.com/7c93c4bfa3b9cf24a14feca41ba7e7b4.gif)
-
-- Highlight de sintaxe
-![highlight-js](https://i.gyazo.com/06c0d64de3c6c2e3c3ef85a55988da12.gif)
-
-- Estilizar projeto
-![estilo](https://i.gyazo.com/a2914f5ce45d0a35cd7d6c441da9c20b.gif)
-
-- Pesquisar projetos
-![pesquisa](https://i.gyazo.com/a7fec16b54ed8f8e609894c6bc40ac91.gif)
-
-- Compartilhar projeto nas redes sociais
-![compartilhar](https://i.gyazo.com/4488bc86f0873ab30c611d9ac0d0d9f2.gif)
-
-- Excluir projeto
-![exclusao-de-projeto](https://i.gyazo.com/b62570f7e418bc25cd55fb865127602c.gif)
-
-- Editar perfil
-![editar-perfil](https://i.gyazo.com/56d4090da48685445ab52a2c6d523f4b.gif)
-
-## Executando no locahost
-
-### Pre requisitos:
-
-- Ter o composer instalado
-- Banco de dados MYSQL
-
-### Passo a passo:
-
-1. Clone projeto
-2. Rode o composer install na linha de comando na pasta do projeto
-3. Copie o arquivo .env.example para o arquivo .env
-4. No arquivo .env mude as configurações do banco de dados para as suas configurações
-5. Rode o php artisan key:generate na linha de comando
-6. Rode php artisan migrate
-7. Rode php artisan serve
-8. Acesse o localhost:8000
-
-## Tecnologia utilizadas
-
-- Laravel
-- Blade
-- Bootstrap
-- jQuery
-- MySQL
-- Sass
-
-
+## Testes automatizados
+Até o momento, os testes sao todos a nível de aplicaçao. A Laravel oferece muitas ferramentas para esse tipo de teste, tendo como base o [PHPUnit](https://phpunit.readthedocs.io/en/9.5/). Testa-se tanto os endpoints relativos aos usuários, quanto aos projetos. 
 
