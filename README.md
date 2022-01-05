@@ -25,6 +25,7 @@
 
 ## Design Patterns e boas práticas
 Em vez de utilizar FormRequests para validar os dados recebidos nas requisiçoes, optei como criar meus próprios validadores, e um Desing Pattern muito útil para evitar a repetiçao de código foi o [Template Method](https://refactoring.guru/design-patterns/template-method). Para entender melhor a implementaçao, olhe o diretório **app/Service/Validadores**.
+
 Para fins de aprendizagem e experimentaçao, o [Princípio da Responsabilidade Única](https://www.devmedia.com.br/arquitetura-o-principio-da-responsabilidade-unica/18700) foi aplicado a risca em todos os controllers, separando-os segundo o CRUD (criaçao, leitura, atualizaçao e remoçao). Além disse, também busquei fazer uso do [Princípio da Inversao de Dependencia](https://dev.to/lucascavalcante/principios-solid-o-que-sao-e-como-aplica-los-no-php-laravel-parte-05-inversao-de-dependencia-3o6e).
 
 ## Autenticaçao
