@@ -66,11 +66,10 @@ class LoginController extends BaseController
     {
         Auth::logout();
 
-        $response = $this->responseOutput->set(
+        return $this->responseOutput->set(
             true,
         );
 
-        return response()->json($response);
     }
 
    
