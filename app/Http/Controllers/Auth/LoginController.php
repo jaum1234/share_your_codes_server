@@ -24,6 +24,7 @@ class LoginController extends BaseController
 
     public function store(Request $request): JsonResponse
     {
+
         try {
             $validator = $this->validador->validar($request);
         } catch (ValidationException $e) {

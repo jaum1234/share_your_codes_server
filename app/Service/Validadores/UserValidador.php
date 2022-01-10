@@ -15,11 +15,4 @@ class UserValidador extends BaseValidador
         ];
     }
 
-    protected function messages(): array
-    {
-        return [
-            'required' => 'Esse campo é obrigatório.',
-            'unique' => 'Esse nickname já está em uso.'
-        ];
-    }
 }

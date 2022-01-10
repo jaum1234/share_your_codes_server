@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Env;
+
 return [
 
     /*
@@ -19,7 +21,7 @@ return [
 
     'allowed_methods' => ['POST', 'GET', 'DELETE', 'PUT', '*'],
 
-    'allowed_origins' => ['https://shareyourcodes.com'],
+    'allowed_origins' => [env('CORS_ALLOWED')],
 
     'allowed_origins_patterns' => [],
 

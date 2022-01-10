@@ -13,8 +13,7 @@ abstract class BaseValidador
     {
         $validador = Validator::make(
             $request->all(),
-            $this->rules(),
-            $this->messages()
+            $this->rules()
         );
 
         return $this->resultado($validador);
@@ -30,5 +29,4 @@ abstract class BaseValidador
     }
 
     abstract protected function rules(): array;
-    abstract protected function messages(): array;
 }

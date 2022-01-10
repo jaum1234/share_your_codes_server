@@ -13,17 +13,8 @@ class RegisterValidador extends BaseValidador
             'nickname' => 'required|unique:users,nickname',
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|confirmed|string'
+            'password' => 'required|confirmed|string|min:3|max:50'
         ];
     }
 
-    protected function messages(): array
-    {
-        return [
-            'required' => 'Esse campo é obrigatório.',
-            'email' => 'E-mail inválido.',
-            'unique' => ':attribute já cadastrado.',
-            'confirmed' => 'As senhas nao correspondem.'
-        ];
-    }
 }

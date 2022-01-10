@@ -16,13 +16,4 @@ class LoginValidador extends BaseValidador
         ];
     }
 
-    protected function messages(): array
-    {
-        return [
-            'required' => 'Esse campo é obrigatório.',
-            'email' => 'E-mail inválido.',
-            'exists' => ':attribute incorreto',
-            'current_password' => 'Senha incorreta.'
-        ];
-    }
 }
