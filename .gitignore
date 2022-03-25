@@ -3,7 +3,7 @@
 /public/storage
 /storage/*.key
 /vendor
-.env
+
 .env.backup
 .phpunit.result.cache
 docker-compose.override.yml
@@ -84,7 +84,7 @@ web_modules/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
+
 .env.test
 .env.production
 
